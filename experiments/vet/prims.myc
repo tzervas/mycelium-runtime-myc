@@ -1,0 +1,87 @@
+// nodule: interp.prims
+// Primitive operators for the interpreter (M-110).
+//
+// A [`Node::Op`](mycelium_core::Node::Op) names a primitive; the registry maps that name to an
+// implementation. The built-in set here is deliberately the **exact, elementwise** fragment — the
+// identity and per-element logical ops — so the reference interpreter is testable end-to-end
+// without prejudging **M-111** (balanced-ternary *arithmetic* — add/mul with carries, property-
+// tested against an integer oracle), which extends this registry.
+//
+// Every built-in is `guarantee = Exact` and type-checks its operands; a wrong arity, paradigm, or
+// width is an explicit [`EvalError::PrimType`], never a silent coercion (SC-3; G2). Result metadata
+// is threaded honestly: provenance becomes `Derived{ op: hash(prim), inputs: [hash(arg)…] }`
+// (RFC-0001 §4.6) and the guarantee is the `meet` of the inputs and the prim's intrinsic strength
+// (RFC-0001 §4.7). Exact inputs through an exact built-in stay `Exact` / `bound = None`.
+//
+// **Composing an approximate input (M-204; ADR-010).** With the verified-numerics kernels landed
+// (`mycelium-numerics`, E2-4), a built-in over an *approximate* input no longer refuses outright: it
+// composes the input's `Error` bound through the affine ε-kernel and meets the strength to the
+// weakest input ([`mycelium_numerics::compose_error_bound`]). Each prim declares its
+// `ApproxRule`: the additive ternary arithmetic (`trit.add/sub/neg`) carries a sound affine
+// composition; `core.id` passes the bound through unchanged; the logical `bit.*` ops and `trit.mul`
+// have **no defined ε-propagation rule over approximate inputs** and so still refuse
+// (`EvalError::ApproxCompositionUnsupported`) — refusing remains the honest choice over fabricating a
+// bound (G2/VR-5).
+// @summary: best-effort transpilation via mycelium-transpile (M-873). Declared,
+// unvalidated — no Mycelium parser/typechecker confirms this output; see the
+// accompanying .gap.json for every construct this pass could not express.
+nodule interp.prims;
+
+// Declared: ambient Result type co-emit — oracle self-containment (G-α Rank-1 / L2-A). Type shape cites lib/std/result.myc (Ok/Err sum); combinators are NOT fabricated (VR-5/G2). Checker does not seed Result as prelude (unlike Bool/Unit unconditional, Vec conditional).
+type Result[A, E] = Ok(A) | Err(E);
+
+// Declared: co-emitted guarantee-lattice type — referenced in this file but not declared here and not available via a resolved batch `use` (ORACLE-R1 A2; never silent unknown-type file poison — G2/VR-5). Variants use DN-140 `*_kw` renames for the reserved lattice keywords (Exact/Proven/Empirical/Declared).
+// Declared: renamed Exact -> Exact_kw (reserved-word collision, DN-140)
+// Declared: renamed Proven -> Proven_kw (reserved-word collision, DN-140)
+// Declared: renamed Empirical -> Empirical_kw (reserved-word collision, DN-140)
+// Declared: renamed Declared -> Declared_kw (reserved-word collision, DN-140)
+type GuaranteeStrength = Exact_kw | Proven_kw | Empirical_kw | Declared_kw;
+
+// How a built-in composes an *approximate* input's bound (M-204). Exact inputs never reach this —
+// they short-circuit to an `Exact`/`bound = None` result.
+type ApproxRule = Refuse | Passthrough | Error(ErrorOp);
+
+impl Show[ApproxRule] for ApproxRule {
+  fn render(x: ApproxRule) => Bytes =
+    match x { Refuse => "Refuse", Passthrough => "Passthrough", Error(p0) => bytes_concat(bytes_concat("Error(", render(p0)), ")") };
+};
+
+// `bit.popcount : (Binary{N}) → Binary{N}` — population count (CU-6; Rust `count_ones`).
+fn prim_bit_popcount(prim: Bytes, args: Vec[Value]) => Result[Value, EvalError] = bit_count(prim, args, popcount);
+
+// `bit.clz : (Binary{N}) → Binary{N}` — count leading zeros; `N` for all-zero (CU-6; Rust
+// `leading_zeros`).
+fn prim_bit_clz(prim: Bytes, args: Vec[Value]) => Result[Value, EvalError] = bit_count(prim, args, clz);
+
+// `bit.ctz : (Binary{N}) → Binary{N}` — count trailing zeros; `N` for all-zero (CU-6; Rust
+// `trailing_zeros`).
+fn prim_bit_ctz(prim: Bytes, args: Vec[Value]) => Result[Value, EvalError] = bit_count(prim, args, ctz);
+
+// `trit.mul`: multiplicative ε propagation needs the central operand magnitudes (affine `Mul`); that
+// plumbing lands with the Dense numerics (E2-1), so an approximate input is refused for now — honest,
+// not a fabricated bound (G2).
+fn prim_trit_mul(prim: Bytes, args: Vec[Value]) => Result[Value, EvalError] = trit_binop(prim, args, mul, Refuse);
+
+// `bit.add : (Binary{N}, Binary{N}) → Binary{N}` — never-silent unsigned addition (RFC-0032 D2).
+fn prim_bit_add(prim: Bytes, args: Vec[Value]) => Result[Value, EvalError] = bin_arith(prim, args, False);
+
+// `bit.sub : (Binary{N}, Binary{N}) → Binary{N}` — never-silent unsigned subtraction (RFC-0032 D2).
+fn prim_bit_sub(prim: Bytes, args: Vec[Value]) => Result[Value, EvalError] = bin_arith(prim, args, True);
+
+// The trial count of the M-898 IEEE reference-case corpus (`src/tests/prims.rs`,
+// `flt_reference_case_corpus`) — the evidence behind the `EmpiricalFit` basis every `flt.*`
+// result carries. The corpus test asserts its row count equals this constant, so the recorded
+// trials can never silently drift from the trials actually run (VR-5).
+// Declared: co-emitted private const as zero-arg fn returning a BinLit — Mycelium has no const item production (`item` covers use/default/type/trait/impl/fn/object/lower/derive only); hand-port precedent `max_expr_depth()` (ORACLE-R1 A4; G2/VR-5: value from the Rust initializer or a known workspace-floor path, never fabricated). Use sites rewrite `NAME` → `NAME()`.
+fn FLT_CONFORMANCE_TRIALS() => Binary{64} = 0b0000_0000_0000_0000_0000_0000_0000_0000_0000_0000_0000_0000_0000_0000_0010_1000; // 40
+
+// The trial count of the M-899 IEEE comparison reference corpus (`src/tests/prims.rs`,
+// `flt_cmp_reference_case_corpus`) — the evidence behind the `EmpiricalFit` basis every
+// float-comparison result carries. The corpus test asserts its row count equals this constant,
+// so the recorded trials can never silently drift from the trials actually run (VR-5).
+// Declared: co-emitted private const as zero-arg fn returning a BinLit — Mycelium has no const item production (`item` covers use/default/type/trait/impl/fn/object/lower/derive only); hand-port precedent `max_expr_depth()` (ORACLE-R1 A4; G2/VR-5: value from the Rust initializer or a known workspace-floor path, never fabricated). Use sites rewrite `NAME` → `NAME()`.
+fn FLT_CMP_CONFORMANCE_TRIALS() => Binary{64} = 0b0000_0000_0000_0000_0000_0000_0000_0000_0000_0000_0000_0000_0000_0000_0010_1100; // 44
+
+// The model-dispatch target of a `vsa.*` prim: the M-892 introduction set (MAP-I / FHRR / BSC).
+// Constructed by [`vsa_model_of`] off the first operand's `Repr::Vsa` model id.
+type VsaDispatch = MapI(MapI) | Fhrr(Fhrr) | Bsc(Bsc);

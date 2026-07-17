@@ -1,0 +1,29 @@
+// nodule: interp.swap_kw
+// The swap extension point for the interpreter (M-110).
+//
+// A [`Node::Swap`](mycelium_core::Node::Swap) is the *only* representation-changing node
+// (RFC-0001 §4.5 WF1); evaluating one is delegated to a [`SwapEngine`]. The real, certificate-
+// emitting binary↔ternary swap is **M-120** (`docs/spec/swaps/binary-ternary.md`); this module
+// defines the interface plus the trivial [`IdentitySwapEngine`] (a same-`Repr` swap, which is
+// exactly lossless) so the interpreter can evaluate swap nodes today. An unsupported swap is an
+// explicit error — **never** a silent coercion (SC-3; G2).
+// @summary: best-effort transpilation via mycelium-transpile (M-873). Declared,
+// unvalidated — no Mycelium parser/typechecker confirms this output; see the
+// accompanying .gap.json for every construct this pass could not express.
+nodule interp.swap_kw;
+
+// The trivial swap engine: a swap whose `target` equals the source `Repr` is the identity — exactly
+// lossless, `guarantee` preserved. Any *cross-paradigm* swap returns
+// [`EvalError::UnsupportedSwap`], deferring to the certified M-120 engine. This keeps M-110 honest:
+// it executes the swaps it can prove trivially exact and refuses the rest rather than guessing.
+pub type IdentitySwapEngine = IdentitySwapEngine;
+
+impl Show[IdentitySwapEngine] for IdentitySwapEngine {
+  fn render(x: IdentitySwapEngine) => Bytes =
+    "IdentitySwapEngine";
+};
+
+impl Init[IdentitySwapEngine] for IdentitySwapEngine {
+  fn init() => IdentitySwapEngine =
+    IdentitySwapEngine;
+};

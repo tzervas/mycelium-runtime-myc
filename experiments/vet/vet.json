@@ -1,0 +1,121 @@
+{
+  "records": [
+    {
+      "myc_file": "/tmp/myc-decompose/work/mycelium-runtime-myc/experiments/vet/budget.myc",
+      "source_file": "/root/git/isolated/mycelium/crates/mycelium-interp/src/budget.rs",
+      "class": "Clean",
+      "exit_code": 0,
+      "diagnostic": "",
+      "non_test_items": 11,
+      "emitted_items": 3
+    },
+    {
+      "myc_file": "/tmp/myc-decompose/work/mycelium-runtime-myc/experiments/vet/lib.myc",
+      "source_file": "/root/git/isolated/mycelium/crates/mycelium-interp/src/lib.rs",
+      "class": "CheckError",
+      "exit_code": 3,
+      "diagnostic": "check-error: check error in `Step`: unknown type `Box`",
+      "non_test_items": 25,
+      "emitted_items": 7
+    },
+    {
+      "myc_file": "/tmp/myc-decompose/work/mycelium-runtime-myc/experiments/vet/parallel.myc",
+      "source_file": "/root/git/isolated/mycelium/crates/mycelium-interp/src/parallel.rs",
+      "class": "CheckError",
+      "exit_code": 3,
+      "diagnostic": "check-error: check error in `Step`: unknown type `Box`",
+      "non_test_items": 13,
+      "emitted_items": 4
+    },
+    {
+      "myc_file": "/tmp/myc-decompose/work/mycelium-runtime-myc/experiments/vet/prims.myc",
+      "source_file": "/root/git/isolated/mycelium/crates/mycelium-interp/src/prims.rs",
+      "class": "CheckError",
+      "exit_code": 3,
+      "diagnostic": "check-error: check error in `ApproxRule`: unknown type `ErrorOp`",
+      "non_test_items": 128,
+      "emitted_items": 12
+    },
+    {
+      "myc_file": "/tmp/myc-decompose/work/mycelium-runtime-myc/experiments/vet/supervise.myc",
+      "source_file": "/root/git/isolated/mycelium/crates/mycelium-interp/src/supervise.rs",
+      "class": "Clean",
+      "exit_code": 0,
+      "diagnostic": "",
+      "non_test_items": 18,
+      "emitted_items": 4
+    },
+    {
+      "myc_file": "/tmp/myc-decompose/work/mycelium-runtime-myc/experiments/vet/swap.myc",
+      "source_file": "/root/git/isolated/mycelium/crates/mycelium-interp/src/swap.rs",
+      "class": "Clean",
+      "exit_code": 0,
+      "diagnostic": "",
+      "non_test_items": 5,
+      "emitted_items": 1
+    }
+  ],
+  "total_non_test_items": 200,
+  "total_emitted_items": 31,
+  "total_checked_clean_items": 8,
+  "class_counts": {
+    "CheckError": 3,
+    "Clean": 3
+  },
+  "phylum": {
+    "ran": true,
+    "ok": false,
+    "nodules": [
+      {
+        "nodule": "interp.budget",
+        "file": "budget.myc",
+        "class": "Clean",
+        "site": null,
+        "on": null,
+        "message": null
+      },
+      {
+        "nodule": "interp",
+        "file": "lib.myc",
+        "class": "CheckError",
+        "site": "Step",
+        "on": null,
+        "message": "unknown type `Box`"
+      },
+      {
+        "nodule": "interp.parallel",
+        "file": "parallel.myc",
+        "class": "CheckError",
+        "site": "Step",
+        "on": null,
+        "message": "unknown type `Box`"
+      },
+      {
+        "nodule": "interp.prims",
+        "file": "prims.myc",
+        "class": "CheckError",
+        "site": "ApproxRule",
+        "on": null,
+        "message": "unknown type `ErrorOp`"
+      },
+      {
+        "nodule": "interp.supervise",
+        "file": "supervise.myc",
+        "class": "Clean",
+        "site": null,
+        "on": null,
+        "message": null
+      },
+      {
+        "nodule": "interp.swap_kw",
+        "file": "swap.myc",
+        "class": "Clean",
+        "site": null,
+        "on": null,
+        "message": null
+      }
+    ],
+    "diagnostic": "unknown type `Box`"
+  },
+  "total_checked_clean_items_phylum": 8
+}

@@ -1,0 +1,240 @@
+{
+  "files": [
+    {
+      "file": "/root/git/isolated/mycelium/crates/mycelium-interp/src/budget.rs",
+      "total_items": 12,
+      "non_test_items": 11,
+      "emitted": 3,
+      "gaps": 17,
+      "expressible_pct": 27.27272727272727,
+      "category_counts": {
+        "DeriveAttr": 2,
+        "DeriveSatisfied": 5,
+        "Impl": 5,
+        "Import": 2,
+        "NamedFieldDrop": 1,
+        "Struct": 1,
+        "TestItem": 1
+      }
+    },
+    {
+      "file": "/root/git/isolated/mycelium/crates/mycelium-interp/src/lib.rs",
+      "total_items": 34,
+      "non_test_items": 25,
+      "emitted": 7,
+      "gaps": 39,
+      "expressible_pct": 28.000000000000004,
+      "category_counts": {
+        "DeriveAttr": 2,
+        "DeriveSatisfied": 1,
+        "GenericBound": 1,
+        "Impl": 6,
+        "Import": 11,
+        "InnerAttr": 1,
+        "ModuleDecl": 5,
+        "MultiStmtBody": 1,
+        "Other": 5,
+        "PayloadVariant": 1,
+        "Struct": 1,
+        "TestItem": 4
+      }
+    },
+    {
+      "file": "/root/git/isolated/mycelium/crates/mycelium-interp/src/parallel.rs",
+      "total_items": 13,
+      "non_test_items": 13,
+      "emitted": 4,
+      "gaps": 19,
+      "expressible_pct": 30.76923076923077,
+      "category_counts": {
+        "DeriveSatisfied": 5,
+        "Impl": 1,
+        "Import": 9,
+        "MultiStmtBody": 2,
+        "NamedFieldDrop": 1,
+        "Other": 1
+      }
+    },
+    {
+      "file": "/root/git/isolated/mycelium/crates/mycelium-interp/src/prims.rs",
+      "total_items": 128,
+      "non_test_items": 128,
+      "emitted": 12,
+      "gaps": 120,
+      "expressible_pct": 9.375,
+      "category_counts": {
+        "Closure": 4,
+        "DeriveSatisfied": 2,
+        "GenericBound": 7,
+        "Impl": 2,
+        "Import": 7,
+        "MultiStmtBody": 61,
+        "Other": 36,
+        "Struct": 1
+      }
+    },
+    {
+      "file": "/root/git/isolated/mycelium/crates/mycelium-interp/src/supervise.rs",
+      "total_items": 19,
+      "non_test_items": 18,
+      "emitted": 4,
+      "gaps": 27,
+      "expressible_pct": 22.22222222222222,
+      "category_counts": {
+        "DeriveAttr": 4,
+        "DeriveSatisfied": 6,
+        "Impl": 7,
+        "Import": 5,
+        "NamedFieldDrop": 1,
+        "PayloadVariant": 1,
+        "Struct": 2,
+        "TestItem": 1
+      }
+    },
+    {
+      "file": "/root/git/isolated/mycelium/crates/mycelium-interp/src/swap.rs",
+      "total_items": 5,
+      "non_test_items": 5,
+      "emitted": 1,
+      "gaps": 7,
+      "expressible_pct": 20.0,
+      "category_counts": {
+        "DeriveSatisfied": 2,
+        "Impl": 1,
+        "Import": 2,
+        "ReservedWord": 1,
+        "Trait": 1
+      }
+    }
+  ],
+  "totals": {
+    "total_items": 211,
+    "non_test_items": 200,
+    "emitted": 31,
+    "gaps": 229,
+    "expressible_pct": 15.5,
+    "category_counts": {
+      "Closure": 4,
+      "DeriveAttr": 8,
+      "DeriveSatisfied": 21,
+      "GenericBound": 8,
+      "Impl": 22,
+      "Import": 36,
+      "InnerAttr": 1,
+      "ModuleDecl": 5,
+      "MultiStmtBody": 64,
+      "NamedFieldDrop": 3,
+      "Other": 42,
+      "PayloadVariant": 2,
+      "ReservedWord": 1,
+      "Struct": 5,
+      "TestItem": 6,
+      "Trait": 1
+    }
+  },
+  "remap": {
+    "phylum": {
+      "source_crate": "mycelium-interp",
+      "target_phylum": "interp"
+    },
+    "nodules": [
+      {
+        "target_nodule": "interp.budget",
+        "operation": "Keep",
+        "sources": [
+          {
+            "rust_path": "/root/git/isolated/mycelium/crates/mycelium-interp/src/budget.rs",
+            "rust_span": null,
+            "moved_items": []
+          }
+        ],
+        "rationale": "structure-preserving 1:1 (DN-109 §5.3-B v0 default: every emitted nodule keeps its source file's mod-tree position, no restructuring proposed)",
+        "safety": "Safe",
+        "api_surface_changed": false,
+        "identity_neutral": true,
+        "guarantee": "Declared"
+      },
+      {
+        "target_nodule": "interp",
+        "operation": "Keep",
+        "sources": [
+          {
+            "rust_path": "/root/git/isolated/mycelium/crates/mycelium-interp/src/lib.rs",
+            "rust_span": null,
+            "moved_items": []
+          }
+        ],
+        "rationale": "structure-preserving 1:1 (DN-109 §5.3-B v0 default: every emitted nodule keeps its source file's mod-tree position, no restructuring proposed)",
+        "safety": "Safe",
+        "api_surface_changed": false,
+        "identity_neutral": true,
+        "guarantee": "Declared"
+      },
+      {
+        "target_nodule": "interp.parallel",
+        "operation": "Keep",
+        "sources": [
+          {
+            "rust_path": "/root/git/isolated/mycelium/crates/mycelium-interp/src/parallel.rs",
+            "rust_span": null,
+            "moved_items": []
+          }
+        ],
+        "rationale": "structure-preserving 1:1 (DN-109 §5.3-B v0 default: every emitted nodule keeps its source file's mod-tree position, no restructuring proposed)",
+        "safety": "Safe",
+        "api_surface_changed": false,
+        "identity_neutral": true,
+        "guarantee": "Declared"
+      },
+      {
+        "target_nodule": "interp.prims",
+        "operation": "Keep",
+        "sources": [
+          {
+            "rust_path": "/root/git/isolated/mycelium/crates/mycelium-interp/src/prims.rs",
+            "rust_span": null,
+            "moved_items": []
+          }
+        ],
+        "rationale": "structure-preserving 1:1 (DN-109 §5.3-B v0 default: every emitted nodule keeps its source file's mod-tree position, no restructuring proposed)",
+        "safety": "Safe",
+        "api_surface_changed": false,
+        "identity_neutral": true,
+        "guarantee": "Declared"
+      },
+      {
+        "target_nodule": "interp.supervise",
+        "operation": "Keep",
+        "sources": [
+          {
+            "rust_path": "/root/git/isolated/mycelium/crates/mycelium-interp/src/supervise.rs",
+            "rust_span": null,
+            "moved_items": []
+          }
+        ],
+        "rationale": "structure-preserving 1:1 (DN-109 §5.3-B v0 default: every emitted nodule keeps its source file's mod-tree position, no restructuring proposed)",
+        "safety": "Safe",
+        "api_surface_changed": false,
+        "identity_neutral": true,
+        "guarantee": "Declared"
+      },
+      {
+        "target_nodule": "interp.swap",
+        "operation": "Keep",
+        "sources": [
+          {
+            "rust_path": "/root/git/isolated/mycelium/crates/mycelium-interp/src/swap.rs",
+            "rust_span": null,
+            "moved_items": []
+          }
+        ],
+        "rationale": "structure-preserving 1:1 (DN-109 §5.3-B v0 default: every emitted nodule keeps its source file's mod-tree position, no restructuring proposed)",
+        "safety": "Safe",
+        "api_surface_changed": false,
+        "identity_neutral": true,
+        "guarantee": "Declared"
+      }
+    ],
+    "idiom_choices": []
+  }
+}

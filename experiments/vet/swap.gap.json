@@ -1,0 +1,79 @@
+{
+  "source": "/root/git/isolated/mycelium/crates/mycelium-interp/src/swap.rs",
+  "emitted_items": [
+    "IdentitySwapEngine"
+  ],
+  "gaps": [
+    {
+      "file": "/root/git/isolated/mycelium/crates/mycelium-interp/src/swap.rs",
+      "line": 1,
+      "col": 1,
+      "category": "ReservedWord",
+      "rust_construct": "ReservedWord",
+      "snippet": "nodule interp.swap;",
+      "reason": "derived nodule path `interp.swap` has segment(s) [swap] colliding with a Mycelium reserved word — emitting them verbatim would fail to parse (`nodule interp.swap;` tokenizes the colliding word as a keyword, not an identifier); each colliding segment is escaped with the `_kw` suffix (now `interp.swap_kw`) rather than dropped, so distinct source files whose only differing segment is a reserved word (e.g. `l1.fuse` vs `l1.nodule`) stay distinguishable instead of both collapsing onto the same nodule path (G2/VR-5)",
+      "item_name": null
+    },
+    {
+      "file": "/root/git/isolated/mycelium/crates/mycelium-interp/src/swap.rs",
+      "line": 10,
+      "col": 1,
+      "category": "Import",
+      "rust_construct": "Import",
+      "snippet": "use mycelium_core :: { ContentHash , Meta , Provenance , Repr , Value } ;",
+      "reason": "`use mycelium_core::ContentHash` — `mycelium_core` is not a sibling module OR sibling phylum transpiled in this same batch (an external crate, `std`, or simply out of this batch's target set). Flagged, not guessed (VR-5/G2); `use mycelium_core::Meta` — `mycelium_core` is not a sibling module OR sibling phylum transpiled in this same batch (an external crate, `std`, or simply out of this batch's target set). Flagged, not guessed (VR-5/G2); `use mycelium_core::Provenance` — `mycelium_core` is not a sibling module OR sibling phylum transpiled in this same batch (an external crate, `std`, or simply out of this batch's target set). Flagged, not guessed (VR-5/G2); `use mycelium_core::Repr` — `mycelium_core` is not a sibling module OR sibling phylum transpiled in this same batch (an external crate, `std`, or simply out of this batch's target set). Flagged, not guessed (VR-5/G2); `use mycelium_core::Value` — `mycelium_core` is not a sibling module OR sibling phylum transpiled in this same batch (an external crate, `std`, or simply out of this batch's target set). Flagged, not guessed (VR-5/G2)",
+      "item_name": null
+    },
+    {
+      "file": "/root/git/isolated/mycelium/crates/mycelium-interp/src/swap.rs",
+      "line": 12,
+      "col": 1,
+      "category": "Import",
+      "rust_construct": "Import",
+      "snippet": "use crate :: EvalError ;",
+      "reason": "`use ::EvalError` — `EvalError` is not among sibling ``'s successfully-emitted surface in this batch (the sibling file itself gapped it rather than emitting it). Flagged, not guessed (VR-5/G2)",
+      "item_name": null
+    },
+    {
+      "file": "/root/git/isolated/mycelium/crates/mycelium-interp/src/swap.rs",
+      "line": 14,
+      "col": 1,
+      "category": "Trait",
+      "rust_construct": "Trait",
+      "snippet": "# [doc = \" Evaluates a `Swap` node. Implementations must be *never silent*: an out-of-domain or unsupported\"] # [doc = \" conversion returns an [`EvalError`] (the interpreter surfaces it), it does not coerce.\"] # [doc = \"\"] # [doc = \" **`Sync` (M-862) + `Send` (M-864):** the parallel-pure-fragment evaluator (`crate::parallel`)\"] # [doc = \" shares the engine across the M-861 scheduler's worker threads (`mycelium_sched`) via `&Interpreter`\"] # [doc = \" — every engine must be safely readable from multiple threads at once (`Sync`). M-864's persistent\"] # [doc = \" pool tightened `run_indexed` to `'static` job closures, which can no longer *borrow*\"] # [doc = \" `&Interpreter` from the caller's stack frame (the pool's worker threads outlive any single call);\"] # [doc = \" `Interpreter` is now `Clone` and stores its engine as `Arc<dyn SwapEngine>` so a job can own a\"] # [doc = \" cheap handle to it, which additionally requires `Send` (an `Arc<T>` is `Send` only if `T: Send +\"] # [doc = \" Sync`). Every shipped/known implementation (the identity engine here, the M-120 certified engines\"] # [doc = \" in `mycelium-cert`) is a plain, interior-mutability-free struct and satisfies both automatically;\"] # [doc = \" a future engine that needs interior mutability would need its own synchronization (e.g. a\"] # [doc = \" `Mutex`), same as any other `Send + Sync` type.\"] pub trait SwapEngine : Send + Sync { # [doc = \" Convert `src` to `target` under `policy`, returning the converted [`Value`] or an error. The\"] # [doc = \" result's [`Meta`] must record `policy_used` (ADR-006) and an honest guarantee/bound.\"] fn swap (& self , src : & Value , target : & Repr , policy : & ContentHash) -> Result < Value , EvalError > ; }",
+      "reason": "trait `SwapEngine` has supertrait bound(s) — trait_item grammar has no supertrait syntax (`'trait' Ident type_params? '{' ...`)",
+      "item_name": "SwapEngine"
+    },
+    {
+      "file": "/root/git/isolated/mycelium/crates/mycelium-interp/src/swap.rs",
+      "line": 34,
+      "col": 1,
+      "category": "DeriveSatisfied",
+      "rust_construct": "DeriveSatisfied",
+      "snippet": "# [doc = \" The trivial swap engine: a swap whose `target` equals the source `Repr` is the identity — exactly\"] # [doc = \" lossless, `guarantee` preserved. Any *cross-paradigm* swap returns\"] # [doc = \" [`EvalError::UnsupportedSwap`], deferring to the certified M-120 engine. This keeps M-110 honest:\"] # [doc = \" it executes the swaps it can prove trivially exact and refuses the rest rather than guessing.\"] # [derive (Debug , Clone , Copy , Default)] pub struct IdentitySwapEngine ;",
+      "reason": "struct `IdentitySwapEngine` derive(Clone) is a satisfied no-op under Mycelium's value semantics (ADR-003 — every value already copies structurally; DN-128 §6.1) — not emitted as an impl, not a gap",
+      "item_name": "IdentitySwapEngine"
+    },
+    {
+      "file": "/root/git/isolated/mycelium/crates/mycelium-interp/src/swap.rs",
+      "line": 34,
+      "col": 1,
+      "category": "DeriveSatisfied",
+      "rust_construct": "DeriveSatisfied",
+      "snippet": "# [doc = \" The trivial swap engine: a swap whose `target` equals the source `Repr` is the identity — exactly\"] # [doc = \" lossless, `guarantee` preserved. Any *cross-paradigm* swap returns\"] # [doc = \" [`EvalError::UnsupportedSwap`], deferring to the certified M-120 engine. This keeps M-110 honest:\"] # [doc = \" it executes the swaps it can prove trivially exact and refuses the rest rather than guessing.\"] # [derive (Debug , Clone , Copy , Default)] pub struct IdentitySwapEngine ;",
+      "reason": "struct `IdentitySwapEngine` derive(Copy) is a satisfied no-op under Mycelium's value semantics (ADR-003 — every value already copies structurally; DN-128 §6.1) — not emitted as an impl, not a gap",
+      "item_name": "IdentitySwapEngine"
+    },
+    {
+      "file": "/root/git/isolated/mycelium/crates/mycelium-interp/src/swap.rs",
+      "line": 41,
+      "col": 1,
+      "category": "Impl",
+      "rust_construct": "Impl",
+      "snippet": "impl SwapEngine for IdentitySwapEngine { fn swap (& self , src : & Value , target : & Repr , policy : & ContentHash) -> Result < Value , EvalError > { if src . repr () != target { return Err (EvalError :: UnsupportedSwap { from : src . repr () . clone () , to : target . clone () , }) ; } let src_meta = src . meta () ; let meta = Meta :: new (Provenance :: Derived { op : mycelium_core :: operation_hash (\"swap.identity\") , inputs : vec ! [src . content_hash ()] , } , src_meta . guarantee () , src_meta . bound () . cloned () , src_meta . sparsity () , src_meta . physical () , Some (policy . clone ()) ,) . map_err (EvalError :: Wf) ? ; Value :: new (src . repr () . clone () , src . payload () . clone () , meta) . map_err (EvalError :: Wf) } }",
+      "reason": "trait-impl of non-prelude trait `SwapEngine` — no ambient trait definition and synthetic trait emission is refused (DN-34 §8.8 / DN-122 MVP); gapped the whole impl so the residual cannot file-poison myc-check (G2; express gap-close 2026-07-16)",
+      "item_name": "IdentitySwapEngine"
+    }
+  ],
+  "total_top_level_items": 5
+}

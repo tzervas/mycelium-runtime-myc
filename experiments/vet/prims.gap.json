@@ -1,0 +1,1220 @@
+{
+  "source": "/root/git/isolated/mycelium/crates/mycelium-interp/src/prims.rs",
+  "emitted_items": [
+    "co-emit:Result",
+    "co-emit:GuaranteeStrength",
+    "ApproxRule",
+    "prim_bit_popcount",
+    "prim_bit_clz",
+    "prim_bit_ctz",
+    "prim_trit_mul",
+    "prim_bit_add",
+    "prim_bit_sub",
+    "FLT_CONFORMANCE_TRIALS",
+    "FLT_CMP_CONFORMANCE_TRIALS",
+    "VsaDispatch"
+  ],
+  "gaps": [
+    {
+      "file": "/root/git/isolated/mycelium/crates/mycelium-interp/src/prims.rs",
+      "line": 25,
+      "col": 1,
+      "category": "Import",
+      "rust_construct": "Import",
+      "snippet": "use std :: cmp :: Ordering ;",
+      "reason": "`use std.cmp::Ordering` — `std.cmp` is not a sibling module OR sibling phylum transpiled in this same batch (an external crate, `std`, or simply out of this batch's target set). Flagged, not guessed (VR-5/G2)",
+      "item_name": null
+    },
+    {
+      "file": "/root/git/isolated/mycelium/crates/mycelium-interp/src/prims.rs",
+      "line": 26,
+      "col": 1,
+      "category": "Import",
+      "rust_construct": "Import",
+      "snippet": "use std :: collections :: BTreeMap ;",
+      "reason": "`use std.collections::BTreeMap` — `std.collections` is not a sibling module OR sibling phylum transpiled in this same batch (an external crate, `std`, or simply out of this batch's target set). Flagged, not guessed (VR-5/G2)",
+      "item_name": null
+    },
+    {
+      "file": "/root/git/isolated/mycelium/crates/mycelium-interp/src/prims.rs",
+      "line": 28,
+      "col": 1,
+      "category": "Import",
+      "rust_construct": "Import",
+      "snippet": "use mycelium_core :: { binary , operation_hash , ternary , Bound , BoundBasis , BoundKind , FloatWidth , GuaranteeStrength , Meta , NormKind , Payload , Provenance , Repr , Trit , Value , WrappingOpt , } ;",
+      "reason": "`use mycelium_core::binary` — `mycelium_core` is not a sibling module OR sibling phylum transpiled in this same batch (an external crate, `std`, or simply out of this batch's target set). Flagged, not guessed (VR-5/G2); `use mycelium_core::operation_hash` — `mycelium_core` is not a sibling module OR sibling phylum transpiled in this same batch (an external crate, `std`, or simply out of this batch's target set). Flagged, not guessed (VR-5/G2); `use mycelium_core::ternary` — `mycelium_core` is not a sibling module OR sibling phylum transpiled in this same batch (an external crate, `std`, or simply out of this batch's target set). Flagged, not guessed (VR-5/G2); `use mycelium_core::Bound` — `mycelium_core` is not a sibling module OR sibling phylum transpiled in this same batch (an external crate, `std`, or simply out of this batch's target set). Flagged, not guessed (VR-5/G2); `use mycelium_core::BoundBasis` — `mycelium_core` is not a sibling module OR sibling phylum transpiled in this same batch (an external crate, `std`, or simply out of this batch's target set). Flagged, not guessed (VR-5/G2); `use mycelium_core::BoundKind` — `mycelium_core` is not a sibling module OR sibling phylum transpiled in this same batch (an external crate, `std`, or simply out of this batch's target set). Flagged, not guessed (VR-5/G2); `use mycelium_core::FloatWidth` — `mycelium_core` is not a sibling module OR sibling phylum transpiled in this same batch (an external crate, `std`, or simply out of this batch's target set). Flagged, not guessed (VR-5/G2); `use mycelium_core::GuaranteeStrength` — `mycelium_core` is not a sibling module OR sibling phylum transpiled in this same batch (an external crate, `std`, or simply out of this batch's target set). Flagged, not guessed (VR-5/G2); `use mycelium_core::Meta` — `mycelium_core` is not a sibling module OR sibling phylum transpiled in this same batch (an external crate, `std`, or simply out of this batch's target set). Flagged, not guessed (VR-5/G2); `use mycelium_core::NormKind` — `mycelium_core` is not a sibling module OR sibling phylum transpiled in this same batch (an external crate, `std`, or simply out of this batch's target set). Flagged, not guessed (VR-5/G2); `use mycelium_core::Payload` — `mycelium_core` is not a sibling module OR sibling phylum transpiled in this same batch (an external crate, `std`, or simply out of this batch's target set). Flagged, not guessed (VR-5/G2); `use mycelium_core::Provenance` — `mycelium_core` is not a sibling module OR sibling phylum transpiled in this same batch (an external crate, `std`, or simply out of this batch's target set). Flagged, not guessed (VR-5/G2); `use mycelium_core::Repr` — `mycelium_core` is not a sibling module OR sibling phylum transpiled in this same batch (an external crate, `std`, or simply out of this batch's target set). Flagged, not guessed (VR-5/G2); `use mycelium_core::Trit` — `mycelium_core` is not a sibling module OR sibling phylum transpiled in this same batch (an external crate, `std`, or simply out of this batch's target set). Flagged, not guessed (VR-5/G2); `use mycelium_core::Value` — `mycelium_core` is not a sibling module OR sibling phylum transpiled in this same batch (an external crate, `std`, or simply out of this batch's target set). Flagged, not guessed (VR-5/G2); `use mycelium_core::WrappingOpt` — `mycelium_core` is not a sibling module OR sibling phylum transpiled in this same batch (an external crate, `std`, or simply out of this batch's target set). Flagged, not guessed (VR-5/G2)",
+      "item_name": null
+    },
+    {
+      "file": "/root/git/isolated/mycelium/crates/mycelium-interp/src/prims.rs",
+      "line": 32,
+      "col": 1,
+      "category": "Import",
+      "rust_construct": "Import",
+      "snippet": "use mycelium_dense :: { DenseError , DenseSpace } ;",
+      "reason": "`use mycelium_dense::DenseError` — `mycelium_dense` is not a sibling module OR sibling phylum transpiled in this same batch (an external crate, `std`, or simply out of this batch's target set). Flagged, not guessed (VR-5/G2); `use mycelium_dense::DenseSpace` — `mycelium_dense` is not a sibling module OR sibling phylum transpiled in this same batch (an external crate, `std`, or simply out of this batch's target set). Flagged, not guessed (VR-5/G2)",
+      "item_name": null
+    },
+    {
+      "file": "/root/git/isolated/mycelium/crates/mycelium-interp/src/prims.rs",
+      "line": 33,
+      "col": 1,
+      "category": "Import",
+      "rust_construct": "Import",
+      "snippet": "use mycelium_numerics :: { compose_error_bound , ErrorOp } ;",
+      "reason": "`use mycelium_numerics::compose_error_bound` — `mycelium_numerics` is not a sibling module OR sibling phylum transpiled in this same batch (an external crate, `std`, or simply out of this batch's target set). Flagged, not guessed (VR-5/G2); `use mycelium_numerics::ErrorOp` — `mycelium_numerics` is not a sibling module OR sibling phylum transpiled in this same batch (an external crate, `std`, or simply out of this batch's target set). Flagged, not guessed (VR-5/G2)",
+      "item_name": null
+    },
+    {
+      "file": "/root/git/isolated/mycelium/crates/mycelium-interp/src/prims.rs",
+      "line": 34,
+      "col": 1,
+      "category": "Import",
+      "rust_construct": "Import",
+      "snippet": "use mycelium_vsa :: { capacity , Bsc , CleanupMemory , Fhrr , MapI , Match , VsaError , VsaModel } ;",
+      "reason": "`use mycelium_vsa::capacity` — `mycelium_vsa` is not a sibling module OR sibling phylum transpiled in this same batch (an external crate, `std`, or simply out of this batch's target set). Flagged, not guessed (VR-5/G2); `use mycelium_vsa::Bsc` — `mycelium_vsa` is not a sibling module OR sibling phylum transpiled in this same batch (an external crate, `std`, or simply out of this batch's target set). Flagged, not guessed (VR-5/G2); `use mycelium_vsa::CleanupMemory` — `mycelium_vsa` is not a sibling module OR sibling phylum transpiled in this same batch (an external crate, `std`, or simply out of this batch's target set). Flagged, not guessed (VR-5/G2); `use mycelium_vsa::Fhrr` — `mycelium_vsa` is not a sibling module OR sibling phylum transpiled in this same batch (an external crate, `std`, or simply out of this batch's target set). Flagged, not guessed (VR-5/G2); `use mycelium_vsa::MapI` — `mycelium_vsa` is not a sibling module OR sibling phylum transpiled in this same batch (an external crate, `std`, or simply out of this batch's target set). Flagged, not guessed (VR-5/G2); `use mycelium_vsa::Match` — `mycelium_vsa` is not a sibling module OR sibling phylum transpiled in this same batch (an external crate, `std`, or simply out of this batch's target set). Flagged, not guessed (VR-5/G2); `use mycelium_vsa::VsaError` — `mycelium_vsa` is not a sibling module OR sibling phylum transpiled in this same batch (an external crate, `std`, or simply out of this batch's target set). Flagged, not guessed (VR-5/G2); `use mycelium_vsa::VsaModel` — `mycelium_vsa` is not a sibling module OR sibling phylum transpiled in this same batch (an external crate, `std`, or simply out of this batch's target set). Flagged, not guessed (VR-5/G2)",
+      "item_name": null
+    },
+    {
+      "file": "/root/git/isolated/mycelium/crates/mycelium-interp/src/prims.rs",
+      "line": 36,
+      "col": 1,
+      "category": "Import",
+      "rust_construct": "Import",
+      "snippet": "use crate :: EvalError ;",
+      "reason": "`use ::EvalError` — `EvalError` is not among sibling ``'s successfully-emitted surface in this batch (the sibling file itself gapped it rather than emitting it). Flagged, not guessed (VR-5/G2)",
+      "item_name": null
+    },
+    {
+      "file": "/root/git/isolated/mycelium/crates/mycelium-interp/src/prims.rs",
+      "line": 38,
+      "col": 1,
+      "category": "DeriveSatisfied",
+      "rust_construct": "DeriveSatisfied",
+      "snippet": "# [doc = \" How a built-in composes an *approximate* input's bound (M-204). Exact inputs never reach this —\"] # [doc = \" they short-circuit to an `Exact`/`bound = None` result.\"] # [derive (Debug , Clone , Copy)] enum ApproxRule { # [doc = \" No defined ε-propagation over an approximate input — refuse (honest; `bit.*`, `trit.mul`).\"] Refuse , # [doc = \" Unary identity (`core.id`): pass the single input's bound and strength through unchanged.\"] Passthrough , # [doc = \" Compose the inputs' `Error` bounds through the affine ε-kernel under this op (the additive\"] # [doc = \" ternary arithmetic — sound 1-Lipschitz propagation).\"] Error (ErrorOp) , }",
+      "reason": "enum `ApproxRule` derive(Clone) is a satisfied no-op under Mycelium's value semantics (ADR-003 — every value already copies structurally; DN-128 §6.1) — not emitted as an impl, not a gap",
+      "item_name": "ApproxRule"
+    },
+    {
+      "file": "/root/git/isolated/mycelium/crates/mycelium-interp/src/prims.rs",
+      "line": 38,
+      "col": 1,
+      "category": "DeriveSatisfied",
+      "rust_construct": "DeriveSatisfied",
+      "snippet": "# [doc = \" How a built-in composes an *approximate* input's bound (M-204). Exact inputs never reach this —\"] # [doc = \" they short-circuit to an `Exact`/`bound = None` result.\"] # [derive (Debug , Clone , Copy)] enum ApproxRule { # [doc = \" No defined ε-propagation over an approximate input — refuse (honest; `bit.*`, `trit.mul`).\"] Refuse , # [doc = \" Unary identity (`core.id`): pass the single input's bound and strength through unchanged.\"] Passthrough , # [doc = \" Compose the inputs' `Error` bounds through the affine ε-kernel under this op (the additive\"] # [doc = \" ternary arithmetic — sound 1-Lipschitz propagation).\"] Error (ErrorOp) , }",
+      "reason": "enum `ApproxRule` derive(Copy) is a satisfied no-op under Mycelium's value semantics (ADR-003 — every value already copies structurally; DN-128 §6.1) — not emitted as an impl, not a gap",
+      "item_name": "ApproxRule"
+    },
+    {
+      "file": "/root/git/isolated/mycelium/crates/mycelium-interp/src/prims.rs",
+      "line": 51,
+      "col": 1,
+      "category": "Other",
+      "rust_construct": "Other",
+      "snippet": "# [doc = \" A primitive implementation: a pure function from argument values to a result value (or an error).\"] pub type PrimFn = fn (prim : & str , args : & [& Value]) -> Result < Value , EvalError > ;",
+      "reason": "`type PrimFn = ...` alias — Mycelium's `type_item` always introduces a new nominal sum type via `'=' constructor ('|' constructor)*`; a bare alias to an existing type would fabricate a sum type where none exists semantically",
+      "item_name": "PrimFn"
+    },
+    {
+      "file": "/root/git/isolated/mycelium/crates/mycelium-interp/src/prims.rs",
+      "line": 54,
+      "col": 1,
+      "category": "Struct",
+      "rust_construct": "Struct",
+      "snippet": "# [doc = \" The name→implementation table the interpreter dispatches `Op` nodes through. Extensible: M-111\"] # [doc = \" (arithmetic) and later passes register additional prims here.\"] # [derive (Clone , Default)] pub struct PrimRegistry { table : BTreeMap < String , PrimFn > , }",
+      "reason": "struct `PrimRegistry` uses named fields and references a type not resolvable in-file — emitting it positionally would introduce an unresolved reference that poisons the file's `myc check`; left gapped under the M-1006 resolvability gate (VR-5/G2)",
+      "item_name": "PrimRegistry"
+    },
+    {
+      "file": "/root/git/isolated/mycelium/crates/mycelium-interp/src/prims.rs",
+      "line": 61,
+      "col": 1,
+      "category": "Impl",
+      "rust_construct": "Impl",
+      "snippet": "impl PrimRegistry { # [doc = \" An empty registry.\"] # [must_use] pub fn empty () -> Self { PrimRegistry { table : BTreeMap :: new () , } } # [doc = \" The default registry: the exact built-ins — elementwise logical (`core.id`,\"] # [doc = \" `bit.not/and/or/xor`), fixed-width balanced-ternary arithmetic (`trit.neg/add/sub/mul`,\"] # [doc = \" M-111), the reduce-to-`Bool` comparison prims (`cmp.eq`/`cmp.lt` → `Binary{1}`, RFC-0032 D1,\"] # [doc = \" M-747), never-silent fixed-width binary arithmetic (`bit.add`/`bit.sub`, RFC-0032 D2,\"] # [doc = \" M-748), the never-silent `Binary` width-cast (`bit.width_cast` — zero-extend widen / checked\"] # [doc = \" narrow, DN-41, M-798), the explicit total-but-lossy `Binary` narrow (`bit.truncate` —\"] # [doc = \" unconditionally drops the high bits, never refuses, `Declared` tag, DN-51 §2 D3/§6),\"] # [doc = \" never-silent indexed-sequence access (`seq.len`/`seq.get`, RFC-0032 D3,\"] # [doc = \" M-749), never-silent byte-string access\"] # [doc = \" (`bytes.len`/`bytes.get`/`bytes.slice`/`bytes.concat`, RFC-0032 D4, M-750), the never-silent\"] # [doc = \" two's-complement `Binary` multiply (`bin.mul`, RFC-0033 §4.1.2/§4.1.3, M-887 — the first\"] # [doc = \" `enb` Gap-B prim; sets the registry pattern the sibling Gap-B/C prims mirror), the\"] # [doc = \" never-silent **unsigned** `Binary` division/remainder (`bin.div`/`bin.rem`, RFC-0033\"] # [doc = \" §4.1.2/§4.1.3, M-888 — div-by-zero is an explicit refusal; the signed variant rides M-767),\"] # [doc = \" the never-silent **logical** `Binary` left/right shift (`bin.shl`/`bin.shr`, RFC-0033\"] # [doc = \" §4.1.2/§4.1.3, M-889 — a shift amount `>= N` is an explicit refusal; the arithmetic/signed\"] # [doc = \" variant rides M-767), and the never-silent two's-complement `add`/`sub`/`neg`\"] # [doc = \" (`bin.add`/`bin.sub`/`bin.neg`, RFC-0033 §4.1.2/§4.1.3, M-766 — completes the shared\"] # [doc = \" two's-complement set `bin.mul` started; distinct from `bit.add`/`bit.sub`'s unsigned overflow\"] # [doc = \" criterion), and the **signedness-split signed op set**\"] # [doc = \" (`bin.div_s`/`bin.rem_s`/`bin.shr_s`/`cmp.lt_s`, RFC-0033 §4.1.2/§4.1.3, M-767 — signed\"] # [doc = \" truncated-toward-zero division/remainder, the arithmetic sign-extending right shift, and\"] # [doc = \" the two's-complement ordering, each a distinct named op from its unsigned counterpart per\"] # [doc = \" ADR-028; the `min ÷ −1` overflow, div-by-zero, and an out-of-range shift amount are\"] # [doc = \" explicit refusals), and the **dense group**\"] # [doc = \" (`dense.add`/`dense.sub`/`dense.neg`/`dense.scale`, RFC-0001 §4.1/RFC-0002 §5, M-890 —\"] # [doc = \" `enb` Gap C; the first tensor-valued prims — plus the M-891 measurement pair\"] # [doc = \" `dense.dot`/`dense.similarity`; all delegate to the `mycelium-dense` kernel and\"] # [doc = \" carry its per-op guarantee tags unchanged — `dense.neg` `Exact`, the rest `Proven`; see\"] # [doc = \" the module note at the dense section below), and the **scalar-float arithmetic group**\"] # [doc = \" (`flt.add`/`flt.sub`/`flt.mul`/`flt.div`/`flt.neg`, ADR-040 §2.5, M-898 — `enb` Gap A;\"] # [doc = \" IEEE-754 binary64 under RNE over `Repr::Float`, arithmetic specials in-band per the\"] # [doc = \" ratified FLAG-2, per-op tag `Empirical` per ADR-040 §2.6 — see the float section note),\"] # [doc = \" and the **scalar-float comparison group** (`flt.lt`/`flt.le`/`flt.gt`/`flt.ge`/`flt.eq` —\"] # [doc = \" the IEEE-754 §5.11 partial-order predicates, any NaN operand → the *defined* result\"] # [doc = \" `false` — plus the named opt-in total order `flt.total_le` (IEEE-754 §5.10 `totalOrder`),\"] # [doc = \" ADR-040 §2.4, M-899 — `enb` Gap A; the total-order *property* stays `Empirical` until the\"] # [doc = \" M-511 proof debt is discharged — see the float comparison section note), and the\"] # [doc = \" **VSA bind group** (`vsa.bind`/`vsa.unbind`/`vsa.permute`, RFC-0003 §3/§4/ADR-008, M-892 —\"] # [doc = \" `enb` Gap C; **model-dispatched** MAP-I/FHRR/BSC on the operand's `Repr::Vsa` model id, an\"] # [doc = \" out-of-set model an explicit refusal; the `mycelium-vsa` kernel constructs the result with\"] # [doc = \" its honest per-model tag — MAP-I/BSC ops `Exact`, FHRR `unbind` `Empirical` with its\"] # [doc = \" trial-validated δ — carried unchanged; see the vsa section note below), and the\"] # [doc = \" **certified VSA superposition** (`vsa.bundle`, RFC-0003 §4/§5/ADR-008, M-893 — `enb`\"] # [doc = \" Gap C; MAP-I's `bundle_values_certified` over a `Seq` of hypervectors + a `Float` δ,\"] # [doc = \" dispatch set the certified singleton {MAP-I}; the kernel issues the `Proven`\"] # [doc = \" `CapacityBound` only under its checked side-conditions, carried unchanged — see the vsa\"] # [doc = \" section note below), and the **VSA cleanup/reconstruction pair + capacity query**\"] # [doc = \" (`vsa.cleanup`/`vsa.reconstruct`/`vsa.required_dim`, RFC-0003 §3/§5/§6/ADR-008, M-894 —\"] # [doc = \" `enb` Gap C; the FR-S4 cleanup-memory retrieval and the §6 compositional\"] # [doc = \" role-reconstruction, each returning the `[index, confidence, margin]` decision triple\"] # [doc = \" with the query/record's own (strength, bound) pair carried through, plus the M-131\"] # [doc = \" `requiredDim` query whose result carries the kernel-checked `Proven` `CapacityBound` —\"] # [doc = \" see the M-894 section note below).\"] # [must_use] pub fn with_builtins () -> Self { let mut r = PrimRegistry :: empty () ; r . register (\"core.id\" , prim_id) ; r . register (\"bit.not\" , prim_bit_not) ; r . register (\"bit.and\" , prim_bit_and) ; r . register (\"bit.or\" , prim_bit_or) ; r . register (\"bit.xor\" , prim_bit_xor) ; r . register (\"trit.neg\" , prim_trit_neg) ; r . register (\"trit.add\" , prim_trit_add) ; r . register (\"trit.sub\" , prim_trit_sub) ; r . register (\"trit.mul\" , prim_trit_mul) ; r . register (\"cmp.eq\" , prim_cmp_eq) ; r . register (\"cmp.lt\" , prim_cmp_lt) ; r . register (\"bit.add\" , prim_bit_add) ; r . register (\"bit.sub\" , prim_bit_sub) ; r . register (\"bin.mul\" , prim_bin_mul) ; r . register (\"bit.mul\" , prim_bit_mul) ; r . register (\"bit.popcount\" , prim_bit_popcount) ; r . register (\"bit.clz\" , prim_bit_clz) ; r . register (\"bit.ctz\" , prim_bit_ctz) ; r . register (\"bin.div\" , prim_bin_div) ; r . register (\"bin.rem\" , prim_bin_rem) ; r . register (\"bin.shl\" , prim_bin_shl) ; r . register (\"bin.shr\" , prim_bin_shr) ; r . register (\"bin.add\" , prim_bin_add) ; r . register (\"bin.sub\" , prim_bin_sub) ; r . register (\"bin.neg\" , prim_bin_neg) ; r . register (\"bin.div_s\" , prim_bin_div_s) ; r . register (\"bin.rem_s\" , prim_bin_rem_s) ; r . register (\"bin.shr_s\" , prim_bin_shr_s) ; r . register (\"cmp.lt_s\" , prim_cmp_lt_s) ; r . register (\"bit.width_cast\" , prim_width_cast) ; r . register (\"bit.truncate\" , prim_truncate) ; r . register (\"seq.len\" , prim_seq_len) ; r . register (\"seq.get\" , prim_seq_get) ; r . register (\"bytes.len\" , prim_bytes_len) ; r . register (\"bytes.get\" , prim_bytes_get) ; r . register (\"bytes.slice\" , prim_bytes_slice) ; r . register (\"bytes.concat\" , prim_bytes_concat) ; r . register (\"bytes.eq\" , prim_bytes_eq) ; r . register (\"hash.blake3\" , prim_hash_blake3) ; r . register (\"bit.to_bytes\" , prim_bin_to_bytes) ; r . register (\"fuse_join:binary\" , prim_fuse_join_binary) ; r . register (\"dense.add\" , prim_dense_add) ; r . register (\"dense.sub\" , prim_dense_sub) ; r . register (\"dense.neg\" , prim_dense_neg) ; r . register (\"dense.scale\" , prim_dense_scale) ; r . register (\"dense.dot\" , prim_dense_dot) ; r . register (\"dense.similarity\" , prim_dense_similarity) ; r . register (\"flt.add\" , prim_flt_add) ; r . register (\"flt.sub\" , prim_flt_sub) ; r . register (\"flt.mul\" , prim_flt_mul) ; r . register (\"flt.div\" , prim_flt_div) ; r . register (\"flt.neg\" , prim_flt_neg) ; r . register (\"flt.lt\" , prim_flt_lt) ; r . register (\"flt.le\" , prim_flt_le) ; r . register (\"flt.gt\" , prim_flt_gt) ; r . register (\"flt.ge\" , prim_flt_ge) ; r . register (\"flt.eq\" , prim_flt_eq) ; r . register (\"flt.total_le\" , prim_flt_total_le) ; r . register (\"flt.is_nan\" , prim_flt_is_nan) ; r . register (\"flt.is_finite\" , prim_flt_is_finite) ; r . register (\"flt.is_infinite\" , prim_flt_is_infinite) ; r . register (\"bin.to_flt\" , prim_bin_to_flt) ; r . register (\"flt.to_bin\" , prim_flt_to_bin) ; r . register (\"vsa.bind\" , prim_vsa_bind) ; r . register (\"vsa.unbind\" , prim_vsa_unbind) ; r . register (\"vsa.permute\" , prim_vsa_permute) ; r . register (\"vsa.bundle\" , prim_vsa_bundle) ; r . register (\"vsa.cleanup\" , prim_vsa_cleanup) ; r . register (\"vsa.reconstruct\" , prim_vsa_reconstruct) ; r . register (\"vsa.required_dim\" , prim_vsa_required_dim) ; r } # [doc = \" Register (or replace) a primitive.\"] pub fn register (& mut self , name : & str , f : PrimFn) { self . table . insert (name . to_owned () , f) ; } # [doc = \" Look up a primitive by name.\"] # [must_use] pub fn get (& self , name : & str) -> Option < PrimFn > { self . table . get (name) . copied () } # [doc = \" The registered primitive names (sorted).\"] # [must_use] pub fn names (& self) -> Vec < & str > { self . table . keys () . map (String :: as_str) . collect () } }",
+      "reason": "no member of this impl block could be transpiled (5 sub-issue(s)): impl method `empty` body: struct literal `PrimRegistry { .. }` — not an in-file single-ctor struct or enum struct-variant that emits (no constructor to build; a cross-nodule variant is an honest DN-113/DN-134-OQ-2 resolvability gap, never a fabricated out-of-file reference — VR-5/G2); impl method `with_builtins` body: qualified/associated-function call `PrimRegistry :: empty` did not resolve to a known-emitted associated fn — Mycelium calls are bare identifiers, and the only sound surface form for `Type::method(...)` is the mangled `Type__method` name the declaration side already emits for a receiver-less inherent-impl associated fn (DN-34 §8.13/8.14), referenced only when that exact declaration is PROVEN present (same-file, or a resolved M-1084 cross-nodule sibling). A primitive/std associated fn with no emitted decl (e.g. `i128::try_from`), an unresolved type, or a `self`-receiving method (excluded by construction — it stays reachable only from its own bare call site) all gap here rather than fabricate a call (G2/VR-5, DN-133); impl method `register` body: mutating method body statement is neither a `let`, a supported `self.<field>`/`*<param>` re-assignment, nor (in tail position) the method's own return value — value-threading deliberately refuses any shape outside a flat re-assignment sequence rather than risk an unsound rebind (DN-125 §6.1, never-silent G2/VR-5); impl method `get` body: method call `.copied(...)` has no proven-emitted free-fn referent in this file (neither a D4-mangled inherent `Type__copied` nor a bare inherent recorded by this file's left-to-right pass, nor a prim_map / combinator row). Emitting bare `copied(recv, …)` would fabricate an unknown prim and file-poison myc-check (G-β Rank A / G2/VR-5; residual when the method body itself gapped — e.g. M-1037 `.to_vec()` inside `read_to_end` — so the declaration was never registered); impl method `names` body: method call `.collect(...)` has no proven-emitted free-fn referent in this file (neither a D4-mangled inherent `Type__collect` nor a bare inherent recorded by this file's left-to-right pass, nor a prim_map / combinator row). Emitting bare `collect(recv, …)` would fabricate an unknown prim and file-poison myc-check (G-β Rank A / G2/VR-5; residual when the method body itself gapped — e.g. M-1037 `.to_vec()` inside `read_to_end` — so the declaration was never registered)",
+      "item_name": "PrimRegistry"
+    },
+    {
+      "file": "/root/git/isolated/mycelium/crates/mycelium-interp/src/prims.rs",
+      "line": 287,
+      "col": 1,
+      "category": "Other",
+      "rust_construct": "Other",
+      "snippet": "# [doc = \" Build a result value with honest provenance/guarantee threading (RFC-0001 §4.6/§4.7). The\"] # [doc = \" intrinsic strength of every built-in is `Exact`, so the result strength is the `meet` over the\"] # [doc = \" inputs. Exact inputs → an `Exact`/`bound = None` result; an approximate input is composed per the\"] # [doc = \" prim's [`ApproxRule`] (M-204) — or explicitly refused when no rule applies (never a fabricated\"] # [doc = \" bound; G2).\"] fn compose_result (prim : & str , inputs : & [& Value] , repr : Repr , payload : Payload , rule : ApproxRule ,) -> Result < Value , EvalError > { let strength = GuaranteeStrength :: propagate (GuaranteeStrength :: Exact , inputs . iter () . map (| v | v . meta () . guarantee ()) ,) ; let provenance = Provenance :: Derived { op : operation_hash (prim) , inputs : inputs . iter () . map (| v | v . content_hash ()) . collect () , } ; let (guarantee , bound) = if strength == GuaranteeStrength :: Exact { (GuaranteeStrength :: Exact , None) } else { compose_approx (prim , inputs , rule) ? } ; let meta = Meta :: new (provenance , guarantee , bound , None , None , None) . map_err (EvalError :: Wf) ? ; Value :: new (repr , payload , meta) . map_err (EvalError :: Wf) }",
+      "reason": "qualified/associated-function call `GuaranteeStrength :: propagate` did not resolve to a known-emitted associated fn — Mycelium calls are bare identifiers, and the only sound surface form for `Type::method(...)` is the mangled `Type__method` name the declaration side already emits for a receiver-less inherent-impl associated fn (DN-34 §8.13/8.14), referenced only when that exact declaration is PROVEN present (same-file, or a resolved M-1084 cross-nodule sibling). A primitive/std associated fn with no emitted decl (e.g. `i128::try_from`), an unresolved type, or a `self`-receiving method (excluded by construction — it stays reachable only from its own bare call site) all gap here rather than fabricate a call (G2/VR-5, DN-133)",
+      "item_name": "compose_result"
+    },
+    {
+      "file": "/root/git/isolated/mycelium/crates/mycelium-interp/src/prims.rs",
+      "line": 325,
+      "col": 1,
+      "category": "Closure",
+      "rust_construct": "Closure",
+      "snippet": "# [doc = \" Compose the bound + strength for a result over at least one *approximate* input (M-204; ADR-010).\"] # [doc = \" The honest upgrade over the Phase-1 blanket refusal: a defined rule composes a *checked* bound; an\"] # [doc = \" undefined one still refuses rather than guessing.\"] fn compose_approx (prim : & str , inputs : & [& Value] , rule : ApproxRule ,) -> Result < (GuaranteeStrength , Option < Bound >) , EvalError > { let refuse = | | EvalError :: ApproxCompositionUnsupported { prim : prim . to_owned () , } ; match rule { ApproxRule :: Refuse => Err (refuse ()) , ApproxRule :: Passthrough => { let v = inputs . first () . ok_or_else (refuse) ? ; Ok ((v . meta () . guarantee () , v . meta () . bound () . cloned ())) } ApproxRule :: Error (op) => { let bounds : Vec < & Bound > = inputs . iter () . filter_map (| v | v . meta () . bound ()) . collect () ; let composed = compose_error_bound (& bounds , op) . ok_or_else (refuse) ? ; Ok ((composed . strength , Some (composed . bound))) } } }",
+      "reason": "a zero-parameter closure has no v0 `lambda` form (grammar note on `lambda_expr` — a never-silent refusal, G2)",
+      "item_name": "compose_approx"
+    },
+    {
+      "file": "/root/git/isolated/mycelium/crates/mycelium-interp/src/prims.rs",
+      "line": 353,
+      "col": 1,
+      "category": "Other",
+      "rust_construct": "Other",
+      "snippet": "fn expect_arity (prim : & str , args : & [& Value] , n : usize) -> Result < () , EvalError > { if args . len () == n { Ok (()) } else { Err (EvalError :: PrimType { prim : prim . to_owned () , why : format ! (\"expected {n} argument(s), got {}\" , args . len ()) , }) } }",
+      "reason": "method call `.len(...)` has no proven-emitted free-fn referent in this file (neither a D4-mangled inherent `Type__len` nor a bare inherent recorded by this file's left-to-right pass, nor a prim_map / combinator row). Emitting bare `len(recv, …)` would fabricate an unknown prim and file-poison myc-check (G-β Rank A / G2/VR-5; residual when the method body itself gapped — e.g. M-1037 `.to_vec()` inside `read_to_end` — so the declaration was never registered)",
+      "item_name": "expect_arity"
+    },
+    {
+      "file": "/root/git/isolated/mycelium/crates/mycelium-interp/src/prims.rs",
+      "line": 364,
+      "col": 1,
+      "category": "GenericBound",
+      "rust_construct": "GenericBound",
+      "snippet": "fn as_bits < 'a > (prim : & str , v : & 'a Value) -> Result < & 'a [bool] , EvalError > { match (v . repr () , v . payload ()) { (Repr :: Binary { .. } , Payload :: Bits (b)) => Ok (b) , _ => Err (EvalError :: PrimType { prim : prim . to_owned () , why : \"expected a Binary operand\" . to_owned () , }) , } }",
+      "reason": "lifetime parameter `'a` has no grammar surface",
+      "item_name": "as_bits"
+    },
+    {
+      "file": "/root/git/isolated/mycelium/crates/mycelium-interp/src/prims.rs",
+      "line": 376,
+      "col": 1,
+      "category": "MultiStmtBody",
+      "rust_construct": "MultiStmtBody",
+      "snippet": "# [doc = \" `core.id : a → a`. Identity (re-stamps provenance); useful as a no-op and a test fixture.\"] fn prim_id (prim : & str , args : & [& Value]) -> Result < Value , EvalError > { expect_arity (prim , args , 1) ? ; let v = args [0] ; compose_result (prim , args , v . repr () . clone () , v . payload () . clone () , ApproxRule :: Passthrough ,) }",
+      "reason": "function body has a semicolon-terminated (value-discarding) statement expression before the tail — a `let`-chain body maps only simple `let x = e;` bindings plus a single trailing expression",
+      "item_name": "prim_id"
+    },
+    {
+      "file": "/root/git/isolated/mycelium/crates/mycelium-interp/src/prims.rs",
+      "line": 389,
+      "col": 1,
+      "category": "MultiStmtBody",
+      "rust_construct": "MultiStmtBody",
+      "snippet": "# [doc = \" `bit.not : Binary{n} → Binary{n}` — elementwise complement.\"] fn prim_bit_not (prim : & str , args : & [& Value]) -> Result < Value , EvalError > { expect_arity (prim , args , 1) ? ; let bits = as_bits (prim , args [0]) ? ; let out : Vec < bool > = bits . iter () . map (| & b | ! b) . collect () ; compose_result (prim , args , args [0] . repr () . clone () , Payload :: Bits (out) , ApproxRule :: Refuse ,) }",
+      "reason": "function body has a semicolon-terminated (value-discarding) statement expression before the tail — a `let`-chain body maps only simple `let x = e;` bindings plus a single trailing expression",
+      "item_name": "prim_bit_not"
+    },
+    {
+      "file": "/root/git/isolated/mycelium/crates/mycelium-interp/src/prims.rs",
+      "line": 403,
+      "col": 1,
+      "category": "Other",
+      "rust_construct": "Other",
+      "snippet": "# [doc = \" Shared unary bit-manipulation kernel for `bit.popcount`/`bit.clz`/`bit.ctz` (CU-6) — reads one\"] # [doc = \" `Binary{N}` operand, delegates to the width-preserving [`mycelium_core::binary`] count codec, and\"] # [doc = \" composes the `Binary{N}` count result. Total (no operand refuses — a bit-count always fits `N`\"] # [doc = \" bits), width-preserving, signedness-free. `count` selects the codec.\"] fn bit_count (prim : & str , args : & [& Value] , count : fn (& [bool]) -> Vec < bool > ,) -> Result < Value , EvalError > { expect_arity (prim , args , 1) ? ; let bits = as_bits (prim , args [0]) ? ; let out = count (bits) ; compose_result (prim , args , args [0] . repr () . clone () , Payload :: Bits (out) , ApproxRule :: Refuse ,) }",
+      "reason": "unsupported Rust type form `fn (& [bool]) -> Vec < bool >`",
+      "item_name": "bit_count"
+    },
+    {
+      "file": "/root/git/isolated/mycelium/crates/mycelium-interp/src/prims.rs",
+      "line": 441,
+      "col": 1,
+      "category": "Other",
+      "rust_construct": "Other",
+      "snippet": "# [doc = \" Shared elementwise binary-logical kernel for `bit.and/or/xor`.\"] fn bit_binop (prim : & str , args : & [& Value] , op : fn (bool , bool) -> bool) -> Result < Value , EvalError > { expect_arity (prim , args , 2) ? ; let a = as_bits (prim , args [0]) ? ; let b = as_bits (prim , args [1]) ? ; if a . len () != b . len () { return Err (EvalError :: PrimType { prim : prim . to_owned () , why : format ! (\"width mismatch: {} vs {}\" , a . len () , b . len ()) , }) ; } let out : Vec < bool > = a . iter () . zip (b) . map (| (& x , & y) | op (x , y)) . collect () ; compose_result (prim , args , args [0] . repr () . clone () , Payload :: Bits (out) , ApproxRule :: Refuse ,) }",
+      "reason": "unsupported Rust type form `fn (bool , bool) -> bool`",
+      "item_name": "bit_binop"
+    },
+    {
+      "file": "/root/git/isolated/mycelium/crates/mycelium-interp/src/prims.rs",
+      "line": 462,
+      "col": 1,
+      "category": "Closure",
+      "rust_construct": "Closure",
+      "snippet": "fn prim_bit_and (prim : & str , args : & [& Value]) -> Result < Value , EvalError > { bit_binop (prim , args , | x , y | x & y) }",
+      "reason": "closure parameter `x` has no explicit type annotation — Mycelium's `lambda` parameters are always `name: Type` (grammar `lambda_expr` / `param`) and this transpiler has no type-inference pass to recover an omitted Rust closure-param type",
+      "item_name": "prim_bit_and"
+    },
+    {
+      "file": "/root/git/isolated/mycelium/crates/mycelium-interp/src/prims.rs",
+      "line": 465,
+      "col": 1,
+      "category": "Closure",
+      "rust_construct": "Closure",
+      "snippet": "fn prim_bit_or (prim : & str , args : & [& Value]) -> Result < Value , EvalError > { bit_binop (prim , args , | x , y | x | y) }",
+      "reason": "closure parameter `x` has no explicit type annotation — Mycelium's `lambda` parameters are always `name: Type` (grammar `lambda_expr` / `param`) and this transpiler has no type-inference pass to recover an omitted Rust closure-param type",
+      "item_name": "prim_bit_or"
+    },
+    {
+      "file": "/root/git/isolated/mycelium/crates/mycelium-interp/src/prims.rs",
+      "line": 468,
+      "col": 1,
+      "category": "Closure",
+      "rust_construct": "Closure",
+      "snippet": "fn prim_bit_xor (prim : & str , args : & [& Value]) -> Result < Value , EvalError > { bit_binop (prim , args , | x , y | x ^ y) }",
+      "reason": "closure parameter `x` has no explicit type annotation — Mycelium's `lambda` parameters are always `name: Type` (grammar `lambda_expr` / `param`) and this transpiler has no type-inference pass to recover an omitted Rust closure-param type",
+      "item_name": "prim_bit_xor"
+    },
+    {
+      "file": "/root/git/isolated/mycelium/crates/mycelium-interp/src/prims.rs",
+      "line": 472,
+      "col": 1,
+      "category": "GenericBound",
+      "rust_construct": "GenericBound",
+      "snippet": "fn as_trits < 'a > (prim : & str , v : & 'a Value) -> Result < & 'a [Trit] , EvalError > { match (v . repr () , v . payload ()) { (Repr :: Ternary { .. } , Payload :: Trits (t)) => Ok (t) , _ => Err (EvalError :: PrimType { prim : prim . to_owned () , why : \"expected a Ternary operand\" . to_owned () , }) , } }",
+      "reason": "lifetime parameter `'a` has no grammar surface",
+      "item_name": "as_trits"
+    },
+    {
+      "file": "/root/git/isolated/mycelium/crates/mycelium-interp/src/prims.rs",
+      "line": 482,
+      "col": 1,
+      "category": "MultiStmtBody",
+      "rust_construct": "MultiStmtBody",
+      "snippet": "# [doc = \" `trit.neg : Ternary{m} → Ternary{m}` — digit-wise sign flip. Exactly `value(−t) = −value(t)`\"] # [doc = \" (balanced ternary has no sign asymmetry; `docs/spec/swaps/binary-ternary.md` §1). Always in range.\"] fn prim_trit_neg (prim : & str , args : & [& Value]) -> Result < Value , EvalError > { expect_arity (prim , args , 1) ? ; let out = ternary :: neg (as_trits (prim , args [0]) ?) ; compose_result (prim , args , args [0] . repr () . clone () , Payload :: Trits (out) , ApproxRule :: Error (ErrorOp :: Neg) ,) }",
+      "reason": "function body has a semicolon-terminated (value-discarding) statement expression before the tail — a `let`-chain body maps only simple `let x = e;` bindings plus a single trailing expression",
+      "item_name": "prim_trit_neg"
+    },
+    {
+      "file": "/root/git/isolated/mycelium/crates/mycelium-interp/src/prims.rs",
+      "line": 496,
+      "col": 1,
+      "category": "Other",
+      "rust_construct": "Other",
+      "snippet": "# [doc = \" Shared kernel for the fixed-width balanced-ternary binary arithmetic prims (`trit.add/sub/mul`).\"] # [doc = \" Operands must be equal-width `Ternary`; an out-of-range result is an explicit\"] # [doc = \" [`EvalError::Overflow`], never a silent wrap (M-111; `binary-ternary.md` §1).\"] fn trit_binop (prim : & str , args : & [& Value] , op : fn (& [Trit] , & [Trit]) -> Option < Vec < Trit > > , rule : ApproxRule ,) -> Result < Value , EvalError > { expect_arity (prim , args , 2) ? ; let a = as_trits (prim , args [0]) ? ; let b = as_trits (prim , args [1]) ? ; if a . len () != b . len () { return Err (EvalError :: PrimType { prim : prim . to_owned () , why : format ! (\"width mismatch: {} vs {} trits\" , a . len () , b . len ()) , }) ; } let out = op (a , b) . ok_or_else (| | EvalError :: Overflow { prim : prim . to_owned () , }) ? ; compose_result (prim , args , args [0] . repr () . clone () , Payload :: Trits (out) , rule ,) }",
+      "reason": "unsupported Rust type form `fn (& [Trit] , & [Trit]) -> Option < Vec < Trit > >`",
+      "item_name": "trit_binop"
+    },
+    {
+      "file": "/root/git/isolated/mycelium/crates/mycelium-interp/src/prims.rs",
+      "line": 526,
+      "col": 1,
+      "category": "Other",
+      "rust_construct": "Other",
+      "snippet": "# [doc = \" `trit.add`: balanced-ternary addition is exact on the values, so an approximate input's ε\"] # [doc = \" propagates additively (1-Lipschitz; affine `Add`) — sound (M-204).\"] fn prim_trit_add (prim : & str , args : & [& Value]) -> Result < Value , EvalError > { trit_binop (prim , args , ternary :: add , ApproxRule :: Error (ErrorOp :: Add)) }",
+      "reason": "qualified/associated-function call `ApproxRule :: Error` did not resolve to a known-emitted associated fn — Mycelium calls are bare identifiers, and the only sound surface form for `Type::method(...)` is the mangled `Type__method` name the declaration side already emits for a receiver-less inherent-impl associated fn (DN-34 §8.13/8.14), referenced only when that exact declaration is PROVEN present (same-file, or a resolved M-1084 cross-nodule sibling). A primitive/std associated fn with no emitted decl (e.g. `i128::try_from`), an unresolved type, or a `self`-receiving method (excluded by construction — it stays reachable only from its own bare call site) all gap here rather than fabricate a call (G2/VR-5, DN-133)",
+      "item_name": "prim_trit_add"
+    },
+    {
+      "file": "/root/git/isolated/mycelium/crates/mycelium-interp/src/prims.rs",
+      "line": 531,
+      "col": 1,
+      "category": "Other",
+      "rust_construct": "Other",
+      "snippet": "# [doc = \" `trit.sub`: same additive ε propagation as `trit.add` (affine `Sub`).\"] fn prim_trit_sub (prim : & str , args : & [& Value]) -> Result < Value , EvalError > { trit_binop (prim , args , ternary :: sub , ApproxRule :: Error (ErrorOp :: Sub)) }",
+      "reason": "qualified/associated-function call `ApproxRule :: Error` did not resolve to a known-emitted associated fn — Mycelium calls are bare identifiers, and the only sound surface form for `Type::method(...)` is the mangled `Type__method` name the declaration side already emits for a receiver-less inherent-impl associated fn (DN-34 §8.13/8.14), referenced only when that exact declaration is PROVEN present (same-file, or a resolved M-1084 cross-nodule sibling). A primitive/std associated fn with no emitted decl (e.g. `i128::try_from`), an unresolved type, or a `self`-receiving method (excluded by construction — it stays reachable only from its own bare call site) all gap here rather than fabricate a call (G2/VR-5, DN-133)",
+      "item_name": "prim_trit_sub"
+    },
+    {
+      "file": "/root/git/isolated/mycelium/crates/mycelium-interp/src/prims.rs",
+      "line": 554,
+      "col": 1,
+      "category": "Other",
+      "rust_construct": "Other",
+      "snippet": "# [doc = \" Compare two representation values for the comparison prims. Requires equal width and the same\"] # [doc = \" paradigm; a mismatch is an explicit error (never a silent ordering). The orderings are the D1\"] # [doc = \" total orders: **unsigned magnitude** for `Binary{N}` (MSB-first lexicographic over the bits) and\"] # [doc = \" **balanced-integer value** for `Ternary{N}` (MSB-first lexicographic over the signed digits — for\"] # [doc = \" fixed-width balanced ternary the most-significant differing digit dominates, so this equals the\"] # [doc = \" integer-value order).\"] fn cmp_repr_operands (prim : & str , a : & Value , b : & Value) -> Result < Ordering , EvalError > { match (a . repr () , b . repr ()) { (Repr :: Binary { width : wa } , Repr :: Binary { width : wb }) => { if wa != wb { return Err (EvalError :: PrimType { prim : prim . to_owned () , why : format ! (\"width mismatch: Binary{{{wa}}} vs Binary{{{wb}}}\") , }) ; } let xa = as_bits (prim , a) ? ; let xb = as_bits (prim , b) ? ; Ok (xa . iter () . cmp (xb . iter ())) } (Repr :: Ternary { trits : ta } , Repr :: Ternary { trits : tb }) => { if ta != tb { return Err (EvalError :: PrimType { prim : prim . to_owned () , why : format ! (\"width mismatch: Ternary{{{ta}}} vs Ternary{{{tb}}}\") , }) ; } let xa = as_trits (prim , a) ? ; let xb = as_trits (prim , b) ? ; Ok (xa . iter () . map (| t | ternary :: digit (* t)) . cmp (xb . iter () . map (| t | ternary :: digit (* t)))) } (Repr :: Float { .. } , Repr :: Float { .. }) => Err (EvalError :: PrimType { prim : prim . to_owned () , why : \"float comparison is partial (NaN is unordered — ADR-040 §2.4) and does not use \\\n                  the D1 Binary/Ternary total order; use the explicit predicates \\\n                  flt.lt/flt.le/flt.gt/flt.ge/flt.eq (any NaN operand → false) or the named \\\n                  total order flt.total_le for sorting/keying (M-899)\" . to_owned () , }) , _ => Err (EvalError :: PrimType { prim : prim . to_owned () , why : \"comparison requires two operands of the same paradigm (both Binary or both \\\n                  Ternary)\" . to_owned () , }) , } }",
+      "reason": "method call `.repr(...)` has no proven-emitted free-fn referent in this file (neither a D4-mangled inherent `Type__repr` nor a bare inherent recorded by this file's left-to-right pass, nor a prim_map / combinator row). Emitting bare `repr(recv, …)` would fabricate an unknown prim and file-poison myc-check (G-β Rank A / G2/VR-5; residual when the method body itself gapped — e.g. M-1037 `.to_vec()` inside `read_to_end` — so the declaration was never registered)",
+      "item_name": "cmp_repr_operands"
+    },
+    {
+      "file": "/root/git/isolated/mycelium/crates/mycelium-interp/src/prims.rs",
+      "line": 610,
+      "col": 1,
+      "category": "Other",
+      "rust_construct": "Other",
+      "snippet": "# [doc = \" Build the `Binary{1}` truth value for a comparison result (`0b1` = true). Threads provenance/\"] # [doc = \" guarantee honestly via [`compose_result`]; comparison has no defined ε-propagation over an\"] # [doc = \" approximate input, so an approximate operand is refused (`ApproxRule::Refuse`) rather than\"] # [doc = \" fabricating a bound (G2/VR-5).\"] fn bool_result (prim : & str , inputs : & [& Value] , truth : bool) -> Result < Value , EvalError > { compose_result (prim , inputs , Repr :: Binary { width : 1 } , Payload :: Bits (vec ! [truth]) , ApproxRule :: Refuse ,) }",
+      "reason": "struct literal `Binary { .. }` — not an in-file single-ctor struct or enum struct-variant that emits (no constructor to build; a cross-nodule variant is an honest DN-113/DN-134-OQ-2 resolvability gap, never a fabricated out-of-file reference — VR-5/G2)",
+      "item_name": "bool_result"
+    },
+    {
+      "file": "/root/git/isolated/mycelium/crates/mycelium-interp/src/prims.rs",
+      "line": 624,
+      "col": 1,
+      "category": "MultiStmtBody",
+      "rust_construct": "MultiStmtBody",
+      "snippet": "# [doc = \" `cmp.eq : (T{N}, T{N}) → Binary{1}` — structural width-typed equality (RFC-0032 D1).\"] fn prim_cmp_eq (prim : & str , args : & [& Value]) -> Result < Value , EvalError > { expect_arity (prim , args , 2) ? ; let truth = cmp_repr_operands (prim , args [0] , args [1]) ? == Ordering :: Equal ; bool_result (prim , args , truth) }",
+      "reason": "function body has a semicolon-terminated (value-discarding) statement expression before the tail — a `let`-chain body maps only simple `let x = e;` bindings plus a single trailing expression",
+      "item_name": "prim_cmp_eq"
+    },
+    {
+      "file": "/root/git/isolated/mycelium/crates/mycelium-interp/src/prims.rs",
+      "line": 631,
+      "col": 1,
+      "category": "MultiStmtBody",
+      "rust_construct": "MultiStmtBody",
+      "snippet": "# [doc = \" `cmp.lt : (T{N}, T{N}) → Binary{1}` — the D1 total order (`a < b`).\"] fn prim_cmp_lt (prim : & str , args : & [& Value]) -> Result < Value , EvalError > { expect_arity (prim , args , 2) ? ; let truth = cmp_repr_operands (prim , args [0] , args [1]) ? == Ordering :: Less ; bool_result (prim , args , truth) }",
+      "reason": "function body has a semicolon-terminated (value-discarding) statement expression before the tail — a `let`-chain body maps only simple `let x = e;` bindings plus a single trailing expression",
+      "item_name": "prim_cmp_lt"
+    },
+    {
+      "file": "/root/git/isolated/mycelium/crates/mycelium-interp/src/prims.rs",
+      "line": 646,
+      "col": 1,
+      "category": "MultiStmtBody",
+      "rust_construct": "MultiStmtBody",
+      "snippet": "# [doc = \" Shared kernel for the never-silent binary arithmetic prims. `subtract == false` is ripple-carry\"] # [doc = \" addition (carry-out ⇒ overflow); `subtract == true` is ripple-borrow subtraction (borrow-out ⇒\"] # [doc = \" underflow, i.e. a negative result with no unsigned representation). Operands must be equal-width\"] # [doc = \" `Binary`; a width mismatch is an explicit [`EvalError::PrimType`].\"] fn bin_arith (prim : & str , args : & [& Value] , subtract : bool) -> Result < Value , EvalError > { expect_arity (prim , args , 2) ? ; let a = as_bits (prim , args [0]) ? ; let b = as_bits (prim , args [1]) ? ; if a . len () != b . len () { return Err (EvalError :: PrimType { prim : prim . to_owned () , why : format ! (\"width mismatch: {} vs {} bits\" , a . len () , b . len ()) , }) ; } let n = a . len () ; let mut out = vec ! [false ; n] ; if subtract { let mut borrow = 0i8 ; for i in (0 .. n) . rev () { let d = i8 :: from (a [i]) - i8 :: from (b [i]) - borrow ; if d < 0 { out [i] = (d + 2) == 1 ; borrow = 1 ; } else { out [i] = d == 1 ; borrow = 0 ; } } if borrow != 0 { return Err (EvalError :: Overflow { prim : prim . to_owned () , }) ; } } else { let mut carry = 0u8 ; for i in (0 .. n) . rev () { let s = u8 :: from (a [i]) + u8 :: from (b [i]) + carry ; out [i] = (s & 1) == 1 ; carry = s >> 1 ; } if carry != 0 { return Err (EvalError :: Overflow { prim : prim . to_owned () , }) ; } } compose_result (prim , args , args [0] . repr () . clone () , Payload :: Bits (out) , ApproxRule :: Refuse ,) }",
+      "reason": "function body has a semicolon-terminated (value-discarding) statement expression before the tail — a `let`-chain body maps only simple `let x = e;` bindings plus a single trailing expression",
+      "item_name": "bin_arith"
+    },
+    {
+      "file": "/root/git/isolated/mycelium/crates/mycelium-interp/src/prims.rs",
+      "line": 739,
+      "col": 1,
+      "category": "MultiStmtBody",
+      "rust_construct": "MultiStmtBody",
+      "snippet": "# [doc = \" `bin.mul : (Binary{N}, Binary{N}) → Binary{N}` — never-silent two's-complement multiply\"] # [doc = \" (RFC-0033 §4.1.2/§4.1.3, M-887). Equal-width operands, `N ≤\"] # [doc = \" `[`mycelium_core::binary::MUL_MAX_WIDTH`]` (see the module note above); a width mismatch or an\"] # [doc = \" over-cap width is an explicit [`EvalError::PrimType`], and an out-of-range product is an\"] # [doc = \" explicit [`EvalError::Overflow`] — never a silent wrap (G2).\"] fn prim_bin_mul (prim : & str , args : & [& Value]) -> Result < Value , EvalError > { expect_arity (prim , args , 2) ? ; let a = as_bits (prim , args [0]) ? ; let b = as_bits (prim , args [1]) ? ; if a . len () != b . len () { return Err (EvalError :: PrimType { prim : prim . to_owned () , why : format ! (\"width mismatch: {} vs {} bits\" , a . len () , b . len ()) , }) ; } if a . len () > binary :: MUL_MAX_WIDTH { return Err (EvalError :: PrimType { prim : prim . to_owned () , why : format ! (\"width {} exceeds the {}-bit two's-complement multiply cap (M-887 scope)\" , a . len () , binary :: MUL_MAX_WIDTH) , }) ; } let out = binary :: mul (a , b) . ok_or_else (| | EvalError :: Overflow { prim : prim . to_owned () , }) ? ; compose_result (prim , args , args [0] . repr () . clone () , Payload :: Bits (out) , ApproxRule :: Refuse ,) }",
+      "reason": "function body has a semicolon-terminated (value-discarding) statement expression before the tail — a `let`-chain body maps only simple `let x = e;` bindings plus a single trailing expression",
+      "item_name": "prim_bin_mul"
+    },
+    {
+      "file": "/root/git/isolated/mycelium/crates/mycelium-interp/src/prims.rs",
+      "line": 776,
+      "col": 1,
+      "category": "MultiStmtBody",
+      "rust_construct": "MultiStmtBody",
+      "snippet": "# [doc = \" `bit.mul : (Binary{N}, Binary{N}) → Binary{N}` — never-silent **unsigned** fixed-width multiply\"] # [doc = \" (CU-1; RFC-0033 §4.1.2 — overflow detection is signedness-distinct ⇒ a distinct named op from the\"] # [doc = \" signed `bin.mul`; `lib/std/math.myc` FLAG-math-1). The unsigned counterpart of the `bit.add`/\"] # [doc = \" `bit.sub`/`bin.div`/`bin.rem` unsigned family: operands read as unsigned bitvectors, an out-of-\"] # [doc = \" `U_N` product an explicit [`EvalError::Overflow`], a width mismatch or over-`MUL_MAX_WIDTH` width an\"] # [doc = \" explicit [`EvalError::PrimType`] — never a silent wrap or truncation (G2). Delegates to the shared\"] # [doc = \" [`mycelium_core::binary::mul_unsigned`] codec.\"] fn prim_bit_mul (prim : & str , args : & [& Value]) -> Result < Value , EvalError > { expect_arity (prim , args , 2) ? ; let a = as_bits (prim , args [0]) ? ; let b = as_bits (prim , args [1]) ? ; if a . len () != b . len () { return Err (EvalError :: PrimType { prim : prim . to_owned () , why : format ! (\"width mismatch: {} vs {} bits\" , a . len () , b . len ()) , }) ; } if a . len () > binary :: MUL_MAX_WIDTH { return Err (EvalError :: PrimType { prim : prim . to_owned () , why : format ! (\"width {} exceeds the {}-bit multiply cap (CU-1 scope)\" , a . len () , binary :: MUL_MAX_WIDTH) , }) ; } let out = binary :: mul_unsigned (a , b) . ok_or_else (| | EvalError :: Overflow { prim : prim . to_owned () , }) ? ; compose_result (prim , args , args [0] . repr () . clone () , Payload :: Bits (out) , ApproxRule :: Refuse ,) }",
+      "reason": "function body has a semicolon-terminated (value-discarding) statement expression before the tail — a `let`-chain body maps only simple `let x = e;` bindings plus a single trailing expression",
+      "item_name": "prim_bit_mul"
+    },
+    {
+      "file": "/root/git/isolated/mycelium/crates/mycelium-interp/src/prims.rs",
+      "line": 844,
+      "col": 1,
+      "category": "MultiStmtBody",
+      "rust_construct": "MultiStmtBody",
+      "snippet": "# [doc = \" Shared arity/width validation + kernel dispatch for `bin.div`/`bin.rem`: checks arity 2,\"] # [doc = \" extracts equal-width `Binary` operand bits (width mismatch/over-cap → [`EvalError::PrimType`]),\"] # [doc = \" and calls [`binary::div_rem`] (div-by-zero → an explicit [`EvalError::PrimType`], never a\"] # [doc = \" panic). Returns `(quotient_bits, remainder_bits)` so `bin.div`/`bin.rem` share exactly one\"] # [doc = \" division per call rather than each recomputing it.\"] fn bin_div_rem (prim : & str , args : & [& Value]) -> Result < (Vec < bool > , Vec < bool >) , EvalError > { expect_arity (prim , args , 2) ? ; let a = as_bits (prim , args [0]) ? ; let b = as_bits (prim , args [1]) ? ; if a . len () != b . len () { return Err (EvalError :: PrimType { prim : prim . to_owned () , why : format ! (\"width mismatch: {} vs {} bits\" , a . len () , b . len ()) , }) ; } if a . len () > binary :: DIV_MAX_WIDTH { return Err (EvalError :: PrimType { prim : prim . to_owned () , why : format ! (\"width {} exceeds the {}-bit unsigned division cap (M-888 scope)\" , a . len () , binary :: DIV_MAX_WIDTH) , }) ; } binary :: div_rem (a , b) . ok_or_else (| | EvalError :: PrimType { prim : prim . to_owned () , why : \"division by zero\" . to_owned () , }) }",
+      "reason": "function body has a semicolon-terminated (value-discarding) statement expression before the tail — a `let`-chain body maps only simple `let x = e;` bindings plus a single trailing expression",
+      "item_name": "bin_div_rem"
+    },
+    {
+      "file": "/root/git/isolated/mycelium/crates/mycelium-interp/src/prims.rs",
+      "line": 875,
+      "col": 1,
+      "category": "MultiStmtBody",
+      "rust_construct": "MultiStmtBody",
+      "snippet": "# [doc = \" `bin.div : (Binary{N}, Binary{N}) → Binary{N}` — never-silent **unsigned** division\"] # [doc = \" (RFC-0033 §4.1.2/§4.1.3, M-888). Equal-width operands, `N ≤ `[`binary::DIV_MAX_WIDTH`]`; a width\"] # [doc = \" mismatch, an over-cap width, or division by zero is an explicit [`EvalError::PrimType`] — never\"] # [doc = \" a panic or a silently-defined value (G2).\"] fn prim_bin_div (prim : & str , args : & [& Value]) -> Result < Value , EvalError > { let (q , _r) = bin_div_rem (prim , args) ? ; compose_result (prim , args , args [0] . repr () . clone () , Payload :: Bits (q) , ApproxRule :: Refuse ,) }",
+      "reason": "`let` binding uses an unsupported pattern (only simple `let x = e;` is supported)",
+      "item_name": "prim_bin_div"
+    },
+    {
+      "file": "/root/git/isolated/mycelium/crates/mycelium-interp/src/prims.rs",
+      "line": 890,
+      "col": 1,
+      "category": "MultiStmtBody",
+      "rust_construct": "MultiStmtBody",
+      "snippet": "# [doc = \" `bin.rem : (Binary{N}, Binary{N}) → Binary{N}` — never-silent **unsigned** remainder\"] # [doc = \" (RFC-0033 §4.1.2/§4.1.3, M-888). Same never-silent contract as [`prim_bin_div`]; together they\"] # [doc = \" satisfy the Euclidean identity `a == (a/b)*b + (a%b)` for `b ≠ 0` (property-tested).\"] fn prim_bin_rem (prim : & str , args : & [& Value]) -> Result < Value , EvalError > { let (_q , r) = bin_div_rem (prim , args) ? ; compose_result (prim , args , args [0] . repr () . clone () , Payload :: Bits (r) , ApproxRule :: Refuse ,) }",
+      "reason": "`let` binding uses an unsupported pattern (only simple `let x = e;` is supported)",
+      "item_name": "prim_bin_rem"
+    },
+    {
+      "file": "/root/git/isolated/mycelium/crates/mycelium-interp/src/prims.rs",
+      "line": 924,
+      "col": 1,
+      "category": "Other",
+      "rust_construct": "Other",
+      "snippet": "# [doc = \" Shared arity/width validation + kernel dispatch for `bin.shl`/`bin.shr` (M-889) and the\"] # [doc = \" arithmetic `bin.shr_s` (M-767 — same operand shape and refusal contract, sign-extending\"] # [doc = \" kernel): checks arity 2, extracts equal-width `Binary` operand bits (width mismatch/over-cap →\"] # [doc = \" [`EvalError::PrimType`]), and calls `op` (`None` — a shift amount `>= N` — → an explicit\"] # [doc = \" [`EvalError::PrimType`], never a panic).\"] fn bin_shift (prim : & str , args : & [& Value] , op : fn (& [bool] , & [bool]) -> Option < Vec < bool > > ,) -> Result < Vec < bool > , EvalError > { expect_arity (prim , args , 2) ? ; let a = as_bits (prim , args [0]) ? ; let shift = as_bits (prim , args [1]) ? ; if a . len () != shift . len () { return Err (EvalError :: PrimType { prim : prim . to_owned () , why : format ! (\"width mismatch: {} vs {} bits\" , a . len () , shift . len ()) , }) ; } if a . len () > binary :: SHIFT_MAX_WIDTH { return Err (EvalError :: PrimType { prim : prim . to_owned () , why : format ! (\"width {} exceeds the {}-bit shift cap (M-889/M-767 scope)\" , a . len () , binary :: SHIFT_MAX_WIDTH) , }) ; } op (a , shift) . ok_or_else (| | EvalError :: PrimType { prim : prim . to_owned () , why : format ! (\"shift amount >= width ({} bits)\" , a . len ()) , }) }",
+      "reason": "unsupported Rust type form `fn (& [bool] , & [bool]) -> Option < Vec < bool > >`",
+      "item_name": "bin_shift"
+    },
+    {
+      "file": "/root/git/isolated/mycelium/crates/mycelium-interp/src/prims.rs",
+      "line": 959,
+      "col": 1,
+      "category": "Other",
+      "rust_construct": "Other",
+      "snippet": "# [doc = \" `bin.shl : (Binary{N}, Binary{N}) → Binary{N}` — never-silent **logical** left shift\"] # [doc = \" (RFC-0033 §4.1.2/§4.1.3, M-889). Equal-width operands, `N ≤ `[`binary::SHIFT_MAX_WIDTH`]`; a\"] # [doc = \" width mismatch, an over-cap width, or a shift amount `>= N` is an explicit\"] # [doc = \" [`EvalError::PrimType`] — never UB or a silent wrap/rotate (G2).\"] fn prim_bin_shl (prim : & str , args : & [& Value]) -> Result < Value , EvalError > { let out = bin_shift (prim , args , binary :: shl) ? ; compose_result (prim , args , args [0] . repr () . clone () , Payload :: Bits (out) , ApproxRule :: Refuse ,) }",
+      "reason": "unsupported expression form `bin_shift (prim , args , binary :: shl) ?`",
+      "item_name": "prim_bin_shl"
+    },
+    {
+      "file": "/root/git/isolated/mycelium/crates/mycelium-interp/src/prims.rs",
+      "line": 974,
+      "col": 1,
+      "category": "Other",
+      "rust_construct": "Other",
+      "snippet": "# [doc = \" `bin.shr : (Binary{N}, Binary{N}) → Binary{N}` — never-silent **logical** (zero-filling) right\"] # [doc = \" shift (RFC-0033 §4.1.2/§4.1.3, M-889). Same never-silent contract as [`prim_bin_shl`]; the\"] # [doc = \" **arithmetic**/sign-extending right shift is the distinct signed op M-767 lands separately.\"] fn prim_bin_shr (prim : & str , args : & [& Value]) -> Result < Value , EvalError > { let out = bin_shift (prim , args , binary :: shr) ? ; compose_result (prim , args , args [0] . repr () . clone () , Payload :: Bits (out) , ApproxRule :: Refuse ,) }",
+      "reason": "unsupported expression form `bin_shift (prim , args , binary :: shr) ?`",
+      "item_name": "prim_bin_shr"
+    },
+    {
+      "file": "/root/git/isolated/mycelium/crates/mycelium-interp/src/prims.rs",
+      "line": 1013,
+      "col": 1,
+      "category": "Other",
+      "rust_construct": "Other",
+      "snippet": "# [doc = \" Shared arity/width validation + kernel dispatch for the two's-complement `bin.add`/`bin.sub`\"] # [doc = \" prims (M-766): checks arity 2, extracts equal-width `Binary` operand bits (width mismatch/\"] # [doc = \" over-cap → [`EvalError::PrimType`]), and calls `op` (`None` — the exact result does not fit\"] # [doc = \" `B_n` — → an explicit [`EvalError::Overflow`], never a silent wrap).\"] fn bin_add_sub (prim : & str , args : & [& Value] , op : fn (& [bool] , & [bool]) -> Option < Vec < bool > > ,) -> Result < Vec < bool > , EvalError > { expect_arity (prim , args , 2) ? ; let a = as_bits (prim , args [0]) ? ; let b = as_bits (prim , args [1]) ? ; if a . len () != b . len () { return Err (EvalError :: PrimType { prim : prim . to_owned () , why : format ! (\"width mismatch: {} vs {} bits\" , a . len () , b . len ()) , }) ; } if a . len () > binary :: TC_MAX_WIDTH { return Err (EvalError :: PrimType { prim : prim . to_owned () , why : format ! (\"width {} exceeds the {}-bit two's-complement arithmetic cap (M-766 scope)\" , a . len () , binary :: TC_MAX_WIDTH) , }) ; } op (a , b) . ok_or_else (| | EvalError :: Overflow { prim : prim . to_owned () , }) }",
+      "reason": "unsupported Rust type form `fn (& [bool] , & [bool]) -> Option < Vec < bool > >`",
+      "item_name": "bin_add_sub"
+    },
+    {
+      "file": "/root/git/isolated/mycelium/crates/mycelium-interp/src/prims.rs",
+      "line": 1046,
+      "col": 1,
+      "category": "Other",
+      "rust_construct": "Other",
+      "snippet": "# [doc = \" `bin.add : (Binary{N}, Binary{N}) → Binary{N}` — never-silent two's-complement add (RFC-0033\"] # [doc = \" §4.1.2/§4.1.3, M-766). Equal-width operands, `N ≤ `[`binary::TC_MAX_WIDTH`]`; a width mismatch or\"] # [doc = \" an over-cap width is an explicit [`EvalError::PrimType`], and an out-of-range sum is an explicit\"] # [doc = \" [`EvalError::Overflow`] — never a silent wrap (G2). Distinct from `bit.add` (RFC-0032 D2), whose\"] # [doc = \" unsigned carry-out overflow criterion under-refuses relative to the signed domain `B_N` (see the\"] # [doc = \" module-level inventory note above).\"] fn prim_bin_add (prim : & str , args : & [& Value]) -> Result < Value , EvalError > { let out = bin_add_sub (prim , args , binary :: add) ? ; compose_result (prim , args , args [0] . repr () . clone () , Payload :: Bits (out) , ApproxRule :: Refuse ,) }",
+      "reason": "unsupported expression form `bin_add_sub (prim , args , binary :: add) ?`",
+      "item_name": "prim_bin_add"
+    },
+    {
+      "file": "/root/git/isolated/mycelium/crates/mycelium-interp/src/prims.rs",
+      "line": 1063,
+      "col": 1,
+      "category": "Other",
+      "rust_construct": "Other",
+      "snippet": "# [doc = \" `bin.sub : (Binary{N}, Binary{N}) → Binary{N}` — never-silent two's-complement subtract\"] # [doc = \" (RFC-0033 §4.1.2/§4.1.3, M-766). Same never-silent contract as [`prim_bin_add`]; distinct from\"] # [doc = \" `bit.sub`'s unsigned borrow-out overflow criterion for the same reason.\"] fn prim_bin_sub (prim : & str , args : & [& Value]) -> Result < Value , EvalError > { let out = bin_add_sub (prim , args , binary :: sub) ? ; compose_result (prim , args , args [0] . repr () . clone () , Payload :: Bits (out) , ApproxRule :: Refuse ,) }",
+      "reason": "unsupported expression form `bin_add_sub (prim , args , binary :: sub) ?`",
+      "item_name": "prim_bin_sub"
+    },
+    {
+      "file": "/root/git/isolated/mycelium/crates/mycelium-interp/src/prims.rs",
+      "line": 1077,
+      "col": 1,
+      "category": "MultiStmtBody",
+      "rust_construct": "MultiStmtBody",
+      "snippet": "# [doc = \" `bin.neg : Binary{N} → Binary{N}` — never-silent two's-complement negate (RFC-0033\"] # [doc = \" §4.1.2/§4.1.3, M-766): the shared op set's genuinely-missing member (unlike `add`/`sub`/`mul`,\"] # [doc = \" there is no pre-existing unsigned \\\"negate\\\" to reconcile against). An over-cap width is an\"] # [doc = \" explicit [`EvalError::PrimType`]; negating `B_N`'s minimum value `-2^(N-1)` (which has no positive\"] # [doc = \" two's-complement counterpart in `B_N`) is an explicit [`EvalError::Overflow`] — never a silent\"] # [doc = \" wrap (G2), the classic two's-complement negate-overflow case.\"] fn prim_bin_neg (prim : & str , args : & [& Value]) -> Result < Value , EvalError > { expect_arity (prim , args , 1) ? ; let a = as_bits (prim , args [0]) ? ; if a . len () > binary :: TC_MAX_WIDTH { return Err (EvalError :: PrimType { prim : prim . to_owned () , why : format ! (\"width {} exceeds the {}-bit two's-complement arithmetic cap (M-766 scope)\" , a . len () , binary :: TC_MAX_WIDTH) , }) ; } let out = binary :: neg (a) . ok_or_else (| | EvalError :: Overflow { prim : prim . to_owned () , }) ? ; compose_result (prim , args , args [0] . repr () . clone () , Payload :: Bits (out) , ApproxRule :: Refuse ,) }",
+      "reason": "function body has a semicolon-terminated (value-discarding) statement expression before the tail — a `let`-chain body maps only simple `let x = e;` bindings plus a single trailing expression",
+      "item_name": "prim_bin_neg"
+    },
+    {
+      "file": "/root/git/isolated/mycelium/crates/mycelium-interp/src/prims.rs",
+      "line": 1125,
+      "col": 1,
+      "category": "MultiStmtBody",
+      "rust_construct": "MultiStmtBody",
+      "snippet": "# [doc = \" Evaluate `prim` (one of `bin.add`/`bin.sub`/`bin.mul`) under the **named** `wrapping` opt-out\"] # [doc = \" (RFC-0034 §10): the result wraps modulo `2^n` into `B_n` instead of refusing out-of-range —\"] # [doc = \" mirroring [`prim_bin_add`]/[`prim_bin_sub`]/[`prim_bin_mul`]'s operand contract (equal-width,\"] # [doc = \" the same per-op width cap) but never their range refusal. Tagged **`Declared`** (a\"] # [doc = \" zero-magnitude `UserDeclared` bound, M-I4 — the explicit, developer-opted-into semantics; never\"] # [doc = \" a fabricated `Proven`/`Empirical` claim, VR-5) and carrying the [`WrappingOpt`] marker so the\"] # [doc = \" opt-out stays inspectable on the result ([`Meta::wrapping_opt`]). Any other `prim` name, or a\"] # [doc = \" structural mismatch (unequal widths, an over-cap width), is an explicit\"] # [doc = \" [`EvalError::PrimType`] — never a silent fallback to the non-wrapping refusal.\"] pub fn eval_wrapping (prim : & str , args : & [& Value]) -> Result < Value , EvalError > { expect_arity (prim , args , 2) ? ; let a = as_bits (prim , args [0]) ? ; let b = as_bits (prim , args [1]) ? ; if a . len () != b . len () { return Err (EvalError :: PrimType { prim : prim . to_owned () , why : format ! (\"width mismatch: {} vs {} bits\" , a . len () , b . len ()) , }) ; } # [doc = \" A wrapping-mode binary bitvector op (`wrapping_add`/`wrapping_sub`/`wrapping_mul`'s shared\"] # [doc = \" shape) — named to keep `eval_wrapping`'s dispatch tuple within clippy's complexity budget.\"] type WrappingOp = fn (& [bool] , & [bool]) -> Option < Vec < bool > > ; let (op , cap) : (WrappingOp , usize) = match prim { \"bin.add\" => (binary :: wrapping_add , binary :: TC_MAX_WIDTH) , \"bin.sub\" => (binary :: wrapping_sub , binary :: TC_MAX_WIDTH) , \"bin.mul\" => (binary :: wrapping_mul , binary :: MUL_MAX_WIDTH) , _ => { return Err (EvalError :: PrimType { prim : prim . to_owned () , why : \"eval_wrapping only supports the wrapping mode over bin.add/bin.sub/bin.mul \\\n                      (RFC-0034 §10 — no new wrapping_* prims)\" . to_owned () , }) ; } } ; if a . len () > cap { return Err (EvalError :: PrimType { prim : prim . to_owned () , why : format ! (\"width {} exceeds the {}-bit wrapping arithmetic cap\" , a . len () , cap) , }) ; } let out = op (a , b) . expect (\"width already validated; wrapping ops never refuse on range\") ; wrapping_result (prim , args , args [0] . repr () . clone () , Payload :: Bits (out)) }",
+      "reason": "function body has a semicolon-terminated (value-discarding) statement expression before the tail — a `let`-chain body maps only simple `let x = e;` bindings plus a single trailing expression",
+      "item_name": "eval_wrapping"
+    },
+    {
+      "file": "/root/git/isolated/mycelium/crates/mycelium-interp/src/prims.rs",
+      "line": 1175,
+      "col": 1,
+      "category": "Other",
+      "rust_construct": "Other",
+      "snippet": "# [doc = \" Build a `wrapping`-tagged result (RFC-0034 §10; CU-5): `Declared` guarantee with a\"] # [doc = \" zero-magnitude `UserDeclared` bound (M-I4) — the explicit, developer-opted-into semantics,\"] # [doc = \" never a fabricated `Proven`/`Empirical` claim (VR-5) — and the [`WrappingOpt`] marker attached\"] # [doc = \" so the opt-out stays inspectable ([`Meta::wrapping_opt`]).\"] fn wrapping_result (prim : & str , inputs : & [& Value] , repr : Repr , payload : Payload ,) -> Result < Value , EvalError > { let provenance = Provenance :: Derived { op : operation_hash (prim) , inputs : inputs . iter () . map (| v | v . content_hash ()) . collect () , } ; let bound = Bound { kind : BoundKind :: Error { eps : 0.0 , norm : NormKind :: Linf , } , basis : BoundBasis :: UserDeclared , } ; let meta = Meta :: new (provenance , GuaranteeStrength :: Declared , Some (bound) , None , None , None ,) . map_err (EvalError :: Wf) ? . with_wrapping (WrappingOpt :: new ()) ; Value :: new (repr , payload , meta) . map_err (EvalError :: Wf) }",
+      "reason": "struct literal `Derived { .. }` — not an in-file single-ctor struct or enum struct-variant that emits (no constructor to build; a cross-nodule variant is an honest DN-113/DN-134-OQ-2 resolvability gap, never a fabricated out-of-file reference — VR-5/G2)",
+      "item_name": "wrapping_result"
+    },
+    {
+      "file": "/root/git/isolated/mycelium/crates/mycelium-interp/src/prims.rs",
+      "line": 1241,
+      "col": 1,
+      "category": "GenericBound",
+      "rust_construct": "GenericBound",
+      "snippet": "# [doc = \" Shared arity/width/divisor validation for `bin.div_s`/`bin.rem_s`: checks arity 2, extracts\"] # [doc = \" equal-width `Binary` operand bits (width mismatch/over-cap → [`EvalError::PrimType`]), and\"] # [doc = \" refuses an all-zero divisor (div-by-zero → [`EvalError::PrimType`], covering `N == 0`, whose\"] # [doc = \" only representable divisor is zero) — so the kernel's remaining `None` (quotient overflow,\"] # [doc = \" `div_s` only) maps unambiguously to [`EvalError::Overflow`] at the call sites (G2: the refusal\"] # [doc = \" reasons stay honestly distinct).\"] fn bin_div_rem_s_operands < 'a > (prim : & str , args : & 'a [& Value] ,) -> Result < (& 'a [bool] , & 'a [bool]) , EvalError > { expect_arity (prim , args , 2) ? ; let a = as_bits (prim , args [0]) ? ; let b = as_bits (prim , args [1]) ? ; if a . len () != b . len () { return Err (EvalError :: PrimType { prim : prim . to_owned () , why : format ! (\"width mismatch: {} vs {} bits\" , a . len () , b . len ()) , }) ; } if a . len () > binary :: DIV_MAX_WIDTH { return Err (EvalError :: PrimType { prim : prim . to_owned () , why : format ! (\"width {} exceeds the {}-bit signed division cap (M-767 scope)\" , a . len () , binary :: DIV_MAX_WIDTH) , }) ; } if b . iter () . all (| & bit | ! bit) { return Err (EvalError :: PrimType { prim : prim . to_owned () , why : \"division by zero\" . to_owned () , }) ; } Ok ((a , b)) }",
+      "reason": "lifetime parameter `'a` has no grammar surface",
+      "item_name": "bin_div_rem_s_operands"
+    },
+    {
+      "file": "/root/git/isolated/mycelium/crates/mycelium-interp/src/prims.rs",
+      "line": 1279,
+      "col": 1,
+      "category": "MultiStmtBody",
+      "rust_construct": "MultiStmtBody",
+      "snippet": "# [doc = \" `bin.div_s : (Binary{N}, Binary{N}) → Binary{N}` — never-silent **signed** (two's-complement)\"] # [doc = \" division, truncated toward zero (RFC-0033 §4.1.2/§4.1.3, ADR-028, M-767; SMT-LIB `bvsdiv` —\"] # [doc = \" see the section note). Equal-width operands, `N ≤ `[`binary::DIV_MAX_WIDTH`]`; a width\"] # [doc = \" mismatch, an over-cap width, or division by zero is an explicit [`EvalError::PrimType`], and\"] # [doc = \" the single signed-division overflow — `B_N`'s minimum ÷ −1 — is an explicit\"] # [doc = \" [`EvalError::Overflow`], never a silent wrap (G2).\"] fn prim_bin_div_s (prim : & str , args : & [& Value]) -> Result < Value , EvalError > { let (a , b) = bin_div_rem_s_operands (prim , args) ? ; let out = binary :: div_signed (a , b) . ok_or_else (| | EvalError :: Overflow { prim : prim . to_owned () , }) ? ; compose_result (prim , args , args [0] . repr () . clone () , Payload :: Bits (out) , ApproxRule :: Refuse ,) }",
+      "reason": "`let` binding uses an unsupported pattern (only simple `let x = e;` is supported)",
+      "item_name": "prim_bin_div_s"
+    },
+    {
+      "file": "/root/git/isolated/mycelium/crates/mycelium-interp/src/prims.rs",
+      "line": 1300,
+      "col": 1,
+      "category": "MultiStmtBody",
+      "rust_construct": "MultiStmtBody",
+      "snippet": "# [doc = \" `bin.rem_s : (Binary{N}, Binary{N}) → Binary{N}` — never-silent **signed** remainder, sign\"] # [doc = \" following the dividend (RFC-0033 §4.1.2/§4.1.3, ADR-028, M-767; SMT-LIB `bvsrem`). Same\"] # [doc = \" operand contract as [`prim_bin_div_s`]; together they satisfy the truncated-division identity\"] # [doc = \" `a == div_s(a,b)·b + rem_s(a,b)` with `|r| < |b|` (property-tested in `mycelium-core`). The\"] # [doc = \" remainder itself **never overflows** (`|r| < |b| ≤ 2^(N-1)` keeps it inside `B_N`), so\"] # [doc = \" `rem_s(min, −1) = 0` succeeds where `div_s(min, −1)` refuses.\"] fn prim_bin_rem_s (prim : & str , args : & [& Value]) -> Result < Value , EvalError > { let (a , b) = bin_div_rem_s_operands (prim , args) ? ; let out = binary :: rem_signed (a , b) . ok_or_else (| | EvalError :: Overflow { prim : prim . to_owned () , }) ? ; compose_result (prim , args , args [0] . repr () . clone () , Payload :: Bits (out) , ApproxRule :: Refuse ,) }",
+      "reason": "`let` binding uses an unsupported pattern (only simple `let x = e;` is supported)",
+      "item_name": "prim_bin_rem_s"
+    },
+    {
+      "file": "/root/git/isolated/mycelium/crates/mycelium-interp/src/prims.rs",
+      "line": 1322,
+      "col": 1,
+      "category": "Other",
+      "rust_construct": "Other",
+      "snippet": "# [doc = \" `bin.shr_s : (Binary{N}, Binary{N}) → Binary{N}` — never-silent **arithmetic** (sign-extending)\"] # [doc = \" right shift (RFC-0033 §4.1.2/§4.1.3, ADR-028, M-767; SMT-LIB `bvashr`): copies of the sign bit\"] # [doc = \" are shifted in where the logical `bin.shr` shifts in zeros, so the result is `⌊a / 2^k⌋` under\"] # [doc = \" the two's-complement reading. Same operand shape and refusal contract as [`prim_bin_shr`]\"] # [doc = \" (shift amount an unsigned `Binary{N}`; width mismatch / over-cap width / amount `>= N` →\"] # [doc = \" explicit [`EvalError::PrimType`], never UB or a silently sign-filled out-of-range shift) —\"] # [doc = \" delegated through the same [`bin_shift`] validator.\"] fn prim_bin_shr_s (prim : & str , args : & [& Value]) -> Result < Value , EvalError > { let out = bin_shift (prim , args , binary :: shr_signed) ? ; compose_result (prim , args , args [0] . repr () . clone () , Payload :: Bits (out) , ApproxRule :: Refuse ,) }",
+      "reason": "unsupported expression form `bin_shift (prim , args , binary :: shr_signed) ?`",
+      "item_name": "prim_bin_shr_s"
+    },
+    {
+      "file": "/root/git/isolated/mycelium/crates/mycelium-interp/src/prims.rs",
+      "line": 1340,
+      "col": 1,
+      "category": "MultiStmtBody",
+      "rust_construct": "MultiStmtBody",
+      "snippet": "# [doc = \" `cmp.lt_s : (Binary{N}, Binary{N}) → Binary{1}` — the **signed** (two's-complement) strict\"] # [doc = \" order (RFC-0033 §4.1.2, ADR-028, M-767; SMT-LIB `bvslt`), the distinct named counterpart to\"] # [doc = \" `cmp.lt`'s unsigned-magnitude order on `Binary` (e.g. at `Binary{8}`, `0b1111_1111` is `−1 <\"] # [doc = \" 0` here but `255 > 0` there). `Binary`-only: balanced ternary is inherently signed, so its D1\"] # [doc = \" `cmp.lt` order *is* the signed order — a ternary operand refuses with that routing (explicit,\"] # [doc = \" never a silently duplicated order), as does a float (partial order — ADR-040 §2.4) or any\"] # [doc = \" width mismatch (never a silent `false`; G2). Width-unbounded, like `cmp.lt`.\"] fn prim_cmp_lt_s (prim : & str , args : & [& Value]) -> Result < Value , EvalError > { expect_arity (prim , args , 2) ? ; match (args [0] . repr () , args [1] . repr ()) { (Repr :: Binary { width : wa } , Repr :: Binary { width : wb }) => { if wa != wb { return Err (EvalError :: PrimType { prim : prim . to_owned () , why : format ! (\"width mismatch: Binary{{{wa}}} vs Binary{{{wb}}}\") , }) ; } let a = as_bits (prim , args [0]) ? ; let b = as_bits (prim , args [1]) ? ; let ord = binary :: cmp_signed (a , b) . ok_or_else (| | EvalError :: PrimType { prim : prim . to_owned () , why : \"width mismatch\" . to_owned () , }) ? ; bool_result (prim , args , ord == Ordering :: Less) } (Repr :: Ternary { .. } , Repr :: Ternary { .. }) => Err (EvalError :: PrimType { prim : prim . to_owned () , why : \"balanced ternary is inherently signed — its cmp.lt order IS the signed order; \\\n                  use cmp.lt (there is no distinct ternary signed comparison to select)\" . to_owned () , }) , _ => Err (EvalError :: PrimType { prim : prim . to_owned () , why : \"cmp.lt_s is the Binary two's-complement order (ADR-028): both operands must be \\\n                  Binary{N} of equal width\" . to_owned () , }) , } }",
+      "reason": "function body has a semicolon-terminated (value-discarding) statement expression before the tail — a `let`-chain body maps only simple `let x = e;` bindings plus a single trailing expression",
+      "item_name": "prim_cmp_lt_s"
+    },
+    {
+      "file": "/root/git/isolated/mycelium/crates/mycelium-interp/src/prims.rs",
+      "line": 1403,
+      "col": 1,
+      "category": "MultiStmtBody",
+      "rust_construct": "MultiStmtBody",
+      "snippet": "# [doc = \" `bit.width_cast : (Binary{N}, Binary{M}) → Binary{M}` — never-silent unsigned width-cast (DN-41).\"] # [doc = \" The second operand is a **width witness** (only its `Binary{M}` width is read; its bits are\"] # [doc = \" ignored). Widening (`M > N`) zero-extends (Exact); narrowing (`M < N`) refuses with\"] # [doc = \" [`EvalError::Overflow`] when the value does not fit `M` bits — never a silent truncation (G2).\"] fn prim_width_cast (prim : & str , args : & [& Value]) -> Result < Value , EvalError > { expect_arity (prim , args , 2) ? ; let value = as_bits (prim , args [0]) ? ; let witness = as_bits (prim , args [1]) ? ; let n = value . len () ; let m = witness . len () ; let out : Vec < bool > = if m >= n { let mut bits = vec ! [false ; m - n] ; bits . extend_from_slice (value) ; bits } else { let (dropped , kept) = value . split_at (n - m) ; if dropped . iter () . any (| & b | b) { return Err (EvalError :: Overflow { prim : prim . to_owned () , }) ; } kept . to_vec () } ; compose_result (prim , & args [.. 1] , args [1] . repr () . clone () , Payload :: Bits (out) , ApproxRule :: Refuse ,) }",
+      "reason": "function body has a semicolon-terminated (value-discarding) statement expression before the tail — a `let`-chain body maps only simple `let x = e;` bindings plus a single trailing expression",
+      "item_name": "prim_width_cast"
+    },
+    {
+      "file": "/root/git/isolated/mycelium/crates/mycelium-interp/src/prims.rs",
+      "line": 1472,
+      "col": 1,
+      "category": "Other",
+      "rust_construct": "Other",
+      "snippet": "# [doc = \" Build a `truncate`-tagged result (DN-51 §2 D3): mirrors [`wrapping_result`]'s posture exactly —\"] # [doc = \" `Declared` guarantee with a zero-magnitude `UserDeclared` bound, because the lossiness is the\"] # [doc = \" op's own declared semantics, not a fittable/provable numeric approximation (see the section note\"] # [doc = \" above). Mirrors [`prim_width_cast`]'s witness-invisibility: `inputs` is expected to be just the\"] # [doc = \" **value** operand (`&args[..1]`) — the witness contributes its width only, never its\"] # [doc = \" guarantee/provenance (DN-41 §3).\"] fn truncate_result (prim : & str , inputs : & [& Value] , repr : Repr , payload : Payload ,) -> Result < Value , EvalError > { let strength = GuaranteeStrength :: propagate (GuaranteeStrength :: Declared , inputs . iter () . map (| v | v . meta () . guarantee ()) ,) ; let provenance = Provenance :: Derived { op : operation_hash (prim) , inputs : inputs . iter () . map (| v | v . content_hash ()) . collect () , } ; let bound = Bound { kind : BoundKind :: Error { eps : 0.0 , norm : NormKind :: Linf , } , basis : BoundBasis :: UserDeclared , } ; let meta = Meta :: new (provenance , strength , Some (bound) , None , None , None) . map_err (EvalError :: Wf) ? ; Value :: new (repr , payload , meta) . map_err (EvalError :: Wf) }",
+      "reason": "qualified/associated-function call `GuaranteeStrength :: propagate` did not resolve to a known-emitted associated fn — Mycelium calls are bare identifiers, and the only sound surface form for `Type::method(...)` is the mangled `Type__method` name the declaration side already emits for a receiver-less inherent-impl associated fn (DN-34 §8.13/8.14), referenced only when that exact declaration is PROVEN present (same-file, or a resolved M-1084 cross-nodule sibling). A primitive/std associated fn with no emitted decl (e.g. `i128::try_from`), an unresolved type, or a `self`-receiving method (excluded by construction — it stays reachable only from its own bare call site) all gap here rather than fabricate a call (G2/VR-5, DN-133)",
+      "item_name": "truncate_result"
+    },
+    {
+      "file": "/root/git/isolated/mycelium/crates/mycelium-interp/src/prims.rs",
+      "line": 1504,
+      "col": 1,
+      "category": "MultiStmtBody",
+      "rust_construct": "MultiStmtBody",
+      "snippet": "# [doc = \" `bit.truncate : (Binary{N}, Binary{M}) → Binary{M}` — DN-51 §2 D3's explicit, total, lossy\"] # [doc = \" narrow. Widen/identity (`M >= N`) zero-extends exactly like [`prim_width_cast`] (no bits\"] # [doc = \" dropped); narrow (`M < N`) unconditionally keeps the low `M` bits — **never refuses**, unlike\"] # [doc = \" `width_cast`'s checked narrow. The second operand is the same width-witness shape as\"] # [doc = \" `width_cast` (only its `Binary{M}` width is read; its bits are ignored).\"] fn prim_truncate (prim : & str , args : & [& Value]) -> Result < Value , EvalError > { expect_arity (prim , args , 2) ? ; let value = as_bits (prim , args [0]) ? ; let witness = as_bits (prim , args [1]) ? ; let n = value . len () ; let m = witness . len () ; let out : Vec < bool > = if m >= n { let mut bits = vec ! [false ; m - n] ; bits . extend_from_slice (value) ; bits } else { let (_dropped , kept) = value . split_at (n - m) ; kept . to_vec () } ; truncate_result (prim , & args [.. 1] , args [1] . repr () . clone () , Payload :: Bits (out)) }",
+      "reason": "function body has a semicolon-terminated (value-discarding) statement expression before the tail — a `let`-chain body maps only simple `let x = e;` bindings plus a single trailing expression",
+      "item_name": "prim_truncate"
+    },
+    {
+      "file": "/root/git/isolated/mycelium/crates/mycelium-interp/src/prims.rs",
+      "line": 1540,
+      "col": 1,
+      "category": "Other",
+      "rust_construct": "Other",
+      "snippet": "# [doc = \" Interpret an unsigned `Binary{N}` value as a `usize` index (MSB-first bits). A non-Binary operand\"] # [doc = \" is an explicit error; a width that cannot fit `usize` (`> 64` here, conservatively the pointer\"] # [doc = \" width is ≥ 32) overflowing `usize` is also refused rather than silently truncated (G2).\"] fn as_index (prim : & str , v : & Value) -> Result < usize , EvalError > { let bits = as_bits (prim , v) ? ; if bits . len () > usize :: BITS as usize { return Err (EvalError :: PrimType { prim : prim . to_owned () , why : format ! (\"index width {} exceeds the {}-bit usize index space\" , bits . len () , usize :: BITS) , }) ; } let idx = bits . iter () . fold (0usize , | acc , & b | (acc << 1) | usize :: from (b)) ; Ok (idx) }",
+      "reason": "unsupported expression form `as_bits (prim , v) ?`",
+      "item_name": "as_index"
+    },
+    {
+      "file": "/root/git/isolated/mycelium/crates/mycelium-interp/src/prims.rs",
+      "line": 1562,
+      "col": 1,
+      "category": "GenericBound",
+      "rust_construct": "GenericBound",
+      "snippet": "# [doc = \" Extract the elements of a `Repr::Seq` operand; a non-sequence is an explicit error (G2).\"] fn as_seq < 'a > (prim : & str , v : & 'a Value) -> Result < & 'a [Value] , EvalError > { v . seq_elems () . ok_or_else (| | EvalError :: PrimType { prim : prim . to_owned () , why : \"expected a Seq operand\" . to_owned () , }) }",
+      "reason": "lifetime parameter `'a` has no grammar surface",
+      "item_name": "as_seq"
+    },
+    {
+      "file": "/root/git/isolated/mycelium/crates/mycelium-interp/src/prims.rs",
+      "line": 1570,
+      "col": 1,
+      "category": "MultiStmtBody",
+      "rust_construct": "MultiStmtBody",
+      "snippet": "# [doc = \" `seq.len : Seq<T, N> → Binary{32}` — the element count as an unsigned 32-bit value (RFC-0032 D3).\"] fn prim_seq_len (prim : & str , args : & [& Value]) -> Result < Value , EvalError > { expect_arity (prim , args , 1) ? ; let elems = as_seq (prim , args [0]) ? ; let n = u32 :: try_from (elems . len ()) . map_err (| _ | EvalError :: PrimType { prim : prim . to_owned () , why : format ! (\"sequence length {} exceeds the 32-bit length encoding\" , elems . len ()) , }) ? ; u32_as_binary32 (prim , args , n) }",
+      "reason": "function body has a semicolon-terminated (value-discarding) statement expression before the tail — a `let`-chain body maps only simple `let x = e;` bindings plus a single trailing expression",
+      "item_name": "prim_seq_len"
+    },
+    {
+      "file": "/root/git/isolated/mycelium/crates/mycelium-interp/src/prims.rs",
+      "line": 1588,
+      "col": 1,
+      "category": "MultiStmtBody",
+      "rust_construct": "MultiStmtBody",
+      "snippet": "# [doc = \" `seq.get : (Seq<T, N>, Binary{W}) → T` — never-silent indexed access (RFC-0032 D3). An\"] # [doc = \" out-of-bounds index is an explicit [`EvalError::PrimType`] (the `.myc` surface lifts to `Option`),\"] # [doc = \" never a panic or a silent default (G2).\"] fn prim_seq_get (prim : & str , args : & [& Value]) -> Result < Value , EvalError > { expect_arity (prim , args , 2) ? ; let elems = as_seq (prim , args [0]) ? ; let i = as_index (prim , args [1]) ? ; match elems . get (i) { Some (e) => { let guarantee = GuaranteeStrength :: propagate (e . meta () . guarantee () , args . iter () . map (| v | v . meta () . guarantee ()) ,) ; let bound = e . meta () . bound () . cloned () ; let provenance = Provenance :: Derived { op : operation_hash (prim) , inputs : args . iter () . map (| v | v . content_hash ()) . collect () , } ; let meta = Meta :: new (provenance , guarantee , bound , None , None , None) . map_err (EvalError :: Wf) ? ; Value :: new (e . repr () . clone () , e . payload () . clone () , meta) . map_err (EvalError :: Wf) } None => Err (EvalError :: PrimType { prim : prim . to_owned () , why : format ! (\"index {i} out of bounds for a sequence of length {}\" , elems . len ()) , }) , } }",
+      "reason": "function body has a semicolon-terminated (value-discarding) statement expression before the tail — a `let`-chain body maps only simple `let x = e;` bindings plus a single trailing expression",
+      "item_name": "prim_seq_get"
+    },
+    {
+      "file": "/root/git/isolated/mycelium/crates/mycelium-interp/src/prims.rs",
+      "line": 1636,
+      "col": 1,
+      "category": "GenericBound",
+      "rust_construct": "GenericBound",
+      "snippet": "# [doc = \" Extract the bytes of a `Repr::Bytes` operand; a non-bytes value is an explicit error (G2).\"] fn as_bytes_payload < 'a > (prim : & str , v : & 'a Value) -> Result < & 'a [u8] , EvalError > { v . bytes () . ok_or_else (| | EvalError :: PrimType { prim : prim . to_owned () , why : \"expected a Bytes operand\" . to_owned () , }) }",
+      "reason": "lifetime parameter `'a` has no grammar surface",
+      "item_name": "as_bytes_payload"
+    },
+    {
+      "file": "/root/git/isolated/mycelium/crates/mycelium-interp/src/prims.rs",
+      "line": 1644,
+      "col": 1,
+      "category": "MultiStmtBody",
+      "rust_construct": "MultiStmtBody",
+      "snippet": "# [doc = \" Build a `Binary{32}` value from a `u32`, MSB-first (the never-silent length/index encoding).\"] fn u32_as_binary32 (prim : & str , inputs : & [& Value] , n : u32) -> Result < Value , EvalError > { let out : Vec < bool > = (0 .. 32) . rev () . map (| k | (n >> k) & 1 == 1) . collect () ; compose_result (prim , inputs , Repr :: Binary { width : 32 } , Payload :: Bits (out) , ApproxRule :: Refuse ,) }",
+      "reason": "`let` binding uses an unsupported pattern (only simple `let x = e;` is supported)",
+      "item_name": "u32_as_binary32"
+    },
+    {
+      "file": "/root/git/isolated/mycelium/crates/mycelium-interp/src/prims.rs",
+      "line": 1656,
+      "col": 1,
+      "category": "MultiStmtBody",
+      "rust_construct": "MultiStmtBody",
+      "snippet": "# [doc = \" `bytes.len : Bytes → Binary{32}` — the byte count (RFC-0032 D4).\"] fn prim_bytes_len (prim : & str , args : & [& Value]) -> Result < Value , EvalError > { expect_arity (prim , args , 1) ? ; let bytes = as_bytes_payload (prim , args [0]) ? ; let n = u32 :: try_from (bytes . len ()) . map_err (| _ | EvalError :: PrimType { prim : prim . to_owned () , why : format ! (\"byte length {} exceeds the 32-bit length encoding\" , bytes . len ()) , }) ? ; u32_as_binary32 (prim , args , n) }",
+      "reason": "function body has a semicolon-terminated (value-discarding) statement expression before the tail — a `let`-chain body maps only simple `let x = e;` bindings plus a single trailing expression",
+      "item_name": "prim_bytes_len"
+    },
+    {
+      "file": "/root/git/isolated/mycelium/crates/mycelium-interp/src/prims.rs",
+      "line": 1670,
+      "col": 1,
+      "category": "MultiStmtBody",
+      "rust_construct": "MultiStmtBody",
+      "snippet": "# [doc = \" `bytes.get : (Bytes, Binary{W}) → Binary{8}` — never-silent indexed byte access (RFC-0032 D4). An\"] # [doc = \" out-of-bounds index is an explicit refusal (the `.myc` surface lifts to `Option`), never a silent\"] # [doc = \" default (G2). The returned byte is a `Binary{8}` value (MSB-first).\"] fn prim_bytes_get (prim : & str , args : & [& Value]) -> Result < Value , EvalError > { expect_arity (prim , args , 2) ? ; let bytes = as_bytes_payload (prim , args [0]) ? ; let i = as_index (prim , args [1]) ? ; match bytes . get (i) { Some (& byte) => { let out : Vec < bool > = (0 .. 8) . rev () . map (| k | (byte >> k) & 1 == 1) . collect () ; compose_result (prim , args , Repr :: Binary { width : 8 } , Payload :: Bits (out) , ApproxRule :: Refuse ,) } None => Err (EvalError :: PrimType { prim : prim . to_owned () , why : format ! (\"byte index {i} out of bounds for a byte string of length {}\" , bytes . len ()) , }) , } }",
+      "reason": "function body has a semicolon-terminated (value-discarding) statement expression before the tail — a `let`-chain body maps only simple `let x = e;` bindings plus a single trailing expression",
+      "item_name": "prim_bytes_get"
+    },
+    {
+      "file": "/root/git/isolated/mycelium/crates/mycelium-interp/src/prims.rs",
+      "line": 1698,
+      "col": 1,
+      "category": "MultiStmtBody",
+      "rust_construct": "MultiStmtBody",
+      "snippet": "# [doc = \" `bytes.slice : (Bytes, Binary{W}, Binary{W}) → Bytes` — never-silent sub-slice `[start, end)`\"] # [doc = \" (RFC-0032 D4). An out-of-range or inverted range is an explicit refusal, never a silently-clamped\"] # [doc = \" range (G2).\"] fn prim_bytes_slice (prim : & str , args : & [& Value]) -> Result < Value , EvalError > { expect_arity (prim , args , 3) ? ; let bytes = as_bytes_payload (prim , args [0]) ? ; let start = as_index (prim , args [1]) ? ; let end = as_index (prim , args [2]) ? ; if start > end || end > bytes . len () { return Err (EvalError :: PrimType { prim : prim . to_owned () , why : format ! (\"slice range [{start}, {end}) is out of bounds or inverted for a byte string of \\\n                 length {}\" , bytes . len ()) , }) ; } compose_result (prim , args , Repr :: Bytes , Payload :: Bytes (bytes [start .. end] . to_vec ()) , ApproxRule :: Refuse ,) }",
+      "reason": "function body has a semicolon-terminated (value-discarding) statement expression before the tail — a `let`-chain body maps only simple `let x = e;` bindings plus a single trailing expression",
+      "item_name": "prim_bytes_slice"
+    },
+    {
+      "file": "/root/git/isolated/mycelium/crates/mycelium-interp/src/prims.rs",
+      "line": 1725,
+      "col": 1,
+      "category": "MultiStmtBody",
+      "rust_construct": "MultiStmtBody",
+      "snippet": "# [doc = \" `bytes.concat : (Bytes, Bytes) → Bytes` — byte concatenation (RFC-0032 D4). Total/`Exact`.\"] fn prim_bytes_concat (prim : & str , args : & [& Value]) -> Result < Value , EvalError > { expect_arity (prim , args , 2) ? ; let a = as_bytes_payload (prim , args [0]) ? ; let b = as_bytes_payload (prim , args [1]) ? ; let mut out = Vec :: with_capacity (a . len () + b . len ()) ; out . extend_from_slice (a) ; out . extend_from_slice (b) ; compose_result (prim , args , Repr :: Bytes , Payload :: Bytes (out) , ApproxRule :: Refuse ,) }",
+      "reason": "function body has a semicolon-terminated (value-discarding) statement expression before the tail — a `let`-chain body maps only simple `let x = e;` bindings plus a single trailing expression",
+      "item_name": "prim_bytes_concat"
+    },
+    {
+      "file": "/root/git/isolated/mycelium/crates/mycelium-interp/src/prims.rs",
+      "line": 1748,
+      "col": 1,
+      "category": "MultiStmtBody",
+      "rust_construct": "MultiStmtBody",
+      "snippet": "# [doc = \" `bytes.eq : (Bytes, Bytes) → Binary{1}` — byte-wise equality (M-912). Total/`Exact`.\"] fn prim_bytes_eq (prim : & str , args : & [& Value]) -> Result < Value , EvalError > { expect_arity (prim , args , 2) ? ; let a = as_bytes_payload (prim , args [0]) ? ; let b = as_bytes_payload (prim , args [1]) ? ; bool_result (prim , args , a == b) }",
+      "reason": "function body has a semicolon-terminated (value-discarding) statement expression before the tail — a `let`-chain body maps only simple `let x = e;` bindings plus a single trailing expression",
+      "item_name": "prim_bytes_eq"
+    },
+    {
+      "file": "/root/git/isolated/mycelium/crates/mycelium-interp/src/prims.rs",
+      "line": 1766,
+      "col": 1,
+      "category": "MultiStmtBody",
+      "rust_construct": "MultiStmtBody",
+      "snippet": "# [doc = \" `hash.blake3 : Bytes → Bytes` — the 32-byte BLAKE3 digest of the input byte string (M-912;\"] # [doc = \" M-103). Total and deterministic over every `Bytes` input — there is no failure domain.\"] # [doc = \" Guarantee **`Exact`**.\"] fn prim_hash_blake3 (prim : & str , args : & [& Value]) -> Result < Value , EvalError > { expect_arity (prim , args , 1) ? ; let bytes = as_bytes_payload (prim , args [0]) ? ; let digest = blake3 :: hash (bytes) ; compose_result (prim , args , Repr :: Bytes , Payload :: Bytes (digest . as_bytes () . to_vec ()) , ApproxRule :: Refuse ,) }",
+      "reason": "function body has a semicolon-terminated (value-discarding) statement expression before the tail — a `let`-chain body maps only simple `let x = e;` bindings plus a single trailing expression",
+      "item_name": "prim_hash_blake3"
+    },
+    {
+      "file": "/root/git/isolated/mycelium/crates/mycelium-interp/src/prims.rs",
+      "line": 1788,
+      "col": 1,
+      "category": "MultiStmtBody",
+      "rust_construct": "MultiStmtBody",
+      "snippet": "# [doc = \" `bit.to_bytes : Binary{N} -> Bytes` (DN-138 WU-4) — zero-pads the `N`-bit unsigned magnitude on\"] # [doc = \" the MSB side up to a whole number of bytes (the same zero-extend convention `bit.width_cast`'s\"] # [doc = \" widen case uses, DN-41), then packs MSB-first. Total over every `Binary{N}` (`N = 0` produces an\"] # [doc = \" empty `Bytes`). Guarantee **`Exact`** — a deterministic bit-repacking, no approximation.\"] fn prim_bin_to_bytes (prim : & str , args : & [& Value]) -> Result < Value , EvalError > { expect_arity (prim , args , 1) ? ; let bits = as_bits (prim , args [0]) ? ; let n = bits . len () ; let pad = (8 - n % 8) % 8 ; let mut out = Vec :: with_capacity ((n + pad) / 8) ; let mut acc : u8 = 0 ; let mut count = 0usize ; for bit in std :: iter :: repeat_n (false , pad) . chain (bits . iter () . copied ()) { acc = (acc << 1) | u8 :: from (bit) ; count += 1 ; if count == 8 { out . push (acc) ; acc = 0 ; count = 0 ; } } compose_result (prim , args , Repr :: Bytes , Payload :: Bytes (out) , ApproxRule :: Refuse ,) }",
+      "reason": "function body has a semicolon-terminated (value-discarding) statement expression before the tail — a `let`-chain body maps only simple `let x = e;` bindings plus a single trailing expression",
+      "item_name": "prim_bin_to_bytes"
+    },
+    {
+      "file": "/root/git/isolated/mycelium/crates/mycelium-interp/src/prims.rs",
+      "line": 1833,
+      "col": 1,
+      "category": "Other",
+      "rust_construct": "Other",
+      "snippet": "# [doc = \" Compose a `fuse_join` result: the `meet` of the input guarantees + the canonical\"] # [doc = \" `Derived{op:\\\"fuse_join\\\", …}` provenance (DN-58 §A.5). The meet op introduces no error, so an\"] # [doc = \" **exact** pair yields an exact result with no bound; an **approximate** input has no defined\"] # [doc = \" ε-propagation rule for the meet (as for `bit.and`), so it is refused — never a fabricated bound\"] # [doc = \" (G2/VR-5).\"] fn fuse_join_result (prim : & str , inputs : & [& Value] , repr : Repr , payload : Payload ,) -> Result < Value , EvalError > { let strength = GuaranteeStrength :: propagate (GuaranteeStrength :: Exact , inputs . iter () . map (| v | v . meta () . guarantee ()) ,) ; if strength != GuaranteeStrength :: Exact { return Err (EvalError :: ApproxCompositionUnsupported { prim : prim . to_owned () , }) ; } let provenance = Provenance :: Derived { op : operation_hash (\"fuse_join\") , inputs : inputs . iter () . map (| v | v . content_hash ()) . collect () , } ; let meta = Meta :: new (provenance , GuaranteeStrength :: Exact , None , None , None , None) . map_err (EvalError :: Wf) ? ; Value :: new (repr , payload , meta) . map_err (EvalError :: Wf) }",
+      "reason": "qualified/associated-function call `GuaranteeStrength :: propagate` did not resolve to a known-emitted associated fn — Mycelium calls are bare identifiers, and the only sound surface form for `Type::method(...)` is the mangled `Type__method` name the declaration side already emits for a receiver-less inherent-impl associated fn (DN-34 §8.13/8.14), referenced only when that exact declaration is PROVEN present (same-file, or a resolved M-1084 cross-nodule sibling). A primitive/std associated fn with no emitted decl (e.g. `i128::try_from`), an unresolved type, or a `self`-receiving method (excluded by construction — it stays reachable only from its own bare call site) all gap here rather than fabricate a call (G2/VR-5, DN-133)",
+      "item_name": "fuse_join_result"
+    },
+    {
+      "file": "/root/git/isolated/mycelium/crates/mycelium-interp/src/prims.rs",
+      "line": 1864,
+      "col": 1,
+      "category": "MultiStmtBody",
+      "rust_construct": "MultiStmtBody",
+      "snippet": "# [doc = \" `fuse_join:binary : (Binary{N}, Binary{N}) → Binary{N}` — the `Binary` `Fuse` meet (bitwise-AND;\"] # [doc = \" DN-58 §A). Commutative/associative/idempotent (`Empirical`). A width/paradigm mismatch is an\"] # [doc = \" explicit [`EvalError::PrimType`], never a silent coercion (G2). The result carries the canonical\"] # [doc = \" `fuse_join` provenance (DN-58 §A.5).\"] fn prim_fuse_join_binary (prim : & str , args : & [& Value]) -> Result < Value , EvalError > { expect_arity (prim , args , 2) ? ; let a = as_bits (prim , args [0]) ? ; let b = as_bits (prim , args [1]) ? ; if a . len () != b . len () { return Err (EvalError :: PrimType { prim : prim . to_owned () , why : format ! (\"width mismatch: {} vs {} bits\" , a . len () , b . len ()) , }) ; } let out : Vec < bool > = a . iter () . zip (b) . map (| (& x , & y) | x & y) . collect () ; fuse_join_result (prim , args , args [0] . repr () . clone () , Payload :: Bits (out)) }",
+      "reason": "function body has a semicolon-terminated (value-discarding) statement expression before the tail — a `let`-chain body maps only simple `let x = e;` bindings plus a single trailing expression",
+      "item_name": "prim_fuse_join_binary"
+    },
+    {
+      "file": "/root/git/isolated/mycelium/crates/mycelium-interp/src/prims.rs",
+      "line": 1926,
+      "col": 1,
+      "category": "MultiStmtBody",
+      "rust_construct": "MultiStmtBody",
+      "snippet": "# [doc = \" Bind the [`DenseSpace`] a dense prim operates in off its **first operand's** `Repr` (the space\"] # [doc = \" anchor); the kernel then enforces every other operand agrees (dim/dtype mismatch → explicit\"] # [doc = \" error, never a broadcast). A non-`Dense` first operand or an unsupported dtype (`F16`/`F64`,\"] # [doc = \" the kernel's v1 scope) is an explicit [`EvalError::PrimType`].\"] fn dense_space_of (prim : & str , v : & Value) -> Result < DenseSpace , EvalError > { let Repr :: Dense { dim , dtype } = * v . repr () else { return Err (EvalError :: PrimType { prim : prim . to_owned () , why : format ! (\"expected a Dense operand, got {:?}\" , v . repr ()) , }) ; } ; DenseSpace :: new (dim , dtype) . map_err (| e | map_dense_err (prim , e)) }",
+      "reason": "`let` binding uses an unsupported pattern (only simple `let x = e;` is supported)",
+      "item_name": "dense_space_of"
+    },
+    {
+      "file": "/root/git/isolated/mycelium/crates/mycelium-interp/src/prims.rs",
+      "line": 1940,
+      "col": 1,
+      "category": "Other",
+      "rust_construct": "Other",
+      "snippet": "# [doc = \" Map a kernel [`DenseError`] onto the interpreter's never-silent error surface (see the module\"] # [doc = \" note above for the variant-by-variant rationale). Every arm is explicit; nothing is coerced.\"] fn map_dense_err (prim : & str , e : DenseError) -> EvalError { match e { DenseError :: Overflow { .. } => EvalError :: Overflow { prim : prim . to_owned () , } , DenseError :: ApproximateSource => EvalError :: ApproxCompositionUnsupported { prim : prim . to_owned () , } , other => EvalError :: PrimType { prim : prim . to_owned () , why : other . to_string () , } , } }",
+      "reason": "struct-variant pattern `Overflow { .. }` names a constructor with no confirmed in-file layout -- resolved only for an emitted, in-file struct (or, once DN-132's SS5.1 variant-aware `StructLayout` population lands, an in-file enum's named-field variant); never a guessed field-index arity (DN-132 SS5.1/OQ-4, VR-5/G2)",
+      "item_name": "map_dense_err"
+    },
+    {
+      "file": "/root/git/isolated/mycelium/crates/mycelium-interp/src/prims.rs",
+      "line": 1959,
+      "col": 1,
+      "category": "MultiStmtBody",
+      "rust_construct": "MultiStmtBody",
+      "snippet": "# [doc = \" `dense.add : (Dense{d, s}, Dense{d, s}) → Dense{d, s}` — elementwise addition (M-890).\"] # [doc = \" **`Proven`**, carried from the kernel: per-element relative ε (`op_rel_eps`) under the\"] # [doc = \" round-to-nearest theorem with checked side-conditions; a dim/dtype mismatch is an explicit\"] # [doc = \" refusal, never a broadcast (G2).\"] fn prim_dense_add (prim : & str , args : & [& Value]) -> Result < Value , EvalError > { expect_arity (prim , args , 2) ? ; let space = dense_space_of (prim , args [0]) ? ; space . add_values (args [0] , args [1]) . map_err (| e | map_dense_err (prim , e)) }",
+      "reason": "function body has a semicolon-terminated (value-discarding) statement expression before the tail — a `let`-chain body maps only simple `let x = e;` bindings plus a single trailing expression",
+      "item_name": "prim_dense_add"
+    },
+    {
+      "file": "/root/git/isolated/mycelium/crates/mycelium-interp/src/prims.rs",
+      "line": 1971,
+      "col": 1,
+      "category": "MultiStmtBody",
+      "rust_construct": "MultiStmtBody",
+      "snippet": "# [doc = \" `dense.sub : (Dense{d, s}, Dense{d, s}) → Dense{d, s}` — elementwise subtraction (M-890).\"] # [doc = \" Same **`Proven`** carried tag and never-silent shape contract as [`prim_dense_add`].\"] fn prim_dense_sub (prim : & str , args : & [& Value]) -> Result < Value , EvalError > { expect_arity (prim , args , 2) ? ; let space = dense_space_of (prim , args [0]) ? ; space . sub_values (args [0] , args [1]) . map_err (| e | map_dense_err (prim , e)) }",
+      "reason": "function body has a semicolon-terminated (value-discarding) statement expression before the tail — a `let`-chain body maps only simple `let x = e;` bindings plus a single trailing expression",
+      "item_name": "prim_dense_sub"
+    },
+    {
+      "file": "/root/git/isolated/mycelium/crates/mycelium-interp/src/prims.rs",
+      "line": 1981,
+      "col": 1,
+      "category": "MultiStmtBody",
+      "rust_construct": "MultiStmtBody",
+      "snippet": "# [doc = \" `dense.neg : Dense{d, s} → Dense{d, s}` — elementwise negation (M-890). **`Exact`**, carried\"] # [doc = \" from the kernel: the dtype grids are symmetric, so negation never rounds.\"] fn prim_dense_neg (prim : & str , args : & [& Value]) -> Result < Value , EvalError > { expect_arity (prim , args , 1) ? ; let space = dense_space_of (prim , args [0]) ? ; space . neg_value (args [0]) . map_err (| e | map_dense_err (prim , e)) }",
+      "reason": "function body has a semicolon-terminated (value-discarding) statement expression before the tail — a `let`-chain body maps only simple `let x = e;` bindings plus a single trailing expression",
+      "item_name": "prim_dense_neg"
+    },
+    {
+      "file": "/root/git/isolated/mycelium/crates/mycelium-interp/src/prims.rs",
+      "line": 1989,
+      "col": 1,
+      "category": "MultiStmtBody",
+      "rust_construct": "MultiStmtBody",
+      "snippet": "# [doc = \" `dense.scale : (Dense{d, s}, Dense{1, s}) → Dense{d, s}` — scalar multiplication (M-890).\"] # [doc = \" **`Proven`**, carried from the kernel. The factor rides a `Dense{1, s}` value (the pre-Gap-A\"] # [doc = \" scalar form — see the module note): it must be the **same dtype** as the vector, dim exactly 1,\"] # [doc = \" and `Exact` (an approximate factor has no defined composition rule — refused, never fabricated);\"] # [doc = \" the kernel re-checks the factor is finite and on-grid (`ScalarOffGrid`).\"] fn prim_dense_scale (prim : & str , args : & [& Value]) -> Result < Value , EvalError > { expect_arity (prim , args , 2) ? ; let space = dense_space_of (prim , args [0]) ? ; let factor = args [1] ; let Repr :: Dense { dim : 1 , dtype } = * factor . repr () else { return Err (EvalError :: PrimType { prim : prim . to_owned () , why : format ! (\"the scale factor must be a Dense{{1, dtype}} scalar (the pre-Gap-A scalar form), \\\n                 got {:?}\" , factor . repr ()) , }) ; } ; if dtype != space . dtype { return Err (EvalError :: PrimType { prim : prim . to_owned () , why : format ! (\"the scale factor dtype {dtype:?} must match the vector dtype {:?} — never a \\\n                 silent re-round\" , space . dtype) , }) ; } if factor . meta () . guarantee () != GuaranteeStrength :: Exact { return Err (EvalError :: ApproxCompositionUnsupported { prim : prim . to_owned () , }) ; } let Payload :: Scalars (xs) = factor . payload () else { return Err (EvalError :: PrimType { prim : prim . to_owned () , why : \"the scale factor's payload is not scalar data\" . to_owned () , }) ; } ; let [c] = xs . as_slice () else { return Err (EvalError :: PrimType { prim : prim . to_owned () , why : format ! (\"the Dense{{1}} scale factor must carry exactly one element, got {}\" , xs . len ()) , }) ; } ; space . scale_value (args [0] , * c) . map_err (| e | map_dense_err (prim , e)) }",
+      "reason": "function body has a semicolon-terminated (value-discarding) statement expression before the tail — a `let`-chain body maps only simple `let x = e;` bindings plus a single trailing expression",
+      "item_name": "prim_dense_scale"
+    },
+    {
+      "file": "/root/git/isolated/mycelium/crates/mycelium-interp/src/prims.rs",
+      "line": 2045,
+      "col": 1,
+      "category": "MultiStmtBody",
+      "rust_construct": "MultiStmtBody",
+      "snippet": "# [doc = \" `dense.dot : (Dense{d, s}, Dense{d, s}) → Dense{1, F64}` — the dot-product measurement\"] # [doc = \" (M-891). **`Proven`**, carried from the kernel: the absolute (`Linf`) binary64 accumulation\"] # [doc = \" bound `dot_abs_eps` with its `ProvenThm` citation rides the result `Value` (see the module\"] # [doc = \" note — the dtype's `op_rel_eps` deliberately does NOT appear); a dim/dtype mismatch is an\"] # [doc = \" explicit refusal, never a broadcast (G2).\"] fn prim_dense_dot (prim : & str , args : & [& Value]) -> Result < Value , EvalError > { expect_arity (prim , args , 2) ? ; let space = dense_space_of (prim , args [0]) ? ; space . dot_value (args [0] , args [1]) . map_err (| e | map_dense_err (prim , e)) }",
+      "reason": "function body has a semicolon-terminated (value-discarding) statement expression before the tail — a `let`-chain body maps only simple `let x = e;` bindings plus a single trailing expression",
+      "item_name": "prim_dense_dot"
+    },
+    {
+      "file": "/root/git/isolated/mycelium/crates/mycelium-interp/src/prims.rs",
+      "line": 2058,
+      "col": 1,
+      "category": "MultiStmtBody",
+      "rust_construct": "MultiStmtBody",
+      "snippet": "# [doc = \" `dense.similarity : (Dense{d, s}, Dense{d, s}) → Dense{1, F64}` — the cosine-similarity\"] # [doc = \" measurement (M-891). **`Proven`**, carried from the kernel: the input-independent absolute\"] # [doc = \" (`Linf`) bound `similarity_abs_eps` (normalization caps the error) with its `ProvenThm`\"] # [doc = \" citation. Zero-norm operands yield the kernel's documented convention `0` exactly (disclosed\"] # [doc = \" in the citation, never silent).\"] fn prim_dense_similarity (prim : & str , args : & [& Value]) -> Result < Value , EvalError > { expect_arity (prim , args , 2) ? ; let space = dense_space_of (prim , args [0]) ? ; space . similarity_value (args [0] , args [1]) . map_err (| e | map_dense_err (prim , e)) }",
+      "reason": "function body has a semicolon-terminated (value-discarding) statement expression before the tail — a `let`-chain body maps only simple `let x = e;` bindings plus a single trailing expression",
+      "item_name": "prim_dense_similarity"
+    },
+    {
+      "file": "/root/git/isolated/mycelium/crates/mycelium-interp/src/prims.rs",
+      "line": 2119,
+      "col": 1,
+      "category": "Other",
+      "rust_construct": "Other",
+      "snippet": "# [doc = \" The method recorded in the `EmpiricalFit` basis of every `flt.*` result (ADR-040 §2.6).\"] pub const FLT_CONFORMANCE_METHOD : & str = \"bit-reproducibility differential against hand-derived \\\n     IEEE-754 binary64 RNE reference cases (exact-arithmetic rows, ties-to-even at the 2^53 \\\n     boundary, overflow/underflow edges, signed zeros, in-band specials algebra, canonical-NaN \\\n     identity)\" ;",
+      "reason": "top-level `const FLT_CONFORMANCE_METHOD` — co-emit (ORACLE-R1 A4) only covers plain unsigned integer types (`u8`/`u16`/`u32`/`u64`/`u128`/`usize`); other types have no const item production and no faithful zero-arg-fn encoding (gap, never fabricate)",
+      "item_name": "FLT_CONFORMANCE_METHOD"
+    },
+    {
+      "file": "/root/git/isolated/mycelium/crates/mycelium-interp/src/prims.rs",
+      "line": 2125,
+      "col": 1,
+      "category": "Other",
+      "rust_construct": "Other",
+      "snippet": "# [doc = \" The zero-deviation-vs-spec bound every `flt.*` result carries (see the module note above):\"] # [doc = \" the delivered bit pattern deviates from the IEEE-754-defined correctly-rounded RNE binary64\"] # [doc = \" result by at most 0 (`Linf`), on the `EmpiricalFit` evidence of the reference-case corpus.\"] fn flt_bound () -> Bound { Bound { kind : BoundKind :: Error { eps : 0.0 , norm : NormKind :: Linf , } , basis : BoundBasis :: EmpiricalFit { trials : FLT_CONFORMANCE_TRIALS , method : FLT_CONFORMANCE_METHOD . to_owned () , } , } }",
+      "reason": "struct literal `Bound { .. }` — not an in-file single-ctor struct or enum struct-variant that emits (no constructor to build; a cross-nodule variant is an honest DN-113/DN-134-OQ-2 resolvability gap, never a fabricated out-of-file reference — VR-5/G2)",
+      "item_name": "flt_bound"
+    },
+    {
+      "file": "/root/git/isolated/mycelium/crates/mycelium-interp/src/prims.rs",
+      "line": 2141,
+      "col": 1,
+      "category": "Other",
+      "rust_construct": "Other",
+      "snippet": "# [doc = \" Extract the binary64 scalar of a `Float` operand; any other representation is an explicit\"] # [doc = \" [`EvalError::PrimType`] — never a silent coercion (G2). The returned NaN, if any, already\"] # [doc = \" carries the canonical bits ([`mycelium_core::CANONICAL_NAN_BITS`]) by `Value::new`'s\"] # [doc = \" construction invariant.\"] fn as_float (prim : & str , v : & Value) -> Result < f64 , EvalError > { match (v . repr () , v . payload ()) { (Repr :: Float { .. } , Payload :: Float (x)) => Ok (* x) , _ => Err (EvalError :: PrimType { prim : prim . to_owned () , why : format ! (\"expected a Float operand, got {:?}\" , v . repr ()) , }) , } }",
+      "reason": "method call `.repr(...)` has no proven-emitted free-fn referent in this file (neither a D4-mangled inherent `Type__repr` nor a bare inherent recorded by this file's left-to-right pass, nor a prim_map / combinator row). Emitting bare `repr(recv, …)` would fabricate an unknown prim and file-poison myc-check (G-β Rank A / G2/VR-5; residual when the method body itself gapped — e.g. M-1037 `.to_vec()` inside `read_to_end` — so the declaration was never registered)",
+      "item_name": "as_float"
+    },
+    {
+      "file": "/root/git/isolated/mycelium/crates/mycelium-interp/src/prims.rs",
+      "line": 2155,
+      "col": 1,
+      "category": "Other",
+      "rust_construct": "Other",
+      "snippet": "# [doc = \" Whether a `flt.*` input's tag/bound is composable (the module-note rule): `Exact`, or the\"] # [doc = \" zero-deviation `Empirical` form a prior `flt.*` op produced. Anything else — a genuine\"] # [doc = \" approximation bound — has no defined float ε-propagation rule yet.\"] fn flt_input_composable (v : & Value) -> bool { match v . meta () . guarantee () { GuaranteeStrength :: Exact => true , GuaranteeStrength :: Empirical => matches ! (v . meta () . bound () , Some (Bound { kind : BoundKind :: Error { eps , .. } , basis : BoundBasis :: EmpiricalFit { .. } , }) if * eps == 0.0) , _ => false , } }",
+      "reason": "method call `.guarantee(...)` has no proven-emitted free-fn referent in this file (neither a D4-mangled inherent `Type__guarantee` nor a bare inherent recorded by this file's left-to-right pass, nor a prim_map / combinator row). Emitting bare `guarantee(recv, …)` would fabricate an unknown prim and file-poison myc-check (G-β Rank A / G2/VR-5; residual when the method body itself gapped — e.g. M-1037 `.to_vec()` inside `read_to_end` — so the declaration was never registered)",
+      "item_name": "flt_input_composable"
+    },
+    {
+      "file": "/root/git/isolated/mycelium/crates/mycelium-interp/src/prims.rs",
+      "line": 2172,
+      "col": 1,
+      "category": "Other",
+      "rust_construct": "Other",
+      "snippet": "# [doc = \" Build a `flt.*` result: `Float{F64}` repr, the computed scalar (NaN canonicalized by\"] # [doc = \" [`Value::new`] — ADR-040 §2.3), `Derived` provenance, and the honest ADR-040 §2.6 tag —\"] # [doc = \" strength `meet(Empirical, inputs)` with the zero-deviation `EmpiricalFit` bound. An input\"] # [doc = \" that is neither `Exact` nor the composable zero-deviation form is an explicit\"] # [doc = \" [`EvalError::ApproxCompositionUnsupported`] (never a fabricated bound — G2/VR-5).\"] fn flt_result (prim : & str , inputs : & [& Value] , out : f64) -> Result < Value , EvalError > { empirical_flt_result (prim , inputs , Repr :: Float { width : FloatWidth :: F64 , } , Payload :: Float (out) ,) }",
+      "reason": "struct literal `Float { .. }` — not an in-file single-ctor struct or enum struct-variant that emits (no constructor to build; a cross-nodule variant is an honest DN-113/DN-134-OQ-2 resolvability gap, never a fabricated out-of-file reference — VR-5/G2)",
+      "item_name": "flt_result"
+    },
+    {
+      "file": "/root/git/isolated/mycelium/crates/mycelium-interp/src/prims.rs",
+      "line": 2188,
+      "col": 1,
+      "category": "MultiStmtBody",
+      "rust_construct": "MultiStmtBody",
+      "snippet": "# [doc = \" Build a result for any op whose **intrinsic** is `Empirical` with the shared zero-deviation-\"] # [doc = \" vs-spec bound (ADR-040 §2.6 — arithmetic, comparison, *and* conversion prims all carry this\"] # [doc = \" posture, §2.6's \\\"Conversions: range/exactness checks `Empirical`…\\\" clause). Generalizes\"] # [doc = \" [`flt_result`] (always a `Float` output) to an arbitrary output `repr`/`payload`, shared with\"] # [doc = \" the CU-3 `bin.to_flt`/`flt.to_bin` conversion prims. Composability is the same rule\"] # [doc = \" [`flt_result`] always used: every input must be `Exact` or the zero-deviation `Empirical` form\"] # [doc = \" a prior `flt.*`/conversion op produced ([`flt_input_composable`]); anything else is an explicit\"] # [doc = \" [`EvalError::ApproxCompositionUnsupported`] refusal, never a fabricated bound (G2/VR-5).\"] fn empirical_flt_result (prim : & str , inputs : & [& Value] , repr : Repr , payload : Payload ,) -> Result < Value , EvalError > { if ! inputs . iter () . all (| v | flt_input_composable (v)) { return Err (EvalError :: ApproxCompositionUnsupported { prim : prim . to_owned () , }) ; } let strength = GuaranteeStrength :: propagate (GuaranteeStrength :: Empirical , inputs . iter () . map (| v | v . meta () . guarantee ()) ,) ; let provenance = Provenance :: Derived { op : operation_hash (prim) , inputs : inputs . iter () . map (| v | v . content_hash ()) . collect () , } ; let meta = Meta :: new (provenance , strength , Some (flt_bound ()) , None , None , None) . map_err (EvalError :: Wf) ? ; Value :: new (repr , payload , meta) . map_err (EvalError :: Wf) }",
+      "reason": "function body has a semicolon-terminated (value-discarding) statement expression before the tail — a `let`-chain body maps only simple `let x = e;` bindings plus a single trailing expression",
+      "item_name": "empirical_flt_result"
+    },
+    {
+      "file": "/root/git/isolated/mycelium/crates/mycelium-interp/src/prims.rs",
+      "line": 2225,
+      "col": 1,
+      "category": "MultiStmtBody",
+      "rust_construct": "MultiStmtBody",
+      "snippet": "# [doc = \" Shared arity/operand extraction for the binary `flt.*` ops.\"] fn flt_binop (prim : & str , args : & [& Value]) -> Result < (f64 , f64) , EvalError > { expect_arity (prim , args , 2) ? ; Ok ((as_float (prim , args [0]) ? , as_float (prim , args [1]) ?)) }",
+      "reason": "function body has a semicolon-terminated (value-discarding) statement expression before the tail — a `let`-chain body maps only simple `let x = e;` bindings plus a single trailing expression",
+      "item_name": "flt_binop"
+    },
+    {
+      "file": "/root/git/isolated/mycelium/crates/mycelium-interp/src/prims.rs",
+      "line": 2231,
+      "col": 1,
+      "category": "MultiStmtBody",
+      "rust_construct": "MultiStmtBody",
+      "snippet": "# [doc = \" `flt.add : (Float, Float) → Float` — IEEE-754 binary64 addition, RNE (ADR-040 §2.2/§2.5;\"] # [doc = \" M-898). Total: overflow → ±inf, NaN propagates (in-band specials, ratified FLAG-2 — the\"] # [doc = \" module note above). Tag `Empirical` with the zero-deviation-vs-spec bound (ADR-040 §2.6).\"] fn prim_flt_add (prim : & str , args : & [& Value]) -> Result < Value , EvalError > { let (a , b) = flt_binop (prim , args) ? ; flt_result (prim , args , a + b) }",
+      "reason": "`let` binding uses an unsupported pattern (only simple `let x = e;` is supported)",
+      "item_name": "prim_flt_add"
+    },
+    {
+      "file": "/root/git/isolated/mycelium/crates/mycelium-interp/src/prims.rs",
+      "line": 2239,
+      "col": 1,
+      "category": "MultiStmtBody",
+      "rust_construct": "MultiStmtBody",
+      "snippet": "# [doc = \" `flt.sub : (Float, Float) → Float` — IEEE-754 binary64 subtraction, RNE. Same total/in-band\"] # [doc = \" contract and `Empirical` tag as [`prim_flt_add`].\"] fn prim_flt_sub (prim : & str , args : & [& Value]) -> Result < Value , EvalError > { let (a , b) = flt_binop (prim , args) ? ; flt_result (prim , args , a - b) }",
+      "reason": "`let` binding uses an unsupported pattern (only simple `let x = e;` is supported)",
+      "item_name": "prim_flt_sub"
+    },
+    {
+      "file": "/root/git/isolated/mycelium/crates/mycelium-interp/src/prims.rs",
+      "line": 2246,
+      "col": 1,
+      "category": "MultiStmtBody",
+      "rust_construct": "MultiStmtBody",
+      "snippet": "# [doc = \" `flt.mul : (Float, Float) → Float` — IEEE-754 binary64 multiplication, RNE. Same total/in-band\"] # [doc = \" contract and `Empirical` tag as [`prim_flt_add`] (`0 × inf → NaN`, canonical).\"] fn prim_flt_mul (prim : & str , args : & [& Value]) -> Result < Value , EvalError > { let (a , b) = flt_binop (prim , args) ? ; flt_result (prim , args , a * b) }",
+      "reason": "`let` binding uses an unsupported pattern (only simple `let x = e;` is supported)",
+      "item_name": "prim_flt_mul"
+    },
+    {
+      "file": "/root/git/isolated/mycelium/crates/mycelium-interp/src/prims.rs",
+      "line": 2253,
+      "col": 1,
+      "category": "MultiStmtBody",
+      "rust_construct": "MultiStmtBody",
+      "snippet": "# [doc = \" `flt.div : (Float, Float) → Float` — IEEE-754 binary64 division, RNE. Total: `x/±0 → ±inf`\"] # [doc = \" (sign by IEEE), `0/0 → NaN` (canonical) — **in-band, never a trap** (the ratified FLAG-2\"] # [doc = \" policy; the distinguished sentinel is the never-silent signal, unlike `bin.div`'s integer\"] # [doc = \" div-by-zero, which has no in-band sentinel and must refuse). Tag as [`prim_flt_add`].\"] fn prim_flt_div (prim : & str , args : & [& Value]) -> Result < Value , EvalError > { let (a , b) = flt_binop (prim , args) ? ; flt_result (prim , args , a / b) }",
+      "reason": "`let` binding uses an unsupported pattern (only simple `let x = e;` is supported)",
+      "item_name": "prim_flt_div"
+    },
+    {
+      "file": "/root/git/isolated/mycelium/crates/mycelium-interp/src/prims.rs",
+      "line": 2262,
+      "col": 1,
+      "category": "MultiStmtBody",
+      "rust_construct": "MultiStmtBody",
+      "snippet": "# [doc = \" `flt.neg : Float → Float` — IEEE-754 binary64 negation (sign-bit flip; exact in binary64 —\"] # [doc = \" negation never rounds, and `neg(neg(x))` is a bit-identity). The tag still carries the group's\"] # [doc = \" `Empirical` host-conformance posture (ADR-040 §2.6 tags the whole `flt.*` set; splitting `neg`\"] # [doc = \" out at a stronger tag is a maintainer call — FLAGged in the M-898 report, not silently taken).\"] # [doc = \" `neg(NaN)` re-canonicalizes to the positive quiet NaN (§2.3 — NaN sign/payload bits are not\"] # [doc = \" observable).\"] fn prim_flt_neg (prim : & str , args : & [& Value]) -> Result < Value , EvalError > { expect_arity (prim , args , 1) ? ; let a = as_float (prim , args [0]) ? ; flt_result (prim , args , - a) }",
+      "reason": "function body has a semicolon-terminated (value-discarding) statement expression before the tail — a `let`-chain body maps only simple `let x = e;` bindings plus a single trailing expression",
+      "item_name": "prim_flt_neg"
+    },
+    {
+      "file": "/root/git/isolated/mycelium/crates/mycelium-interp/src/prims.rs",
+      "line": 2326,
+      "col": 1,
+      "category": "Other",
+      "rust_construct": "Other",
+      "snippet": "# [doc = \" The method recorded in the `EmpiricalFit` basis of every float-comparison result\"] # [doc = \" (ADR-040 §2.4/§2.6).\"] pub const FLT_CMP_CONFORMANCE_METHOD : & str = \"truth-table differential against hand-derived \\\n     IEEE-754 §5.11 predicate rows (NaN unordered on every predicate, NaN ≠ NaN, signed-zero \\\n     equality, ±inf ordering) and §5.10 totalOrder rows (−0 ≺ +0, canonical NaN last, NaN \\\n     reflexive) — total-order property evidence is Empirical pending the M-511 proof\" ;",
+      "reason": "top-level `const FLT_CMP_CONFORMANCE_METHOD` — co-emit (ORACLE-R1 A4) only covers plain unsigned integer types (`u8`/`u16`/`u32`/`u64`/`u128`/`usize`); other types have no const item production and no faithful zero-arg-fn encoding (gap, never fabricate)",
+      "item_name": "FLT_CMP_CONFORMANCE_METHOD"
+    },
+    {
+      "file": "/root/git/isolated/mycelium/crates/mycelium-interp/src/prims.rs",
+      "line": 2333,
+      "col": 1,
+      "category": "Other",
+      "rust_construct": "Other",
+      "snippet": "# [doc = \" The zero-deviation-vs-spec bound every float-comparison result carries (see the section note):\"] # [doc = \" the delivered `Binary{1}` truth value deviates from the IEEE-754-defined predicate value by\"] # [doc = \" at most 0 (`Linf`), on the `EmpiricalFit` evidence of the comparison reference corpus.\"] fn flt_cmp_bound () -> Bound { Bound { kind : BoundKind :: Error { eps : 0.0 , norm : NormKind :: Linf , } , basis : BoundBasis :: EmpiricalFit { trials : FLT_CMP_CONFORMANCE_TRIALS , method : FLT_CMP_CONFORMANCE_METHOD . to_owned () , } , } }",
+      "reason": "struct literal `Bound { .. }` — not an in-file single-ctor struct or enum struct-variant that emits (no constructor to build; a cross-nodule variant is an honest DN-113/DN-134-OQ-2 resolvability gap, never a fabricated out-of-file reference — VR-5/G2)",
+      "item_name": "flt_cmp_bound"
+    },
+    {
+      "file": "/root/git/isolated/mycelium/crates/mycelium-interp/src/prims.rs",
+      "line": 2349,
+      "col": 1,
+      "category": "MultiStmtBody",
+      "rust_construct": "MultiStmtBody",
+      "snippet": "# [doc = \" Build a float-comparison result: `Binary{1}` (`0b1` = true), `Derived` provenance, and the\"] # [doc = \" honest ADR-040 §2.6 tag — strength `meet(Empirical, inputs)` with the zero-deviation\"] # [doc = \" `EmpiricalFit` comparison bound. An input that is neither `Exact` nor the composable\"] # [doc = \" zero-deviation form is an explicit [`EvalError::ApproxCompositionUnsupported`] (an ε-ball\"] # [doc = \" around a compared operand could flip the bit — no fabricated bound, G2/VR-5).\"] fn flt_cmp_result (prim : & str , inputs : & [& Value] , truth : bool) -> Result < Value , EvalError > { if ! inputs . iter () . all (| v | flt_input_composable (v)) { return Err (EvalError :: ApproxCompositionUnsupported { prim : prim . to_owned () , }) ; } let strength = GuaranteeStrength :: propagate (GuaranteeStrength :: Empirical , inputs . iter () . map (| v | v . meta () . guarantee ()) ,) ; let provenance = Provenance :: Derived { op : operation_hash (prim) , inputs : inputs . iter () . map (| v | v . content_hash ()) . collect () , } ; let meta = Meta :: new (provenance , strength , Some (flt_cmp_bound ()) , None , None , None ,) . map_err (EvalError :: Wf) ? ; Value :: new (Repr :: Binary { width : 1 } , Payload :: Bits (vec ! [truth]) , meta) . map_err (EvalError :: Wf) }",
+      "reason": "function body has a semicolon-terminated (value-discarding) statement expression before the tail — a `let`-chain body maps only simple `let x = e;` bindings plus a single trailing expression",
+      "item_name": "flt_cmp_result"
+    },
+    {
+      "file": "/root/git/isolated/mycelium/crates/mycelium-interp/src/prims.rs",
+      "line": 2383,
+      "col": 1,
+      "category": "MultiStmtBody",
+      "rust_construct": "MultiStmtBody",
+      "snippet": "# [doc = \" `flt.lt : (Float, Float) → Binary{1}` — IEEE-754 §5.11 `compareQuietLess` (ADR-040 §2.4;\"] # [doc = \" M-899). **NaN is unordered:** any NaN operand → `false` (the defined predicate value, not a\"] # [doc = \" fallback — see the section note). Tag `Empirical` with the zero-deviation comparison bound.\"] fn prim_flt_lt (prim : & str , args : & [& Value]) -> Result < Value , EvalError > { let (a , b) = flt_binop (prim , args) ? ; flt_cmp_result (prim , args , a < b) }",
+      "reason": "`let` binding uses an unsupported pattern (only simple `let x = e;` is supported)",
+      "item_name": "prim_flt_lt"
+    },
+    {
+      "file": "/root/git/isolated/mycelium/crates/mycelium-interp/src/prims.rs",
+      "line": 2391,
+      "col": 1,
+      "category": "MultiStmtBody",
+      "rust_construct": "MultiStmtBody",
+      "snippet": "# [doc = \" `flt.le : (Float, Float) → Binary{1}` — IEEE-754 §5.11 `compareQuietLessEqual`. **NaN is\"] # [doc = \" unordered:** any NaN operand → `false` (`le` is NOT `¬gt` on floats — both are false on\"] # [doc = \" unordered). Tag as [`prim_flt_lt`].\"] fn prim_flt_le (prim : & str , args : & [& Value]) -> Result < Value , EvalError > { let (a , b) = flt_binop (prim , args) ? ; flt_cmp_result (prim , args , a <= b) }",
+      "reason": "`let` binding uses an unsupported pattern (only simple `let x = e;` is supported)",
+      "item_name": "prim_flt_le"
+    },
+    {
+      "file": "/root/git/isolated/mycelium/crates/mycelium-interp/src/prims.rs",
+      "line": 2399,
+      "col": 1,
+      "category": "MultiStmtBody",
+      "rust_construct": "MultiStmtBody",
+      "snippet": "# [doc = \" `flt.gt : (Float, Float) → Binary{1}` — IEEE-754 §5.11 `compareQuietGreater`. **NaN is\"] # [doc = \" unordered:** any NaN operand → `false` (NaN is not \\\"the biggest\\\" under the partial order —\"] # [doc = \" only the *named* total order `flt.total_le` places it). Tag as [`prim_flt_lt`].\"] fn prim_flt_gt (prim : & str , args : & [& Value]) -> Result < Value , EvalError > { let (a , b) = flt_binop (prim , args) ? ; flt_cmp_result (prim , args , a > b) }",
+      "reason": "`let` binding uses an unsupported pattern (only simple `let x = e;` is supported)",
+      "item_name": "prim_flt_gt"
+    },
+    {
+      "file": "/root/git/isolated/mycelium/crates/mycelium-interp/src/prims.rs",
+      "line": 2407,
+      "col": 1,
+      "category": "MultiStmtBody",
+      "rust_construct": "MultiStmtBody",
+      "snippet": "# [doc = \" `flt.ge : (Float, Float) → Binary{1}` — IEEE-754 §5.11 `compareQuietGreaterEqual`. **NaN is\"] # [doc = \" unordered:** any NaN operand → `false`. Tag as [`prim_flt_lt`].\"] fn prim_flt_ge (prim : & str , args : & [& Value]) -> Result < Value , EvalError > { let (a , b) = flt_binop (prim , args) ? ; flt_cmp_result (prim , args , a >= b) }",
+      "reason": "`let` binding uses an unsupported pattern (only simple `let x = e;` is supported)",
+      "item_name": "prim_flt_ge"
+    },
+    {
+      "file": "/root/git/isolated/mycelium/crates/mycelium-interp/src/prims.rs",
+      "line": 2414,
+      "col": 1,
+      "category": "MultiStmtBody",
+      "rust_construct": "MultiStmtBody",
+      "snippet": "# [doc = \" `flt.eq : (Float, Float) → Binary{1}` — IEEE-754 §5.11 `compareQuietEqual`. **NaN ≠ NaN**\"] # [doc = \" (`flt.eq(NaN, NaN) = false` — the honest unordered result; `¬flt.eq(x, x)` is the in-band\"] # [doc = \" NaN test), and the signed zeros compare **equal** (`flt.eq(−0, +0) = true`) even though they\"] # [doc = \" are bit- and address-distinct — the documented ADR-040 FLAG-4 identity-vs-equality seam\"] # [doc = \" (`flt.total_le` is the op that *does* separate them). Tag as [`prim_flt_lt`].\"] fn prim_flt_eq (prim : & str , args : & [& Value]) -> Result < Value , EvalError > { let (a , b) = flt_binop (prim , args) ? ; # [allow (clippy :: float_cmp)] flt_cmp_result (prim , args , a == b) }",
+      "reason": "`let` binding uses an unsupported pattern (only simple `let x = e;` is supported)",
+      "item_name": "prim_flt_eq"
+    },
+    {
+      "file": "/root/git/isolated/mycelium/crates/mycelium-interp/src/prims.rs",
+      "line": 2425,
+      "col": 1,
+      "category": "MultiStmtBody",
+      "rust_construct": "MultiStmtBody",
+      "snippet": "# [doc = \" `flt.total_le : (Float, Float) → Binary{1}` — IEEE-754 §5.10 `totalOrder(a, b)`: `a`\"] # [doc = \" precedes-or-equals `b` in the **named, opt-in total order**\"] # [doc = \" `−inf < … < −0 < +0 < … < +inf < NaN` (ADR-040 §2.4; M-899). Total and reflexive — every\"] # [doc = \" pair is ordered, `total_le(NaN, NaN) = true`, the canonical NaN (§2.3) sorts last, and\"] # [doc = \" `−0`/`+0` are *distinct* (`total_le(−0, +0) ∧ ¬total_le(+0, −0)`) — so sorting/keying floats\"] # [doc = \" is deterministic, by explicit request, never by a silently-imposed order (cmp.md Q1).\"] # [doc = \"\"] # [doc = \" **Tag `Empirical` — the M-511 proof debt (VR-5).** The total-order *property* (totality,\"] # [doc = \" antisymmetry, transitivity, the placement rules) is corpus/property-tested here but has **no\"] # [doc = \" checked proof**; it stays `Empirical` until M-511 discharges it — never `Proven` on the\"] # [doc = \" strength of the host's `total_cmp` documentation alone.\"] fn prim_flt_total_le (prim : & str , args : & [& Value]) -> Result < Value , EvalError > { let (a , b) = flt_binop (prim , args) ? ; flt_cmp_result (prim , args , a . total_cmp (& b) != Ordering :: Greater) }",
+      "reason": "`let` binding uses an unsupported pattern (only simple `let x = e;` is supported)",
+      "item_name": "prim_flt_total_le"
+    },
+    {
+      "file": "/root/git/isolated/mycelium/crates/mycelium-interp/src/prims.rs",
+      "line": 2441,
+      "col": 1,
+      "category": "MultiStmtBody",
+      "rust_construct": "MultiStmtBody",
+      "snippet": "# [doc = \" Extract the single `f64` of a unary `Float` classification prim (arity + `Repr::Float` checked,\"] # [doc = \" never-silent). The unary analogue of [`flt_binop`].\"] fn flt_unop (prim : & str , args : & [& Value]) -> Result < f64 , EvalError > { expect_arity (prim , args , 1) ? ; as_float (prim , args [0]) }",
+      "reason": "function body has a semicolon-terminated (value-discarding) statement expression before the tail — a `let`-chain body maps only simple `let x = e;` bindings plus a single trailing expression",
+      "item_name": "flt_unop"
+    },
+    {
+      "file": "/root/git/isolated/mycelium/crates/mycelium-interp/src/prims.rs",
+      "line": 2448,
+      "col": 1,
+      "category": "Other",
+      "rust_construct": "Other",
+      "snippet": "# [doc = \" `flt.is_nan : (Float) → Binary{1}` — IEEE-754 §5.7.2 `isNaN`: `true` iff the operand is NaN\"] # [doc = \" (CU-2; **ADR-040 §2.5** mandates classification \\\"`is_nan`/`is_finite` at minimum\\\"). This is the\"] # [doc = \" in-band never-silent test for the invalid-operation sentinel (§2.4): `¬flt.eq(x, x)` and\"] # [doc = \" `flt.is_nan(x)` agree, but this is the direct, total predicate. Total — every float is or isn't\"] # [doc = \" NaN; no operand refuses. Tag `Empirical` (ADR-040 §2.6 — the float op set's strength).\"] fn prim_flt_is_nan (prim : & str , args : & [& Value]) -> Result < Value , EvalError > { let x = flt_unop (prim , args) ? ; flt_cmp_result (prim , args , x . is_nan ()) }",
+      "reason": "unsupported expression form `flt_unop (prim , args) ?`",
+      "item_name": "prim_flt_is_nan"
+    },
+    {
+      "file": "/root/git/isolated/mycelium/crates/mycelium-interp/src/prims.rs",
+      "line": 2458,
+      "col": 1,
+      "category": "Other",
+      "rust_construct": "Other",
+      "snippet": "# [doc = \" `flt.is_finite : (Float) → Binary{1}` — IEEE-754 §5.7.2 `isFinite`: `true` iff the operand is\"] # [doc = \" neither ±inf nor NaN (CU-2; **ADR-040 §2.5** mandate). The direct never-silent test for \\\"is this\"] # [doc = \" an ordinary finite value\\\" — the guard that distinguishes an in-range result from a propagated\"] # [doc = \" ±inf/NaN overflow sentinel (§2.4). Total; tag `Empirical` (ADR-040 §2.6).\"] fn prim_flt_is_finite (prim : & str , args : & [& Value]) -> Result < Value , EvalError > { let x = flt_unop (prim , args) ? ; flt_cmp_result (prim , args , x . is_finite ()) }",
+      "reason": "unsupported expression form `flt_unop (prim , args) ?`",
+      "item_name": "prim_flt_is_finite"
+    },
+    {
+      "file": "/root/git/isolated/mycelium/crates/mycelium-interp/src/prims.rs",
+      "line": 2467,
+      "col": 1,
+      "category": "Other",
+      "rust_construct": "Other",
+      "snippet": "# [doc = \" `flt.is_infinite : (Float) → Binary{1}` — IEEE-754 §5.7.2 `isInfinite`: `true` iff the operand is\"] # [doc = \" +inf or −inf (CU-2; the third classification predicate rounding out ADR-040 §2.5's \\\"at minimum\\\"\"] # [doc = \" pair — `is_infinite ≡ ¬is_finite ∧ ¬is_nan`, provided directly so callers need not compose it).\"] # [doc = \" Total; tag `Empirical` (ADR-040 §2.6).\"] fn prim_flt_is_infinite (prim : & str , args : & [& Value]) -> Result < Value , EvalError > { let x = flt_unop (prim , args) ? ; flt_cmp_result (prim , args , x . is_infinite ()) }",
+      "reason": "unsupported expression form `flt_unop (prim , args) ?`",
+      "item_name": "prim_flt_is_infinite"
+    },
+    {
+      "file": "/root/git/isolated/mycelium/crates/mycelium-interp/src/prims.rs",
+      "line": 2495,
+      "col": 1,
+      "category": "MultiStmtBody",
+      "rust_construct": "MultiStmtBody",
+      "snippet": "# [doc = \" `bin.to_flt : Binary{N} → Float` — checked-exact never-silent conversion (ADR-040 §2.4; CU-3).\"] # [doc = \" A non-`Binary` operand is an explicit [`EvalError::PrimType`]; an over-cap width (`N >`\"] # [doc = \" [`binary::FLOAT_CONV_MAX_WIDTH`]) is likewise an explicit [`EvalError::PrimType`]; a magnitude\"] # [doc = \" exceeding the binary64 exact-integer bound (`2^53`) is an explicit [`EvalError::Overflow`] —\"] # [doc = \" never a silent lossy round.\"] fn prim_bin_to_flt (prim : & str , args : & [& Value]) -> Result < Value , EvalError > { expect_arity (prim , args , 1) ? ; let bits = as_bits (prim , args [0]) ? ; if bits . len () > binary :: FLOAT_CONV_MAX_WIDTH { return Err (EvalError :: PrimType { prim : prim . to_owned () , why : format ! (\"width {} exceeds the {}-bit bin.to_flt conversion cap (CU-3 scope)\" , bits . len () , binary :: FLOAT_CONV_MAX_WIDTH) , }) ; } let out = binary :: checked_uint_to_f64 (bits) . ok_or_else (| | EvalError :: Overflow { prim : prim . to_owned () , }) ? ; empirical_flt_result (prim , args , Repr :: Float { width : FloatWidth :: F64 , } , Payload :: Float (out) ,) }",
+      "reason": "function body has a semicolon-terminated (value-discarding) statement expression before the tail — a `let`-chain body maps only simple `let x = e;` bindings plus a single trailing expression",
+      "item_name": "prim_bin_to_flt"
+    },
+    {
+      "file": "/root/git/isolated/mycelium/crates/mycelium-interp/src/prims.rs",
+      "line": 2526,
+      "col": 1,
+      "category": "MultiStmtBody",
+      "rust_construct": "MultiStmtBody",
+      "snippet": "# [doc = \" `flt.to_bin : (Float, Binary{M}) → Binary{M}` — never-silent conversion (ADR-040 §2.4; CU-3).\"] # [doc = \" The second operand is a **width witness** (only its `Binary{M}` width is read; its bits are\"] # [doc = \" ignored — exactly `bit.width_cast`'s shape, DN-41). Refuses with an explicit\"] # [doc = \" [`EvalError::PrimType`] on a non-`Float` first operand, an over-cap witness width, NaN, ±inf, a\"] # [doc = \" negative value, or a nonzero fractional part (dropping it would be a silent truncation);\"] # [doc = \" refuses with an explicit [`EvalError::Overflow`] when the integer magnitude does not fit the\"] # [doc = \" unsigned `M`-bit target or exceeds the binary64 exact-integer bound (`2^53`) — never a silent\"] # [doc = \" round/truncate-by-default. The result's guarantee threads off the **value** operand only (the\"] # [doc = \" witness contributes its width, not its guarantee — mirroring [`prim_width_cast`]).\"] fn prim_flt_to_bin (prim : & str , args : & [& Value]) -> Result < Value , EvalError > { expect_arity (prim , args , 2) ? ; let value = as_float (prim , args [0]) ? ; let witness = as_bits (prim , args [1]) ? ; if witness . len () > binary :: FLOAT_CONV_MAX_WIDTH { return Err (EvalError :: PrimType { prim : prim . to_owned () , why : format ! (\"witness width {} exceeds the {}-bit flt.to_bin conversion cap (CU-3 scope)\" , witness . len () , binary :: FLOAT_CONV_MAX_WIDTH) , }) ; } if ! value . is_finite () || value < 0.0 || value . fract () != 0.0 { return Err (EvalError :: PrimType { prim : prim . to_owned () , why : format ! (\"flt.to_bin requires a non-negative, finite, integer-valued Float (got {value}) \\\n                 — never a silent NaN/inf/fractional coercion (ADR-040 §2.4)\") , }) ; } let m = u32 :: try_from (witness . len ()) . expect (\"witness width <= 64 fits u32\") ; let magnitude = binary :: checked_f64_to_uint (value , m) . ok_or_else (| | EvalError :: Overflow { prim : prim . to_owned () , }) ? ; let out = binary :: uint_to_bits (magnitude , m) . expect (\"checked_f64_to_uint already verified magnitude fits the m-bit unsigned target\") ; empirical_flt_result (prim , & args [.. 1] , args [1] . repr () . clone () , Payload :: Bits (out)) }",
+      "reason": "function body has a semicolon-terminated (value-discarding) statement expression before the tail — a `let`-chain body maps only simple `let x = e;` bindings plus a single trailing expression",
+      "item_name": "prim_flt_to_bin"
+    },
+    {
+      "file": "/root/git/isolated/mycelium/crates/mycelium-interp/src/prims.rs",
+      "line": 2631,
+      "col": 1,
+      "category": "Impl",
+      "rust_construct": "Impl",
+      "snippet": "impl VsaDispatch { # [doc = \" Dispatch `bind` to the model's Value-level op (the kernel constructs the result `Value`).\"] fn bind (& self , a : & Value , b : & Value) -> Result < Value , VsaError > { match self { VsaDispatch :: MapI (m) => m . bind_values (a , b) , VsaDispatch :: Fhrr (m) => m . bind_values (a , b) , VsaDispatch :: Bsc (m) => m . bind_values (a , b) , } } # [doc = \" Dispatch `unbind` (MAP-I/BSC: the self-inverse `Exact` op; FHRR: the regime-gated\"] # [doc = \" `Empirical` op with its δ bound).\"] fn unbind (& self , a : & Value , b : & Value) -> Result < Value , VsaError > { match self { VsaDispatch :: MapI (m) => m . unbind_values (a , b) , VsaDispatch :: Fhrr (m) => m . unbind_values (a , b) , VsaDispatch :: Bsc (m) => m . unbind_values (a , b) , } } # [doc = \" Dispatch `permute` (cyclic shift — `Exact` in every model of the set).\"] fn permute (& self , a : & Value , shift : i64) -> Result < Value , VsaError > { match self { VsaDispatch :: MapI (m) => m . permute_value (a , shift) , VsaDispatch :: Fhrr (m) => m . permute_value (a , shift) , VsaDispatch :: Bsc (m) => m . permute_value (a , shift) , } } # [doc = \" **Data-level** unbind for the M-894 reconstruction decode. The record is a *composite*\"] # [doc = \" (typically a bundle), so the Value-level unbind wrappers are the wrong entry: their\"] # [doc = \" `Exact`/regime guards are about tagging a *surfaced* unbind result, while here the noisy\"] # [doc = \" intermediate never surfaces as a `Value` — it flows straight into the cleanup arg-max,\"] # [doc = \" whose own confidence/margin quantify it (FR-S4; exactly `recon.rs::reconstruct_role`'s\"] # [doc = \" kernel posture). Model/dim were already checked by [`vsa_model_of`] + the operand guards.\"] fn unbind_data (& self , a : & [f64] , b : & [f64]) -> Result < Vec < f64 > , VsaError > { match self { VsaDispatch :: MapI (m) => m . unbind (a , b) , VsaDispatch :: Fhrr (m) => m . unbind (a , b) , VsaDispatch :: Bsc (m) => m . unbind (a , b) , } } # [doc = \" The cleanup arg-max under this model's similarity (M-894): delegate to the kernel's\"] # [doc = \" [`CleanupMemory::cleanup`], which scores every atom and reports the best hit **with its\"] # [doc = \" confidence and margin** (never a silent nearest-neighbour pick — FR-S4/G2).\"] fn cleanup_match (& self , mem : & CleanupMemory , query : & [f64]) -> Option < Match > { match self { VsaDispatch :: MapI (m) => mem . cleanup (query , m) , VsaDispatch :: Fhrr (m) => mem . cleanup (query , m) , VsaDispatch :: Bsc (m) => mem . cleanup (query , m) , } } }",
+      "reason": "no member of this impl block could be transpiled (5 sub-issue(s)): impl method `bind` body: method call `.bind_values(...)` has no proven-emitted free-fn referent in this file (neither a D4-mangled inherent `Type__bind_values` nor a bare inherent recorded by this file's left-to-right pass, nor a prim_map / combinator row). Emitting bare `bind_values(recv, …)` would fabricate an unknown prim and file-poison myc-check (G-β Rank A / G2/VR-5; residual when the method body itself gapped — e.g. M-1037 `.to_vec()` inside `read_to_end` — so the declaration was never registered); impl method `unbind` body: method call `.unbind_values(...)` has no proven-emitted free-fn referent in this file (neither a D4-mangled inherent `Type__unbind_values` nor a bare inherent recorded by this file's left-to-right pass, nor a prim_map / combinator row). Emitting bare `unbind_values(recv, …)` would fabricate an unknown prim and file-poison myc-check (G-β Rank A / G2/VR-5; residual when the method body itself gapped — e.g. M-1037 `.to_vec()` inside `read_to_end` — so the declaration was never registered); impl method `permute` body: method call `.permute_value(...)` has no proven-emitted free-fn referent in this file (neither a D4-mangled inherent `Type__permute_value` nor a bare inherent recorded by this file's left-to-right pass, nor a prim_map / combinator row). Emitting bare `permute_value(recv, …)` would fabricate an unknown prim and file-poison myc-check (G-β Rank A / G2/VR-5; residual when the method body itself gapped — e.g. M-1037 `.to_vec()` inside `read_to_end` — so the declaration was never registered); impl method `unbind_data` body: method call `.unbind(...)` has no proven-emitted free-fn referent in this file (neither a D4-mangled inherent `Type__unbind` nor a bare inherent recorded by this file's left-to-right pass, nor a prim_map / combinator row). Emitting bare `unbind(recv, …)` would fabricate an unknown prim and file-poison myc-check (G-β Rank A / G2/VR-5; residual when the method body itself gapped — e.g. M-1037 `.to_vec()` inside `read_to_end` — so the declaration was never registered); impl method `cleanup_match` body: method call `.cleanup(...)` has no proven-emitted free-fn referent in this file (neither a D4-mangled inherent `Type__cleanup` nor a bare inherent recorded by this file's left-to-right pass, nor a prim_map / combinator row). Emitting bare `cleanup(recv, …)` would fabricate an unknown prim and file-poison myc-check (G-β Rank A / G2/VR-5; residual when the method body itself gapped — e.g. M-1037 `.to_vec()` inside `read_to_end` — so the declaration was never registered)",
+      "item_name": "VsaDispatch"
+    },
+    {
+      "file": "/root/git/isolated/mycelium/crates/mycelium-interp/src/prims.rs",
+      "line": 2686,
+      "col": 1,
+      "category": "MultiStmtBody",
+      "rust_construct": "MultiStmtBody",
+      "snippet": "# [doc = \" Bind the VSA model a `vsa.*` prim dispatches to off its **first operand's** `Repr::Vsa` model\"] # [doc = \" id + dim (the model anchor); the kernel then enforces every other hypervector operand agrees\"] # [doc = \" (a model/dim mismatch is an explicit `NotThisModel`/`DimMismatch` refusal, never a coercion).\"] # [doc = \" A non-`Vsa` first operand, or a model outside the M-892 introduction dispatch set\"] # [doc = \" (MAP-I / FHRR / BSC), is an explicit [`EvalError::PrimType`] naming the model and the set (G2).\"] fn vsa_model_of (prim : & str , v : & Value) -> Result < VsaDispatch , EvalError > { let Repr :: Vsa { model , dim , .. } = v . repr () else { return Err (EvalError :: PrimType { prim : prim . to_owned () , why : format ! (\"expected a Vsa hypervector operand, got {:?}\" , v . repr ()) , }) ; } ; match model . as_str () { \"MAP-I\" => Ok (VsaDispatch :: MapI (MapI :: new (* dim))) , \"FHRR\" => Ok (VsaDispatch :: Fhrr (Fhrr :: new (* dim))) , \"BSC\" => Ok (VsaDispatch :: Bsc (Bsc :: new (* dim))) , other => Err (EvalError :: PrimType { prim : prim . to_owned () , why : format ! (\"model {other:?} is outside the vsa.* prim dispatch set at introduction \\\n                 (MAP-I, FHRR, BSC — M-892); widening the set is an append-only extension, \\\n                 never a guessed algebra\") , }) , } }",
+      "reason": "`let` binding uses an unsupported pattern (only simple `let x = e;` is supported)",
+      "item_name": "vsa_model_of"
+    },
+    {
+      "file": "/root/git/isolated/mycelium/crates/mycelium-interp/src/prims.rs",
+      "line": 2713,
+      "col": 1,
+      "category": "Other",
+      "rust_construct": "Other",
+      "snippet": "# [doc = \" Map a kernel [`VsaError`] onto the interpreter's never-silent error surface (see the section\"] # [doc = \" note above). Every arm is explicit; nothing is coerced.\"] fn map_vsa_err (prim : & str , e : VsaError) -> EvalError { match e { VsaError :: Wf (w) => EvalError :: Wf (w) , other => EvalError :: PrimType { prim : prim . to_owned () , why : other . to_string () , } , } }",
+      "reason": "qualified/associated-function call `EvalError :: Wf` did not resolve to a known-emitted associated fn — Mycelium calls are bare identifiers, and the only sound surface form for `Type::method(...)` is the mangled `Type__method` name the declaration side already emits for a receiver-less inherent-impl associated fn (DN-34 §8.13/8.14), referenced only when that exact declaration is PROVEN present (same-file, or a resolved M-1084 cross-nodule sibling). A primitive/std associated fn with no emitted decl (e.g. `i128::try_from`), an unresolved type, or a `self`-receiving method (excluded by construction — it stays reachable only from its own bare call site) all gap here rather than fabricate a call (G2/VR-5, DN-133)",
+      "item_name": "map_vsa_err"
+    },
+    {
+      "file": "/root/git/isolated/mycelium/crates/mycelium-interp/src/prims.rs",
+      "line": 2728,
+      "col": 1,
+      "category": "Other",
+      "rust_construct": "Other",
+      "snippet": "# [doc = \" The Exact-input guard of the section note: a non-`Exact` operand has no defined δ-propagation\"] # [doc = \" rule through the VSA algebra, and the kernel would stamp the op's own tag regardless — an\"] # [doc = \" unearned upgrade (VR-5). Refused explicitly, never fabricated (the dense group's\"] # [doc = \" `ApproximateSource` posture, enforced wrapper-side because the vsa kernel predates the prim\"] # [doc = \" surface).\"] fn vsa_operands_exact (prim : & str , args : & [& Value]) -> Result < () , EvalError > { if args . iter () . all (| v | v . meta () . guarantee () == GuaranteeStrength :: Exact) { Ok (()) } else { Err (EvalError :: ApproxCompositionUnsupported { prim : prim . to_owned () , }) } }",
+      "reason": "method call `.all(...)` has no proven-emitted free-fn referent in this file (neither a D4-mangled inherent `Type__all` nor a bare inherent recorded by this file's left-to-right pass, nor a prim_map / combinator row). Emitting bare `all(recv, …)` would fabricate an unknown prim and file-poison myc-check (G-β Rank A / G2/VR-5; residual when the method body itself gapped — e.g. M-1037 `.to_vec()` inside `read_to_end` — so the declaration was never registered)",
+      "item_name": "vsa_operands_exact"
+    },
+    {
+      "file": "/root/git/isolated/mycelium/crates/mycelium-interp/src/prims.rs",
+      "line": 2746,
+      "col": 1,
+      "category": "MultiStmtBody",
+      "rust_construct": "MultiStmtBody",
+      "snippet": "# [doc = \" `vsa.bind : (Vsa{m, d}, Vsa{m, d}) → Vsa{m, d}` — model-dispatched binding (M-892). Tag\"] # [doc = \" carried from the kernel: **`Exact`** in every model of the introduction set (MAP-I elementwise\"] # [doc = \" product on the guarded `±1` alphabet; FHRR phase addition; BSC XOR). A model/dim mismatch or\"] # [doc = \" an out-of-alphabet component is an explicit refusal, never a coercion (G2).\"] fn prim_vsa_bind (prim : & str , args : & [& Value]) -> Result < Value , EvalError > { expect_arity (prim , args , 2) ? ; vsa_operands_exact (prim , args) ? ; let model = vsa_model_of (prim , args [0]) ? ; model . bind (args [0] , args [1]) . map_err (| e | map_vsa_err (prim , e)) }",
+      "reason": "function body has a semicolon-terminated (value-discarding) statement expression before the tail — a `let`-chain body maps only simple `let x = e;` bindings plus a single trailing expression",
+      "item_name": "prim_vsa_bind"
+    },
+    {
+      "file": "/root/git/isolated/mycelium/crates/mycelium-interp/src/prims.rs",
+      "line": 2759,
+      "col": 1,
+      "category": "MultiStmtBody",
+      "rust_construct": "MultiStmtBody",
+      "snippet": "# [doc = \" `vsa.unbind : (Vsa{m, d}, Vsa{m, d}) → Vsa{m, d}` — model-dispatched factor recovery (M-892).\"] # [doc = \" Tag carried from the kernel **per model** (VR-5, never re-stamped): MAP-I/BSC **`Exact`** (the\"] # [doc = \" self-inverse identities, alphabet-guarded); FHRR **`Empirical`** with its trial-validated\"] # [doc = \" `FHRR_UNBIND_PROFILE` δ bound, **regime-gated by the kernel** (the operand must be a single\"] # [doc = \" `vsa.fhrr.bind` product — refused explicitly outside the validated regime). The Π-table\"] # [doc = \" intrinsic for this prim is the *meet* over the set (`Empirical`); the runtime value's tag is\"] # [doc = \" the dispatched model's own.\"] fn prim_vsa_unbind (prim : & str , args : & [& Value]) -> Result < Value , EvalError > { expect_arity (prim , args , 2) ? ; vsa_operands_exact (prim , args) ? ; let model = vsa_model_of (prim , args [0]) ? ; model . unbind (args [0] , args [1]) . map_err (| e | map_vsa_err (prim , e)) }",
+      "reason": "function body has a semicolon-terminated (value-discarding) statement expression before the tail — a `let`-chain body maps only simple `let x = e;` bindings plus a single trailing expression",
+      "item_name": "prim_vsa_unbind"
+    },
+    {
+      "file": "/root/git/isolated/mycelium/crates/mycelium-interp/src/prims.rs",
+      "line": 2775,
+      "col": 1,
+      "category": "MultiStmtBody",
+      "rust_construct": "MultiStmtBody",
+      "snippet": "# [doc = \" `vsa.permute : (Vsa{m, d}, Binary{W}) → Vsa{m, d}` — model-dispatched cyclic shift (M-892).\"] # [doc = \" Tag carried from the kernel: **`Exact`** in every model of the set (a pure component\"] # [doc = \" rotation). The shift is an unsigned `Binary{W}` magnitude (see the section note: rotation is\"] # [doc = \" cyclic, so the inverse permute is the complementary shift `d − s`); a shift width beyond the\"] # [doc = \" index space is an explicit refusal, never a truncation (G2).\"] fn prim_vsa_permute (prim : & str , args : & [& Value]) -> Result < Value , EvalError > { expect_arity (prim , args , 2) ? ; vsa_operands_exact (prim , args) ? ; let model = vsa_model_of (prim , args [0]) ? ; let raw = as_index (prim , args [1]) ? ; let shift = i64 :: try_from (raw) . map_err (| _ | EvalError :: PrimType { prim : prim . to_owned () , why : format ! (\"shift amount {raw} exceeds the i64 shift space\") , }) ? ; model . permute (args [0] , shift) . map_err (| e | map_vsa_err (prim , e)) }",
+      "reason": "function body has a semicolon-terminated (value-discarding) statement expression before the tail — a `let`-chain body maps only simple `let x = e;` bindings plus a single trailing expression",
+      "item_name": "prim_vsa_permute"
+    },
+    {
+      "file": "/root/git/isolated/mycelium/crates/mycelium-interp/src/prims.rs",
+      "line": 2797,
+      "col": 1,
+      "category": "MultiStmtBody",
+      "rust_construct": "MultiStmtBody",
+      "snippet": "# [doc = \" `vsa.bundle : (Seq{Vsa{m, d}, N≥1}, Float δ) → Vsa{m, d}` — superposition via the **certified\"] # [doc = \" path** (M-893): `MapI::bundle_values_certified(items, δ)`, the M-131 checked-instantiation\"] # [doc = \" pattern. The kernel issues a **`Proven`** `CapacityBound` (citing Clarkson/Thomas, targeting\"] # [doc = \" failure probability δ) **only** under its *checked* side-conditions — `dim ≥ requiredDim(m, δ)`,\"] # [doc = \" bipolar (±1) atoms, distinct items — and refuses explicitly otherwise\"] # [doc = \" (`InsufficientCapacity` naming the required dim / `NonAlphabetComponent` /\"] # [doc = \" `DuplicateBundleItems`), never an unbacked tag (M-I2/VR-5). The wrapper carries the kernel's\"] # [doc = \" tag + bound through unchanged; the disclosed bound is the value's own (`Capacity{items, dim}`\"] # [doc = \" = this bundle's m and d, with the checked basis in `ProvenThm`), EXPLAIN-able through the\"] # [doc = \" model-namespaced `vsa.map_i.bundle` provenance over all input hashes.\"] # [doc = \"\"] # [doc = \" **The dispatch set for bundle is the certified singleton {MAP-I}.** FHRR/BSC are in the M-892\"] # [doc = \" *bind-group* dispatch set but their kernel bundles are **`Empirical`-profile ops**\"] # [doc = \" (`bundle_values_empirical` — trial-validated δ, not a checked theorem): routing them through\"] # [doc = \" this prim would either silently weaken the prim's certified meaning or silently re-tag their\"] # [doc = \" evidence (both VR-5 violations), so an FHRR/BSC first element is an explicit refusal naming\"] # [doc = \" the certified set — surfacing the empirical bundles is a distinct, append-only extension\"] # [doc = \" under its own name (the M-894 lane), never a silent downgrade. An out-of-set model (HRR/…)\"] # [doc = \" refuses via [`vsa_model_of`] as for the bind group.\"] # [doc = \"\"] # [doc = \" δ is a `Float` operand and must be a probability in `(0, 1]` — a non-finite or out-of-range δ\"] # [doc = \" is refused here with its own message (the kernel's `required_dim` would fold it into an\"] # [doc = \" `InsufficientCapacity` whose \\\"required u64::MAX\\\" obscures the actual offense — G2 prefers the\"] # [doc = \" named refusal). The Exact-input guard of the section note applies to the operands **and each\"] # [doc = \" seq element** (the kernel stamps `Proven` without meeting element strengths — a non-`Exact`\"] # [doc = \" element would be a silent upgrade; in particular a bundle result fed back in refuses:\"] # [doc = \" no δ-composition rule for nested certified bundles exists).\"] fn prim_vsa_bundle (prim : & str , args : & [& Value]) -> Result < Value , EvalError > { expect_arity (prim , args , 2) ? ; vsa_operands_exact (prim , args) ? ; let elems = as_seq (prim , args [0]) ? ; let Some (first) = elems . first () else { return Err (EvalError :: PrimType { prim : prim . to_owned () , why : \"bundle requires at least one item — no superposition is defined over an empty \\\n                  Seq (RFC-0003 §4; refused, never a defaulted value — G2)\" . to_owned () , }) ; } ; if elems . iter () . any (| v | v . meta () . guarantee () != GuaranteeStrength :: Exact) { return Err (EvalError :: ApproxCompositionUnsupported { prim : prim . to_owned () , }) ; } let delta = as_float (prim , args [1]) ? ; if ! (delta . is_finite () && delta > 0.0 && delta <= 1.0) { return Err (EvalError :: PrimType { prim : prim . to_owned () , why : format ! (\"target failure probability δ must be a finite Float in (0, 1], got {delta} — \\\n                 no capacity theorem instantiates outside that range (M-893; refused, never a \\\n                 defaulted δ — G2)\") , }) ; } match vsa_model_of (prim , first) ? { VsaDispatch :: MapI (m) => { let refs : Vec < & Value > = elems . iter () . collect () ; m . bundle_values_certified (& refs , delta) . map_err (| e | map_vsa_err (prim , e)) } VsaDispatch :: Fhrr (_) | VsaDispatch :: Bsc (_) => Err (EvalError :: PrimType { prim : prim . to_owned () , why : format ! (\"model {:?} has no certified Value-level bundle — `vsa.bundle` is the certified \\\n                 path (MAP-I's checked capacity bound) and its dispatch set at introduction is \\\n                 the certified singleton {{MAP-I}} (M-893); the FHRR/BSC empirical-profile \\\n                 bundles are a distinct, append-only surfacing under their own name, never a \\\n                 silent re-tag (VR-5)\" , match first . repr () { Repr :: Vsa { model , .. } => model . as_str () , _ => unreachable ! (\"vsa_model_of admitted a Vsa first element\") , }) , }) , } }",
+      "reason": "function body has a semicolon-terminated (value-discarding) statement expression before the tail — a `let`-chain body maps only simple `let x = e;` bindings plus a single trailing expression",
+      "item_name": "prim_vsa_bundle"
+    },
+    {
+      "file": "/root/git/isolated/mycelium/crates/mycelium-interp/src/prims.rs",
+      "line": 2918,
+      "col": 1,
+      "category": "GenericBound",
+      "rust_construct": "GenericBound",
+      "snippet": "# [doc = \" Extract the hypervector data of a `Vsa` operand whose repr the caller already checked.\"] fn vsa_hv_data < 'a > (prim : & str , v : & 'a Value) -> Result < & 'a [f64] , EvalError > { match v . payload () { Payload :: Hypervector (h) => Ok (h) , other => Err (EvalError :: PrimType { prim : prim . to_owned () , why : format ! (\"expected a Hypervector payload, got {other:?}\") , }) , } }",
+      "reason": "lifetime parameter `'a` has no grammar surface",
+      "item_name": "vsa_hv_data"
+    },
+    {
+      "file": "/root/git/isolated/mycelium/crates/mycelium-interp/src/prims.rs",
+      "line": 2929,
+      "col": 1,
+      "category": "GenericBound",
+      "rust_construct": "GenericBound",
+      "snippet": "# [doc = \" The codebook operand: a **non-empty** `Seq` of clean atoms, each `Exact` and each of exactly\"] # [doc = \" the query/record's model + dim (`like`'s repr). Every violation is an explicit refusal naming\"] # [doc = \" the offense (G2): an empty codebook has nothing to clean up against; a non-`Exact` atom has no\"] # [doc = \" carry rule (only the query/record slot passes its pair through — see the section note); a\"] # [doc = \" cross-model/dim atom is never coerced.\"] fn vsa_codebook < 'a > (prim : & str , like : & Value , seq : & 'a Value) -> Result < & 'a [Value] , EvalError > { let elems = as_seq (prim , seq) ? ; if elems . is_empty () { return Err (EvalError :: PrimType { prim : prim . to_owned () , why : \"the codebook must hold at least one atom — an empty cleanup memory has \\\n                  nothing to clean up against (FR-S4; M-894 — refused, never a defaulted \\\n                  retrieval; G2)\" . to_owned () , }) ; } if seq . meta () . guarantee () != GuaranteeStrength :: Exact || elems . iter () . any (| v | v . meta () . guarantee () != GuaranteeStrength :: Exact) { return Err (EvalError :: ApproxCompositionUnsupported { prim : prim . to_owned () , }) ; } for (i , item) in elems . iter () . enumerate () { if item . repr () != like . repr () { return Err (EvalError :: PrimType { prim : prim . to_owned () , why : format ! (\"codebook atom {i} is {:?} but the query/record is {:?} — every atom must \\\n                     share the query's model and dim (M-894 — a model or dim mismatch is an \\\n                     explicit refusal, never a cross-model coercion; G2)\" , item . repr () , like . repr ()) , }) ; } } Ok (elems) }",
+      "reason": "lifetime parameter `'a` has no grammar surface",
+      "item_name": "vsa_codebook"
+    },
+    {
+      "file": "/root/git/isolated/mycelium/crates/mycelium-interp/src/prims.rs",
+      "line": 2973,
+      "col": 1,
+      "category": "Other",
+      "rust_construct": "Other",
+      "snippet": "# [doc = \" Run the exhaustive cleanup arg-max over `atoms` and apply the identifiability guard\"] # [doc = \" (RFC-0010 §4.4: the retrieval is `Exact` only when the best atom is the *unique* arg-max —\"] # [doc = \" a tie, `margin ≤ 0`, is an explicit refusal, never a coin-flip between tied atoms).\"] fn vsa_cleanup_hit (prim : & str , dispatch : & VsaDispatch , dim : u32 , query : & [f64] , atoms : & [Value] ,) -> Result < Match , EvalError > { let mut mem = CleanupMemory :: new (dim) ; for (i , atom) in atoms . iter () . enumerate () { mem . insert (i . to_string () , vsa_hv_data (prim , atom) ? . to_vec ()) . map_err (| e | map_vsa_err (prim , e)) ? ; } let hit = dispatch . cleanup_match (& mem , query) . ok_or_else (| | EvalError :: PrimType { prim : prim . to_owned () , why : \"cleanup memory holds no usable codebook atom for this model/dim\" . to_owned () , }) ? ; if hit . margin <= 0.0 { return Err (EvalError :: PrimType { prim : prim . to_owned () , why : format ! (\"retrieval is non-identifiable: the best atom (index {}, similarity {}) is not \\\n                 the unique arg-max (margin {}) — a coin-flip between tied atoms is exactly what \\\n                 the Exact decode claim forbids (RFC-0010 §4.4; M-894 — refused, never guessed; \\\n                 G2)\" , hit . index , hit . confidence , hit . margin) , }) ; } Ok (hit) }",
+      "reason": "qualified/associated-function call `CleanupMemory :: new` did not resolve to a known-emitted associated fn — Mycelium calls are bare identifiers, and the only sound surface form for `Type::method(...)` is the mangled `Type__method` name the declaration side already emits for a receiver-less inherent-impl associated fn (DN-34 §8.13/8.14), referenced only when that exact declaration is PROVEN present (same-file, or a resolved M-1084 cross-nodule sibling). A primitive/std associated fn with no emitted decl (e.g. `i128::try_from`), an unresolved type, or a `self`-receiving method (excluded by construction — it stays reachable only from its own bare call site) all gap here rather than fabricate a call (G2/VR-5, DN-133)",
+      "item_name": "vsa_cleanup_hit"
+    },
+    {
+      "file": "/root/git/isolated/mycelium/crates/mycelium-interp/src/prims.rs",
+      "line": 3011,
+      "col": 1,
+      "category": "Other",
+      "rust_construct": "Other",
+      "snippet": "# [doc = \" Build the `Seq{Float, 3} = [index, confidence, margin]` decision triple, carrying the\"] # [doc = \" query/record's own (strength, bound) pair through the RFC-0001 §4.7 meet (the section note's\"] # [doc = \" `Passthrough` rule: the op's own contribution is `Exact` and every other operand is guarded\"] # [doc = \" `Exact`, so the meet is exactly `carried`'s strength, and the disclosed bound is the value's\"] # [doc = \" own). Provenance is `Derived{op: hash(prim), inputs: the operands as passed}`.\"] fn vsa_decision_triple (prim : & str , inputs : & [& Value] , carried : & Value , hit : & Match ,) -> Result < Value , EvalError > { let strength = carried . meta () . guarantee () ; let bound = if strength == GuaranteeStrength :: Exact { None } else { carried . meta () . bound () . cloned () } ; let provenance = Provenance :: Derived { op : operation_hash (prim) , inputs : inputs . iter () . map (| v | v . content_hash ()) . collect () , } ; let index = u32 :: try_from (hit . index) . map_err (| _ | EvalError :: PrimType { prim : prim . to_owned () , why : format ! (\"codebook index {} exceeds the u32 index space\" , hit . index) , }) ? ; let triple_meta = | | -> Result < Meta , EvalError > { Meta :: new (provenance . clone () , strength , bound . clone () , None , None , None ,) . map_err (EvalError :: Wf) } ; let float_repr = Repr :: Float { width : FloatWidth :: F64 , } ; let elems : Vec < Value > = [f64 :: from (index) , hit . confidence , hit . margin] . into_iter () . map (| x | { Value :: new (float_repr . clone () , Payload :: Float (x) , triple_meta () ?) . map_err (EvalError :: Wf) }) . collect :: < Result < _ , _ > > () ? ; Value :: new (Repr :: Seq { elem : Box :: new (float_repr) , len : 3 , } , Payload :: Seq (elems) , triple_meta () ? ,) . map_err (EvalError :: Wf) }",
+      "reason": "method call `.guarantee(...)` has no proven-emitted free-fn referent in this file (neither a D4-mangled inherent `Type__guarantee` nor a bare inherent recorded by this file's left-to-right pass, nor a prim_map / combinator row). Emitting bare `guarantee(recv, …)` would fabricate an unknown prim and file-poison myc-check (G-β Rank A / G2/VR-5; residual when the method body itself gapped — e.g. M-1037 `.to_vec()` inside `read_to_end` — so the declaration was never registered)",
+      "item_name": "vsa_decision_triple"
+    },
+    {
+      "file": "/root/git/isolated/mycelium/crates/mycelium-interp/src/prims.rs",
+      "line": 3069,
+      "col": 1,
+      "category": "MultiStmtBody",
+      "rust_construct": "MultiStmtBody",
+      "snippet": "# [doc = \" `vsa.cleanup : (Vsa{m, d}, Seq{Vsa{m, d}, N≥1}) → Seq{Float, 3}` — the cleanup-memory\"] # [doc = \" retrieval (M-894; FR-S4): snap the (possibly noisy) query to the nearest codebook atom by the\"] # [doc = \" dispatched model's similarity, returning the `[index, confidence, margin]` decision triple.\"] # [doc = \" Dispatch set: the full M-892 set (MAP-I/FHRR/BSC — the procedure is model-generic). The\"] # [doc = \" query's own (strength, bound) pair carries through; codebook atoms must be `Exact`; a tie is\"] # [doc = \" the explicit identifiability refusal (see the section note).\"] fn prim_vsa_cleanup (prim : & str , args : & [& Value]) -> Result < Value , EvalError > { expect_arity (prim , args , 2) ? ; let query = args [0] ; let dispatch = vsa_model_of (prim , query) ? ; let atoms = vsa_codebook (prim , query , args [1]) ? ; let dim = match query . repr () { Repr :: Vsa { dim , .. } => * dim , _ => unreachable ! (\"vsa_model_of admitted a Vsa first operand\") , } ; let hit = vsa_cleanup_hit (prim , & dispatch , dim , vsa_hv_data (prim , query) ? , atoms) ? ; vsa_decision_triple (prim , args , query , & hit) }",
+      "reason": "function body has a semicolon-terminated (value-discarding) statement expression before the tail — a `let`-chain body maps only simple `let x = e;` bindings plus a single trailing expression",
+      "item_name": "prim_vsa_cleanup"
+    },
+    {
+      "file": "/root/git/isolated/mycelium/crates/mycelium-interp/src/prims.rs",
+      "line": 3088,
+      "col": 1,
+      "category": "MultiStmtBody",
+      "rust_construct": "MultiStmtBody",
+      "snippet": "# [doc = \" `vsa.reconstruct : (Vsa{m, d}, Vsa{m, d}, Seq{Vsa{m, d}, N≥1}, Float) → Seq{Float, 3}` — the\"] # [doc = \" RFC-0003 §6 compositional role-reconstruction (M-894; `recon.rs::reconstruct_role` semantics\"] # [doc = \" with the manifest's checks made operand-level): unbind the record by the role atom\"] # [doc = \" (data-level — the noisy intermediate never surfaces), clean the result up against the\"] # [doc = \" codebook, and **refuse explicitly below the caller's threshold** (the manifest's\"] # [doc = \" `cleanup_threshold ∈ [0, 1]` made an explicit `Float` operand — a below-threshold retrieval\"] # [doc = \" is an error naming confidence vs threshold, never a silent low-quality answer; G2). The\"] # [doc = \" record's own (strength, bound) pair carries through — reconstructing from a certified bundle\"] # [doc = \" re-discloses its `Proven` `CapacityBound` (the disclosed bound is the value's own). Dispatch\"] # [doc = \" set: **{MAP-I, BSC}** — an FHRR record is an explicit refusal (its `Empirical` unbind profile\"] # [doc = \" covers only single bind products, not reconstruction records — VR-5; see the section note).\"] fn prim_vsa_reconstruct (prim : & str , args : & [& Value]) -> Result < Value , EvalError > { expect_arity (prim , args , 4) ? ; let (record , role , threshold_v) = (args [0] , args [1] , args [3]) ; let dispatch = vsa_model_of (prim , record) ? ; if matches ! (dispatch , VsaDispatch :: Fhrr (_)) { return Err (EvalError :: PrimType { prim : prim . to_owned () , why : \"model \\\"FHRR\\\" is outside the vsa.reconstruct dispatch set at introduction \\\n                  ({MAP-I, BSC}) — FHRR's unbind tag is Empirical and trial-validated only for \\\n                  a single vsa.fhrr.bind product (FHRR_UNBIND_PROFILE), which a reconstruction \\\n                  record is not; stretching that profile would be an unearned tag (VR-5), so \\\n                  surfacing FHRR reconstruction is a distinct, append-only extension under a \\\n                  reconstruction-regime profile of its own (M-894)\" . to_owned () , }) ; } if role . repr () != record . repr () { return Err (EvalError :: PrimType { prim : prim . to_owned () , why : format ! (\"the role atom is {:?} but the record is {:?} — both must share one model and \\\n                 dim (M-894 — a model or dim mismatch is an explicit refusal, never a \\\n                 cross-model coercion; G2)\" , role . repr () , record . repr ()) , }) ; } if role . meta () . guarantee () != GuaranteeStrength :: Exact || threshold_v . meta () . guarantee () != GuaranteeStrength :: Exact { return Err (EvalError :: ApproxCompositionUnsupported { prim : prim . to_owned () , }) ; } let atoms = vsa_codebook (prim , record , args [2]) ? ; let threshold = as_float (prim , threshold_v) ? ; if ! (threshold . is_finite () && (0.0 ..= 1.0) . contains (& threshold)) { return Err (EvalError :: PrimType { prim : prim . to_owned () , why : format ! (\"the cleanup threshold must be a finite Float in [0, 1], got {threshold} — the \\\n                 RFC-0003 §6 manifest domain (`ReconInfo`'s cleanup_threshold), made an \\\n                 explicit operand (M-894; refused, never a defaulted threshold — G2)\") , }) ; } let dim = match record . repr () { Repr :: Vsa { dim , .. } => * dim , _ => unreachable ! (\"vsa_model_of admitted a Vsa first operand\") , } ; let noisy = dispatch . unbind_data (vsa_hv_data (prim , record) ? , vsa_hv_data (prim , role) ?) . map_err (| e | map_vsa_err (prim , e)) ? ; let hit = vsa_cleanup_hit (prim , & dispatch , dim , & noisy , atoms) ? ; if hit . confidence < threshold { return Err (EvalError :: PrimType { prim : prim . to_owned () , why : format ! (\"cleanup confidence {} is below the threshold {threshold} (best atom: index {}, \\\n                 margin {}) — a below-threshold retrieval is an explicit refusal, never a \\\n                 silent low-quality answer (RFC-0003 §6; FR-S4; M-894; G2)\" , hit . confidence , hit . index , hit . margin) , }) ; } vsa_decision_triple (prim , args , record , & hit) }",
+      "reason": "function body has a semicolon-terminated (value-discarding) statement expression before the tail — a `let`-chain body maps only simple `let x = e;` bindings plus a single trailing expression",
+      "item_name": "prim_vsa_reconstruct"
+    },
+    {
+      "file": "/root/git/isolated/mycelium/crates/mycelium-interp/src/prims.rs",
+      "line": 3169,
+      "col": 1,
+      "category": "MultiStmtBody",
+      "rust_construct": "MultiStmtBody",
+      "snippet": "# [doc = \" `vsa.required_dim : (Binary{W}, Float) → Binary{64}` — the M-131 capacity-bound query\"] # [doc = \" (M-894; RFC-0003 §5): the sufficient dimension `requiredDim(items, δ) = ⌈(2/μ²)·ln(items/δ)⌉`\"] # [doc = \" (μ = 0.1 — the cited Clarkson/Thomas instantiation, `mycelium-vsa::capacity`). The result\"] # [doc = \" carries the kernel's **`Proven`** `CapacityBound` for exactly this (items, dim, δ)\"] # [doc = \" instantiation ([`capacity::proven_capacity_bound`] — the side-condition `dim ≥ requiredDim`\"] # [doc = \" holds *by construction* at the returned dim), so the query is inspectable/EXPLAIN-able: the\"] # [doc = \" `ProvenThm` basis records the citation, μ, and the checked side-condition. Degenerate inputs\"] # [doc = \" — zero items, or δ outside `(0, 1]` — are explicit refusals naming the offense, never the\"] # [doc = \" kernel's `u64::MAX` sentinel (G2). A zero `requiredDim` (items = 1, δ = 1) is disclosed as\"] # [doc = \" the smallest well-formed dimension 1 — still sufficient (the bound is monotone in dim), and\"] # [doc = \" a zero-dimensional hypervector is not a value form.\"] fn prim_vsa_required_dim (prim : & str , args : & [& Value]) -> Result < Value , EvalError > { expect_arity (prim , args , 2) ? ; vsa_operands_exact (prim , args) ? ; let items = as_index (prim , args [0]) ? as u64 ; if items == 0 { return Err (EvalError :: PrimType { prim : prim . to_owned () , why : \"requiredDim is asked for zero items — no dimension certifies an empty bundle \\\n                  (RFC-0003 §5; M-894 — refused, never the u64::MAX sentinel; G2)\" . to_owned () , }) ; } let delta = as_float (prim , args [1]) ? ; if ! (delta . is_finite () && delta > 0.0 && delta <= 1.0) { return Err (EvalError :: PrimType { prim : prim . to_owned () , why : format ! (\"target failure probability δ must be a finite Float in (0, 1], got {delta} — \\\n                 no capacity theorem instantiates outside that range (M-894; refused, never a \\\n                 defaulted δ — G2)\") , }) ; } let required = capacity :: required_dim (items , delta , capacity :: MARGIN_MU) . max (1) ; let bound = capacity :: proven_capacity_bound (items , required , delta) . ok_or_else (| | { EvalError :: PrimType { prim : prim . to_owned () , why : format ! (\"no Proven capacity bound instantiates at (items {items}, dim {required}, \\\n                 δ {delta})\") , } }) ? ; let bits : Vec < bool > = (0 .. 64u32) . rev () . map (| i | (required >> i) & 1 == 1) . collect () ; let meta = Meta :: new (Provenance :: Derived { op : operation_hash (prim) , inputs : args . iter () . map (| v | v . content_hash ()) . collect () , } , GuaranteeStrength :: Proven , Some (bound) , None , None , None ,) . map_err (EvalError :: Wf) ? ; Value :: new (Repr :: Binary { width : 64 } , Payload :: Bits (bits) , meta) . map_err (EvalError :: Wf) }",
+      "reason": "function body has a semicolon-terminated (value-discarding) statement expression before the tail — a `let`-chain body maps only simple `let x = e;` bindings plus a single trailing expression",
+      "item_name": "prim_vsa_required_dim"
+    }
+  ],
+  "total_top_level_items": 128
+}

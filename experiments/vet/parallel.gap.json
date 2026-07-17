@@ -1,0 +1,202 @@
+{
+  "source": "/root/git/isolated/mycelium/crates/mycelium-interp/src/parallel.rs",
+  "emitted_items": [
+    "co-include:Step",
+    "BatchHead",
+    "ParallelPlan",
+    "MIN_BATCH_WIDTH"
+  ],
+  "gaps": [
+    {
+      "file": "/root/git/isolated/mycelium/crates/mycelium-interp/src/parallel.rs",
+      "line": 46,
+      "col": 1,
+      "category": "Import",
+      "rust_construct": "Import",
+      "snippet": "use std :: sync :: atomic :: { AtomicU64 , Ordering } ;",
+      "reason": "`use std.sync.atomic::AtomicU64` — `std.sync.atomic` is not a sibling module OR sibling phylum transpiled in this same batch (an external crate, `std`, or simply out of this batch's target set). Flagged, not guessed (VR-5/G2); `use std.sync.atomic::Ordering` — `std.sync.atomic` is not a sibling module OR sibling phylum transpiled in this same batch (an external crate, `std`, or simply out of this batch's target set). Flagged, not guessed (VR-5/G2)",
+      "item_name": null
+    },
+    {
+      "file": "/root/git/isolated/mycelium/crates/mycelium-interp/src/parallel.rs",
+      "line": 47,
+      "col": 1,
+      "category": "Import",
+      "rust_construct": "Import",
+      "snippet": "use std :: sync :: Arc ;",
+      "reason": "`use std.sync::Arc` — `std.sync` is not a sibling module OR sibling phylum transpiled in this same batch (an external crate, `std`, or simply out of this batch's target set). Flagged, not guessed (VR-5/G2)",
+      "item_name": null
+    },
+    {
+      "file": "/root/git/isolated/mycelium/crates/mycelium-interp/src/parallel.rs",
+      "line": 49,
+      "col": 1,
+      "category": "Import",
+      "rust_construct": "Import",
+      "snippet": "use mycelium_core :: { Alt , CoreValue , Node } ;",
+      "reason": "`use mycelium_core::Alt` — `mycelium_core` is not a sibling module OR sibling phylum transpiled in this same batch (an external crate, `std`, or simply out of this batch's target set). Flagged, not guessed (VR-5/G2); `use mycelium_core::CoreValue` — `mycelium_core` is not a sibling module OR sibling phylum transpiled in this same batch (an external crate, `std`, or simply out of this batch's target set). Flagged, not guessed (VR-5/G2); `use mycelium_core::Node` — `mycelium_core` is not a sibling module OR sibling phylum transpiled in this same batch (an external crate, `std`, or simply out of this batch's target set). Flagged, not guessed (VR-5/G2)",
+      "item_name": null
+    },
+    {
+      "file": "/root/git/isolated/mycelium/crates/mycelium-interp/src/parallel.rs",
+      "line": 50,
+      "col": 1,
+      "category": "Import",
+      "rust_construct": "Import",
+      "snippet": "use mycelium_sched :: scheduler :: Scheduler ;",
+      "reason": "`use mycelium_sched.scheduler::Scheduler` — `mycelium_sched.scheduler` is not a sibling module OR sibling phylum transpiled in this same batch (an external crate, `std`, or simply out of this batch's target set). Flagged, not guessed (VR-5/G2)",
+      "item_name": null
+    },
+    {
+      "file": "/root/git/isolated/mycelium/crates/mycelium-interp/src/parallel.rs",
+      "line": 51,
+      "col": 1,
+      "category": "Import",
+      "rust_construct": "Import",
+      "snippet": "use mycelium_workstack :: { ensure_sufficient_stack , RecursionBudget } ;",
+      "reason": "`use mycelium_workstack::ensure_sufficient_stack` — `mycelium_workstack` is not a sibling module OR sibling phylum transpiled in this same batch (an external crate, `std`, or simply out of this batch's target set). Flagged, not guessed (VR-5/G2); `use mycelium_workstack::RecursionBudget` — `mycelium_workstack` is not a sibling module OR sibling phylum transpiled in this same batch (an external crate, `std`, or simply out of this batch's target set). Flagged, not guessed (VR-5/G2)",
+      "item_name": null
+    },
+    {
+      "file": "/root/git/isolated/mycelium/crates/mycelium-interp/src/parallel.rs",
+      "line": 53,
+      "col": 1,
+      "category": "Import",
+      "rust_construct": "Import",
+      "snippet": "use crate :: { collect_values , node_to_core_value , EvalError , Interpreter , Step } ;",
+      "reason": "`use ::collect_values` — `collect_values` is not among sibling ``'s successfully-emitted surface in this batch (the sibling file itself gapped it rather than emitting it). Flagged, not guessed (VR-5/G2)",
+      "item_name": "co-include:Step"
+    },
+    {
+      "file": "/root/git/isolated/mycelium/crates/mycelium-interp/src/parallel.rs",
+      "line": 53,
+      "col": 1,
+      "category": "Import",
+      "rust_construct": "Import",
+      "snippet": "use crate :: { collect_values , node_to_core_value , EvalError , Interpreter , Step } ;",
+      "reason": "`use ::node_to_core_value` — `node_to_core_value` is not among sibling ``'s successfully-emitted surface in this batch (the sibling file itself gapped it rather than emitting it). Flagged, not guessed (VR-5/G2)",
+      "item_name": "co-include:Step"
+    },
+    {
+      "file": "/root/git/isolated/mycelium/crates/mycelium-interp/src/parallel.rs",
+      "line": 53,
+      "col": 1,
+      "category": "Import",
+      "rust_construct": "Import",
+      "snippet": "use crate :: { collect_values , node_to_core_value , EvalError , Interpreter , Step } ;",
+      "reason": "`use ::EvalError` — `EvalError` is not among sibling ``'s successfully-emitted surface in this batch (the sibling file itself gapped it rather than emitting it). Flagged, not guessed (VR-5/G2)",
+      "item_name": "co-include:Step"
+    },
+    {
+      "file": "/root/git/isolated/mycelium/crates/mycelium-interp/src/parallel.rs",
+      "line": 53,
+      "col": 1,
+      "category": "Import",
+      "rust_construct": "Import",
+      "snippet": "use crate :: { collect_values , node_to_core_value , EvalError , Interpreter , Step } ;",
+      "reason": "`use ::Interpreter` — `Interpreter` is not among sibling ``'s successfully-emitted surface in this batch (the sibling file itself gapped it rather than emitting it). Flagged, not guessed (VR-5/G2)",
+      "item_name": "co-include:Step"
+    },
+    {
+      "file": "/root/git/isolated/mycelium/crates/mycelium-interp/src/parallel.rs",
+      "line": 55,
+      "col": 1,
+      "category": "MultiStmtBody",
+      "rust_construct": "MultiStmtBody",
+      "snippet": "# [doc = \" Whether `node` is a **provably pure** (effect-free) Core IR fragment — the structural,\"] # [doc = \" conservative, EXPLAIN-able gate. See the module docs for the grounding of each case.\"] # [doc = \" All-or-nothing over the whole subtree: a single impure/opaque leaf (a `wild:` op, or any `Swap`)\"] # [doc = \" makes the **entire** fragment ineligible, never just the leaf.\"] # [must_use] pub fn is_pure (node : & Node) -> bool { let mut work : Vec < & Node > = vec ! [node] ; while let Some (n) = work . pop () { match n { Node :: Const (_) | Node :: Var (_) | Node :: Lam { .. } => { } Node :: Op { prim , args } => { if prim . starts_with (\"wild:\") { return false ; } work . extend (args . iter ()) ; } Node :: Swap { .. } => return false , Node :: Let { bound , body , .. } => { work . push (bound) ; work . push (body) ; } Node :: Construct { args , .. } => work . extend (args . iter ()) , Node :: Match { scrutinee , alts , default , } => { work . push (scrutinee) ; for a in alts { match a { Alt :: Ctor { body , .. } | Alt :: Lit { body , .. } => work . push (body) , } } if let Some (d) = default . as_deref () { work . push (d) ; } } Node :: App { func , arg } => { work . push (func) ; work . push (arg) ; } Node :: Fix { body , .. } => work . push (body) , Node :: FixGroup { defs , body } => { for (_ , d) in defs { work . push (d) ; } work . push (body) ; } } } true }",
+      "reason": "`let` binding uses an unsupported pattern (only simple `let x = e;` is supported)",
+      "item_name": "is_pure"
+    },
+    {
+      "file": "/root/git/isolated/mycelium/crates/mycelium-interp/src/parallel.rs",
+      "line": 118,
+      "col": 1,
+      "category": "DeriveSatisfied",
+      "rust_construct": "DeriveSatisfied",
+      "snippet": "# [doc = \" The head node of a parallelized top-level batch — the \\\"independent pure elements\\\" M-862 fans out.\"] # [derive (Debug , Clone , Copy , PartialEq , Eq)] pub enum BatchHead { # [doc = \" A top-level [`Node::Op`]: its argument list is the batch; the batch results are the prim's\"] # [doc = \" operands.\"] Op , # [doc = \" A top-level [`Node::Construct`]: its argument list is the batch; the batch results are the\"] # [doc = \" datum's fields.\"] Construct , }",
+      "reason": "enum `BatchHead` derive(Clone) is a satisfied no-op under Mycelium's value semantics (ADR-003 — every value already copies structurally; DN-128 §6.1) — not emitted as an impl, not a gap",
+      "item_name": "BatchHead"
+    },
+    {
+      "file": "/root/git/isolated/mycelium/crates/mycelium-interp/src/parallel.rs",
+      "line": 118,
+      "col": 1,
+      "category": "DeriveSatisfied",
+      "rust_construct": "DeriveSatisfied",
+      "snippet": "# [doc = \" The head node of a parallelized top-level batch — the \\\"independent pure elements\\\" M-862 fans out.\"] # [derive (Debug , Clone , Copy , PartialEq , Eq)] pub enum BatchHead { # [doc = \" A top-level [`Node::Op`]: its argument list is the batch; the batch results are the prim's\"] # [doc = \" operands.\"] Op , # [doc = \" A top-level [`Node::Construct`]: its argument list is the batch; the batch results are the\"] # [doc = \" datum's fields.\"] Construct , }",
+      "reason": "enum `BatchHead` derive(Copy) is a satisfied no-op under Mycelium's value semantics (ADR-003 — every value already copies structurally; DN-128 §6.1) — not emitted as an impl, not a gap",
+      "item_name": "BatchHead"
+    },
+    {
+      "file": "/root/git/isolated/mycelium/crates/mycelium-interp/src/parallel.rs",
+      "line": 118,
+      "col": 1,
+      "category": "DeriveSatisfied",
+      "rust_construct": "DeriveSatisfied",
+      "snippet": "# [doc = \" The head node of a parallelized top-level batch — the \\\"independent pure elements\\\" M-862 fans out.\"] # [derive (Debug , Clone , Copy , PartialEq , Eq)] pub enum BatchHead { # [doc = \" A top-level [`Node::Op`]: its argument list is the batch; the batch results are the prim's\"] # [doc = \" operands.\"] Op , # [doc = \" A top-level [`Node::Construct`]: its argument list is the batch; the batch results are the\"] # [doc = \" datum's fields.\"] Construct , }",
+      "reason": "enum `BatchHead` derive(Eq): covered by co-occurring PartialEq → `fn eq_BatchHead` (product-row collision policy; DN-128 / ONESHOT C2) — not a second emission",
+      "item_name": "BatchHead"
+    },
+    {
+      "file": "/root/git/isolated/mycelium/crates/mycelium-interp/src/parallel.rs",
+      "line": 129,
+      "col": 1,
+      "category": "NamedFieldDrop",
+      "rust_construct": "NamedFieldDrop",
+      "snippet": "# [doc = \" The **reified, EXPLAIN-able** decision of what (if anything) [`Interpreter::eval_core_parallel`]\"] # [doc = \" will parallelize for a given fragment — never a silent/opaque choice (house rule #2 / G2). A\"] # [doc = \" caller/tool can ask *exactly* what the parallel evaluator intends to do before it runs.\"] # [derive (Debug , Clone , PartialEq , Eq)] pub enum ParallelPlan { # [doc = \" The fragment is **impure** (a `wild:` op or a `Swap` appears somewhere) — evaluated wholly\"] # [doc = \" sequentially by [`Interpreter::eval_core`], never reordered.\"] SequentialImpure , # [doc = \" The fragment is pure but its **outermost node is not an independent-argument batch worth\"] # [doc = \" parallelizing** (fewer than two top-level arguments, or a `Let`/`Match`/`App`/`Fix`/… head) —\"] # [doc = \" evaluated wholly sequentially by [`Interpreter::eval_core`].\"] SequentialNoBatch , # [doc = \" The outermost node is a pure `Op`/`Construct` with **≥2 independent arguments**; those\"] # [doc = \" arguments are the batch dispatched across [`Scheduler::run_indexed`] (a single, non-nested\"] # [doc = \" fan-out), each evaluated sequentially within its worker.\"] TopLevelBatch { # [doc = \" Which node family heads the batch.\"] head : BatchHead , # [doc = \" The batch width (number of independent arguments fanned out).\"] width : usize , } , }",
+      "reason": "enum `ParallelPlan` variant `TopLevelBatch` named field(s) `head, width` emitted positionally as `TopLevelBatch(BatchHead, Binary{64})` — Mycelium's `constructor` is positional-only (no record surface); product structure preserved, field names dropped",
+      "item_name": "ParallelPlan"
+    },
+    {
+      "file": "/root/git/isolated/mycelium/crates/mycelium-interp/src/parallel.rs",
+      "line": 129,
+      "col": 1,
+      "category": "DeriveSatisfied",
+      "rust_construct": "DeriveSatisfied",
+      "snippet": "# [doc = \" The **reified, EXPLAIN-able** decision of what (if anything) [`Interpreter::eval_core_parallel`]\"] # [doc = \" will parallelize for a given fragment — never a silent/opaque choice (house rule #2 / G2). A\"] # [doc = \" caller/tool can ask *exactly* what the parallel evaluator intends to do before it runs.\"] # [derive (Debug , Clone , PartialEq , Eq)] pub enum ParallelPlan { # [doc = \" The fragment is **impure** (a `wild:` op or a `Swap` appears somewhere) — evaluated wholly\"] # [doc = \" sequentially by [`Interpreter::eval_core`], never reordered.\"] SequentialImpure , # [doc = \" The fragment is pure but its **outermost node is not an independent-argument batch worth\"] # [doc = \" parallelizing** (fewer than two top-level arguments, or a `Let`/`Match`/`App`/`Fix`/… head) —\"] # [doc = \" evaluated wholly sequentially by [`Interpreter::eval_core`].\"] SequentialNoBatch , # [doc = \" The outermost node is a pure `Op`/`Construct` with **≥2 independent arguments**; those\"] # [doc = \" arguments are the batch dispatched across [`Scheduler::run_indexed`] (a single, non-nested\"] # [doc = \" fan-out), each evaluated sequentially within its worker.\"] TopLevelBatch { # [doc = \" Which node family heads the batch.\"] head : BatchHead , # [doc = \" The batch width (number of independent arguments fanned out).\"] width : usize , } , }",
+      "reason": "enum `ParallelPlan` derive(Clone) is a satisfied no-op under Mycelium's value semantics (ADR-003 — every value already copies structurally; DN-128 §6.1) — not emitted as an impl, not a gap",
+      "item_name": "ParallelPlan"
+    },
+    {
+      "file": "/root/git/isolated/mycelium/crates/mycelium-interp/src/parallel.rs",
+      "line": 129,
+      "col": 1,
+      "category": "DeriveSatisfied",
+      "rust_construct": "DeriveSatisfied",
+      "snippet": "# [doc = \" The **reified, EXPLAIN-able** decision of what (if anything) [`Interpreter::eval_core_parallel`]\"] # [doc = \" will parallelize for a given fragment — never a silent/opaque choice (house rule #2 / G2). A\"] # [doc = \" caller/tool can ask *exactly* what the parallel evaluator intends to do before it runs.\"] # [derive (Debug , Clone , PartialEq , Eq)] pub enum ParallelPlan { # [doc = \" The fragment is **impure** (a `wild:` op or a `Swap` appears somewhere) — evaluated wholly\"] # [doc = \" sequentially by [`Interpreter::eval_core`], never reordered.\"] SequentialImpure , # [doc = \" The fragment is pure but its **outermost node is not an independent-argument batch worth\"] # [doc = \" parallelizing** (fewer than two top-level arguments, or a `Let`/`Match`/`App`/`Fix`/… head) —\"] # [doc = \" evaluated wholly sequentially by [`Interpreter::eval_core`].\"] SequentialNoBatch , # [doc = \" The outermost node is a pure `Op`/`Construct` with **≥2 independent arguments**; those\"] # [doc = \" arguments are the batch dispatched across [`Scheduler::run_indexed`] (a single, non-nested\"] # [doc = \" fan-out), each evaluated sequentially within its worker.\"] TopLevelBatch { # [doc = \" Which node family heads the batch.\"] head : BatchHead , # [doc = \" The batch width (number of independent arguments fanned out).\"] width : usize , } , }",
+      "reason": "enum `ParallelPlan` derive(Eq): covered by co-occurring PartialEq → `fn eq_ParallelPlan` (product-row collision policy; DN-128 / ONESHOT C2) — not a second emission",
+      "item_name": "ParallelPlan"
+    },
+    {
+      "file": "/root/git/isolated/mycelium/crates/mycelium-interp/src/parallel.rs",
+      "line": 156,
+      "col": 1,
+      "category": "MultiStmtBody",
+      "rust_construct": "MultiStmtBody",
+      "snippet": "# [doc = \" Compute the [`ParallelPlan`] for `node` — the explicit, side-effect-free decision procedure\"] # [doc = \" [`Interpreter::eval_core_parallel`] follows (and that a caller can inspect up front). Looks at the\"] # [doc = \" **outermost node only** (the interim top-level bound; see module docs).\"] # [must_use] pub fn plan_parallel (node : & Node) -> ParallelPlan { if ! is_pure (node) { return ParallelPlan :: SequentialImpure ; } match node { Node :: Op { args , .. } if args . len () >= MIN_BATCH_WIDTH => ParallelPlan :: TopLevelBatch { head : BatchHead :: Op , width : args . len () , } , Node :: Construct { args , .. } if args . len () >= MIN_BATCH_WIDTH => { ParallelPlan :: TopLevelBatch { head : BatchHead :: Construct , width : args . len () , } } _ => ParallelPlan :: SequentialNoBatch , } }",
+      "reason": "function body has a semicolon-terminated (value-discarding) statement expression before the tail — a `let`-chain body maps only simple `let x = e;` bindings plus a single trailing expression",
+      "item_name": "plan_parallel"
+    },
+    {
+      "file": "/root/git/isolated/mycelium/crates/mycelium-interp/src/parallel.rs",
+      "line": 179,
+      "col": 1,
+      "category": "Other",
+      "rust_construct": "Other",
+      "snippet": "# [doc = \" Tick the shared fuel counter (an [`AtomicU64`] so concurrent batch workers share one budget),\"] # [doc = \" returning [`EvalError::FuelExhausted`] on underflow — never silent, and never a per-worker budget\"] # [doc = \" that could let two threads jointly overrun the declared total (RFC-0007 §4.5 CakeML clock).\"] fn tick (fuel : & AtomicU64) -> Result < () , EvalError > { fuel . fetch_update (Ordering :: Relaxed , Ordering :: Relaxed , | f | f . checked_sub (1)) . map (| _ | ()) . map_err (| _ | EvalError :: FuelExhausted) }",
+      "reason": "method call `.map_err(...)` has no proven-emitted free-fn referent in this file (neither a D4-mangled inherent `Type__map_err` nor a bare inherent recorded by this file's left-to-right pass, nor a prim_map / combinator row). Emitting bare `map_err(recv, …)` would fabricate an unknown prim and file-poison myc-check (G-β Rank A / G2/VR-5; residual when the method body itself gapped — e.g. M-1037 `.to_vec()` inside `read_to_end` — so the declaration was never registered)",
+      "item_name": "tick"
+    },
+    {
+      "file": "/root/git/isolated/mycelium/crates/mycelium-interp/src/parallel.rs",
+      "line": 188,
+      "col": 1,
+      "category": "Impl",
+      "rust_construct": "Impl",
+      "snippet": "impl Interpreter { # [doc = \" Evaluate `node` to a [`CoreValue`] with the **same result** as [`Interpreter::eval_core`],\"] # [doc = \" except that when the fragment's [`plan_parallel`] is a [`ParallelPlan::TopLevelBatch`] the\"] # [doc = \" outermost independent argument batch is evaluated **in parallel** on the M-861\"] # [doc = \" [`Scheduler`] — a single, non-nested [`Scheduler::run_indexed`] fan-out (the interim\"] # [doc = \" top-level bound; see module docs). Observable behaviour is identical to the sequential\"] # [doc = \" reference (RT2-preserving): [`Scheduler::run_indexed`] returns outputs in **spawn order**, so\"] # [doc = \" the result is deterministic regardless of the steal schedule, and each argument is reduced by\"] # [doc = \" the trusted sequential [`Interpreter::step`]. Any fragment that is impure, or whose outermost\"] # [doc = \" node is not a ≥2-argument `Op`/`Construct`, falls back **wholesale** to\"] # [doc = \" [`Interpreter::eval_core`] (never a partial/mixed order — G2).\"] # [doc = \"\"] # [doc = \" **Empirical, differential-checked** (M-862): `eval_core_parallel(e) == eval_core(e)` for `e`\"] # [doc = \" in the pure fragment is checked over a corpus in `src/tests/parallel.rs`, not proven.\"] pub fn eval_core_parallel (& self , node : & Node) -> Result < CoreValue , EvalError > { match plan_parallel (node) { ParallelPlan :: SequentialImpure | ParallelPlan :: SequentialNoBatch => { self . eval_core (node) } ParallelPlan :: TopLevelBatch { head , .. } => self . eval_top_batch (node , head) , } } # [doc = \" Evaluate `node` to a representation [`crate::Value`], mirroring [`Interpreter::eval`] — see\"] # [doc = \" [`Interpreter::eval_core_parallel`] for the parallel-evaluation contract.\"] pub fn eval_parallel (& self , node : & Node) -> Result < crate :: Value , EvalError > { match self . eval_core_parallel (node) ? { CoreValue :: Repr (v) => Ok (v) , CoreValue :: Data (_) => Err (EvalError :: DataResult) , } } # [doc = \" Fan the outermost `Op`/`Construct` argument batch across the scheduler (a single, non-nested\"] # [doc = \" `run_indexed`), then recombine. Each argument is reduced to a normal-form [`Node`] by the\"] # [doc = \" trusted sequential small-step interpreter ([`Interpreter::eval_to_normal_node`]) inside its\"] # [doc = \" worker — so this introduces **no** second semantics, only scheduling. Only ever called for a\"] # [doc = \" [`ParallelPlan::TopLevelBatch`] node (a pure `Op`/`Construct` with ≥2 args).\"] # [doc = \"\"] # [doc = \" # Exact-equivalence discipline (fixes a fuel-starvation divergence, M-862 follow-up)\"] # [doc = \" The trusted sequential `eval_core`/`step` is strict left-to-right and **short-circuits**: it\"] # [doc = \" stops at the first erroring argument and never spends fuel on the ones after it. Dispatching\"] # [doc = \" every argument as a concurrent job against one shared fuel counter breaks that: a\"] # [doc = \" fuel-hungry/non-terminating sibling can drain the shared budget and starve an *earlier* arg\"] # [doc = \" into `FuelExhausted` where the sequential reference would have reached a deterministic\"] # [doc = \" non-fuel error first (or vice versa) — schedule-dependent, so it can even disagree with\"] # [doc = \" itself run to run.\"] # [doc = \"\"] # [doc = \" The fix keeps the parallel speedup exactly where it is safe and defers to the reference\"] # [doc = \" everywhere it might not be:\"] # [doc = \" - Snapshot `F0 = self.fuel` and run the batch on a **separate** clone of it (never the real\"] # [doc = \"   counter — there is nothing to corrupt if the attempt is discarded).\"] # [doc = \" - If **every** argument job returns `Ok` (the clone was never exhausted and no argument\"] # [doc = \"   errored), the parallel run cannot have diverged: sequential would have run the same\"] # [doc = \"   arguments to the same values, spending the same total fuel (order-independent for a simple\"] # [doc = \"   decrement-by-1 pool once every request succeeds). Commit that result.\"] # [doc = \" - If **any** argument job returns `Err` (including `FuelExhausted`) the parallel attempt may\"] # [doc = \"   have evaluated (or starved) siblings the sequential reference would never have reached —\"] # [doc = \"   **discard it entirely** (never commit its partially-consumed fuel) and re-evaluate the whole\"] # [doc = \"   node via the trusted sequential [`Interpreter::eval_core`] on a fresh `F0`. That is the\"] # [doc = \"   authoritative, deterministic answer.\"] fn eval_top_batch (& self , node : & Node , head : BatchHead) -> Result < CoreValue , EvalError > { let args : & [Node] = match node { Node :: Op { args , .. } | Node :: Construct { args , .. } => args , _ => { return Err (EvalError :: DataMalformed { why : \"eval_top_batch reached a non-Op/Construct head\" . to_owned () , }) } } ; let fuel = Arc :: new (AtomicU64 :: new (self . fuel)) ; let interp = Arc :: new (self . clone ()) ; let jobs : Vec < _ > = args . iter () . map (| arg | { let interp = Arc :: clone (& interp) ; let fuel = Arc :: clone (& fuel) ; let arg = arg . clone () ; move | | interp . eval_to_normal_node (& arg , & fuel) }) . collect () ; let results : Vec < Result < Node , EvalError > > = Scheduler :: new () . run_indexed (jobs , None , None) ; if results . iter () . any (Result :: is_err) { return self . eval_core (node) ; } let normals : Vec < Node > = results . into_iter () . map (| r | r . expect (\"checked all Ok above\")) . collect () ; match head { BatchHead :: Op => { let prim = match node { Node :: Op { prim , .. } => prim , _ => unreachable ! (\"head == Op ⇒ node is Op\") , } ; let values = collect_values (& normals) ? ; let f = self . prims . get (prim) . ok_or_else (| | EvalError :: UnknownPrim (prim . clone ())) ? ; let result = f (prim , & values) ? ; tick (& fuel) ? ; Ok (CoreValue :: Repr (result)) } BatchHead :: Construct => { let ctor = match node { Node :: Construct { ctor , .. } => ctor , _ => unreachable ! (\"head == Construct ⇒ node is Construct\") , } ; let rebuilt = Node :: Construct { ctor : ctor . clone () , args : normals , } ; node_to_core_value (& rebuilt , & RecursionBudget :: default ()) } } } # [doc = \" Reduce `node` to a **normal-form [`Node`]** (a `Const`, or a saturated `Construct` of values)\"] # [doc = \" by iterating the trusted sequential small-step [`Interpreter::step`] under the shared `fuel`\"] # [doc = \" clock. This is the exact [`Interpreter::eval_core`] loop, returning the normal-form node\"] # [doc = \" instead of reading it off — so a batch worker uses the trusted semantics verbatim, never a\"] # [doc = \" reimplementation. Runs entirely on one thread (no nested parallelism).\"] fn eval_to_normal_node (& self , node : & Node , fuel : & AtomicU64) -> Result < Node , EvalError > { let sizing = RecursionBudget :: default () ; ensure_sufficient_stack (& sizing , move | | { let mut current = node . clone () ; loop { match self . step (& current) ? { Step :: Value => return Ok (current) , Step :: Next (next) => { tick (fuel) ? ; current = * next ; } } } }) } }",
+      "reason": "no member of this impl block could be transpiled (4 sub-issue(s)): impl method `eval_core_parallel` body: method call `.eval_core(...)` has no proven-emitted free-fn referent in this file (neither a D4-mangled inherent `Type__eval_core` nor a bare inherent recorded by this file's left-to-right pass, nor a prim_map / combinator row). Emitting bare `eval_core(recv, …)` would fabricate an unknown prim and file-poison myc-check (G-β Rank A / G2/VR-5; residual when the method body itself gapped — e.g. M-1037 `.to_vec()` inside `read_to_end` — so the declaration was never registered); impl method `eval_parallel` signature: qualified type path `crate :: Value` — collapsing to its last segment would risk colliding with an unrelated same-named local type (e.g. `std::cmp::Ordering` vs a local `Ordering`); left an explicit gap rather than guessed (VR-5); impl method `eval_top_batch` body: `let` binding uses an unsupported pattern (only simple `let x = e;` is supported); impl method `eval_to_normal_node` body: qualified/associated-function call `RecursionBudget :: default` did not resolve to a known-emitted associated fn — Mycelium calls are bare identifiers, and the only sound surface form for `Type::method(...)` is the mangled `Type__method` name the declaration side already emits for a receiver-less inherent-impl associated fn (DN-34 §8.13/8.14), referenced only when that exact declaration is PROVEN present (same-file, or a resolved M-1084 cross-nodule sibling). A primitive/std associated fn with no emitted decl (e.g. `i128::try_from`), an unresolved type, or a `self`-receiving method (excluded by construction — it stays reachable only from its own bare call site) all gap here rather than fabricate a call (G2/VR-5, DN-133)",
+      "item_name": "Interpreter"
+    }
+  ],
+  "total_top_level_items": 13
+}

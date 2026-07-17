@@ -1,0 +1,81 @@
+// nodule: interp.parallel
+// Parallel evaluation of **provably-pure** (effect-free) Core IR fragments (M-862; RFC-0008 §4.2;
+// ADR-034; DN-25). This is a **perf path**, validated against the sequential reference by a
+// differential — never a second semantics: [`Interpreter::eval_core`]/[`Interpreter::step`] stay
+// the trusted, small-step meaning of a program (RFC-0008 §4.2, mirroring the AOT path's
+// relationship to the interpreter, KC-3 — concurrency adds *scheduling*, never new *meaning*).
+//
+// # What gets parallelized — the **bounded, top-level-only** plan ([`plan_parallel`])
+// Only the **outermost independent-argument batch** of a pure fragment is fanned out: the direct
+// argument list of a top-level [`Node::Op`] or [`Node::Construct`] (the "independent pure Construct
+// elements" the M-862 issue names). Each of those arguments is then evaluated **sequentially,
+// wholly inside its own worker**, by the trusted small-step interpreter ([`Interpreter::step`]) —
+// with **no nested** [`Scheduler::run_indexed`]. Everything else (a `Let`/`Match`/`App`/`Fix` head,
+// or an `Op`/`Construct` with fewer than two arguments) is evaluated **wholly sequentially** through
+// the trusted [`Interpreter::eval_core`]. The selection is reified in [`ParallelPlan`] — explicit
+// and EXPLAIN-able, never a silent reorder (house rule #2 / G2).
+//
+// **Why top-level only (interim bound, VR-5/G2).** The relocated M-709/M-861 [`Scheduler`]
+// ([`mycelium_sched`]) spawns **fresh OS threads per [`Scheduler::run_indexed`] call** (the
+// persistent, bounded work-stealing pool is a deferred follow-up). Fanning parallelism *recursively*
+// at every `Op`/`Construct`/`App` node would therefore spawn `O(depth × fan-out)` OS threads — a
+// resource-exhaustion hazard, not a correctness one, but real. Bounding the fan-out to the single
+// outermost batch caps total spawned threads at that batch's width, which is safe and predictable.
+// **This is an explicit interim measure**; once the pooled scheduler lands, the bound can widen
+// (the differential/EXPLAIN contract here is unaffected by *how much* is parallelized).
+//
+// # The purity gate ([`is_pure`])
+// [`is_pure`] is a **whole-fragment, structural** (syntactic) predicate, deliberately conservative
+// and all-or-nothing: if *any* subterm is not provably effect-free, the *whole* fragment is
+// evaluated by the ordinary sequential [`Interpreter::eval_core`] — never a partial/mixed order.
+// Grounding for "provably pure":
+// - Every built-in [`crate::prims::PrimFn`] is documented pure ([`crate::prims`] module docs) —
+//   **except** the reserved `wild:`-namespaced host-capability escape hatch (RFC-0028 §4.3), the
+//   *only* place a `Node::Op` reaches an arbitrary, potentially-effectful host operation. `is_pure`
+//   therefore excludes any `Op` whose `prim` starts with `"wild:"`.
+// - [`Node::Swap`] delegates to a runtime-supplied `Box<dyn SwapEngine>` (crate::swap) whose
+//   concrete behaviour cannot be statically inspected from a `Node` alone. `is_pure` conservatively
+//   treats **every** `Swap` node as an opacity boundary — never assumed pure, even though the
+//   shipped [`crate::swap::IdentitySwapEngine`] happens to be.
+// - `Const`/`Var`/`Lam` are trivially pure (no reduction).
+//
+// # Tag: Empirical (differential-checked)
+// The equivalence `eval_core_parallel(e) == eval_core(e)` for `e` in the pure fragment is checked by
+// a corpus differential (`src/tests/parallel.rs`), not proven — tagged **Empirical** on the
+// transparency lattice (never upgraded to `Proven` without a checked side-condition, VR-5).
+// @summary: best-effort transpilation via mycelium-transpile (M-873). Declared,
+// unvalidated — no Mycelium parser/typechecker confirms this output; see the
+// accompanying .gap.json for every construct this pass could not express.
+nodule interp.parallel;
+
+// EXPLAIN (L2-B/DN-124): Declared co-include of batch-sibling type surface (homes: interp) so single-file oracle is self-contained — not a language `use` identity, not a short-form path collapse (M-1084 full path retained as provenance). Transitive type deps in the same batch are co-included. G2/VR-5.
+type Step = Value | Next(Box[Node]);
+
+// The head node of a parallelized top-level batch — the "independent pure elements" M-862 fans out.
+pub type BatchHead = Op | Construct;
+
+impl Show[BatchHead] for BatchHead {
+  fn render(x: BatchHead) => Bytes =
+    match x { Op => "Op", Construct => "Construct" };
+};
+
+fn eq_BatchHead(a: BatchHead, b: BatchHead) => Binary{1} =
+  match a { Op => match b { Op => 0b1, _ => 0b0 }, Construct => match b { Construct => 0b1, _ => 0b0 } };
+
+// The **reified, EXPLAIN-able** decision of what (if anything) [`Interpreter::eval_core_parallel`]
+// will parallelize for a given fragment — never a silent/opaque choice (house rule #2 / G2). A
+// caller/tool can ask *exactly* what the parallel evaluator intends to do before it runs.
+pub type ParallelPlan = SequentialImpure | SequentialNoBatch | TopLevelBatch(BatchHead, Binary{64});
+
+impl Show[ParallelPlan] for ParallelPlan {
+  fn render(x: ParallelPlan) => Bytes =
+    match x { SequentialImpure => "SequentialImpure", SequentialNoBatch => "SequentialNoBatch", TopLevelBatch(p0, p1) => bytes_concat(bytes_concat(bytes_concat(bytes_concat("TopLevelBatch(", render(p0)), ", "), render(p1)), ")") };
+};
+
+fn eq_ParallelPlan(a: ParallelPlan, b: ParallelPlan) => Binary{1} =
+  match a { SequentialImpure => match b { SequentialImpure => 0b1, _ => 0b0 }, SequentialNoBatch => match b { SequentialNoBatch => 0b1, _ => 0b0 }, TopLevelBatch(p0, p1) => match b { TopLevelBatch(q0, q1) => and(eq_BatchHead(p0, q0), eq(p1, q1)), _ => 0b0 } };
+
+// The number of independent top-level arguments a fragment must have before the batch is fanned out
+// rather than run sequentially. Below this, the scheduling overhead is not worth a thread.
+// Declared: co-emitted private const as zero-arg fn returning a BinLit — Mycelium has no const item production (`item` covers use/default/type/trait/impl/fn/object/lower/derive only); hand-port precedent `max_expr_depth()` (ORACLE-R1 A4; G2/VR-5: value from the Rust initializer or a known workspace-floor path, never fabricated). Use sites rewrite `NAME` → `NAME()`.
+fn MIN_BATCH_WIDTH() => Binary{64} = 0b0000_0000_0000_0000_0000_0000_0000_0000_0000_0000_0000_0000_0000_0000_0000_0010; // 2

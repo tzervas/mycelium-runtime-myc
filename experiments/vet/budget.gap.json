@@ -1,0 +1,181 @@
+{
+  "source": "/root/git/isolated/mycelium/crates/mycelium-interp/src/budget.rs",
+  "emitted_items": [
+    "EffectKind",
+    "EffectBudget",
+    "EffectBudgetExhausted"
+  ],
+  "gaps": [
+    {
+      "file": "/root/git/isolated/mycelium/crates/mycelium-interp/src/budget.rs",
+      "line": 21,
+      "col": 1,
+      "category": "Import",
+      "rust_construct": "Import",
+      "snippet": "use std :: collections :: BTreeMap ;",
+      "reason": "`use std.collections::BTreeMap` — `std.collections` is not a sibling module OR sibling phylum transpiled in this same batch (an external crate, `std`, or simply out of this batch's target set). Flagged, not guessed (VR-5/G2)",
+      "item_name": null
+    },
+    {
+      "file": "/root/git/isolated/mycelium/crates/mycelium-interp/src/budget.rs",
+      "line": 22,
+      "col": 1,
+      "category": "Import",
+      "rust_construct": "Import",
+      "snippet": "use std :: fmt ;",
+      "reason": "`use std::fmt` — `std` is not a sibling module OR sibling phylum transpiled in this same batch (an external crate, `std`, or simply out of this batch's target set). Flagged, not guessed (VR-5/G2)",
+      "item_name": null
+    },
+    {
+      "file": "/root/git/isolated/mycelium/crates/mycelium-interp/src/budget.rs",
+      "line": 24,
+      "col": 1,
+      "category": "DeriveSatisfied",
+      "rust_construct": "DeriveSatisfied",
+      "snippet": "# [doc = \" A closed kernel of effect **kinds** (RFC-0014 §4.5 I3) plus user-declared names. Coarse by design\"] # [doc = \" (KISS/YAGNI) — a declared *set*, not effect-row polymorphism (§9).\"] # [derive (Debug , Clone , PartialEq , Eq , PartialOrd , Ord , Hash)] pub enum EffectKind { # [doc = \" Re-attempting a fallible operation.\"] Retry , # [doc = \" Allocating memory.\"] Alloc , # [doc = \" Input/output.\"] Io , # [doc = \" Triggering a further error/handler (a cascade).\"] Cascade , # [doc = \" Consuming a time/fuel-style clock.\"] Time , # [doc = \" A downstream user-declared effect (still a name in a known set — never `eval`-ed).\"] Named (String) , }",
+      "reason": "enum `EffectKind` derive(Clone) is a satisfied no-op under Mycelium's value semantics (ADR-003 — every value already copies structurally; DN-128 §6.1) — not emitted as an impl, not a gap",
+      "item_name": "EffectKind"
+    },
+    {
+      "file": "/root/git/isolated/mycelium/crates/mycelium-interp/src/budget.rs",
+      "line": 24,
+      "col": 1,
+      "category": "DeriveSatisfied",
+      "rust_construct": "DeriveSatisfied",
+      "snippet": "# [doc = \" A closed kernel of effect **kinds** (RFC-0014 §4.5 I3) plus user-declared names. Coarse by design\"] # [doc = \" (KISS/YAGNI) — a declared *set*, not effect-row polymorphism (§9).\"] # [derive (Debug , Clone , PartialEq , Eq , PartialOrd , Ord , Hash)] pub enum EffectKind { # [doc = \" Re-attempting a fallible operation.\"] Retry , # [doc = \" Allocating memory.\"] Alloc , # [doc = \" Input/output.\"] Io , # [doc = \" Triggering a further error/handler (a cascade).\"] Cascade , # [doc = \" Consuming a time/fuel-style clock.\"] Time , # [doc = \" A downstream user-declared effect (still a name in a known set — never `eval`-ed).\"] Named (String) , }",
+      "reason": "enum `EffectKind` derive(Eq): covered by co-occurring PartialEq → `fn eq_EffectKind` (product-row collision policy; DN-128 / ONESHOT C2) — not a second emission",
+      "item_name": "EffectKind"
+    },
+    {
+      "file": "/root/git/isolated/mycelium/crates/mycelium-interp/src/budget.rs",
+      "line": 24,
+      "col": 1,
+      "category": "DeriveAttr",
+      "rust_construct": "DeriveAttr",
+      "snippet": "# [doc = \" A closed kernel of effect **kinds** (RFC-0014 §4.5 I3) plus user-declared names. Coarse by design\"] # [doc = \" (KISS/YAGNI) — a declared *set*, not effect-row polymorphism (§9).\"] # [derive (Debug , Clone , PartialEq , Eq , PartialOrd , Ord , Hash)] pub enum EffectKind { # [doc = \" Re-attempting a fallible operation.\"] Retry , # [doc = \" Allocating memory.\"] Alloc , # [doc = \" Input/output.\"] Io , # [doc = \" Triggering a further error/handler (a cascade).\"] Cascade , # [doc = \" Consuming a time/fuel-style clock.\"] Time , # [doc = \" A downstream user-declared effect (still a name in a known set — never `eval`-ed).\"] Named (String) , }",
+      "reason": "enum `EffectKind` derive(...) names PartialOrd, Ord, Hash not in the DN-128 enum-derive set this leaf builds (Debug/PartialEq/Clone/Copy recognized; bare Eq is a satisfied co-occurrence note; Hash/PartialOrd/Ord/Default stay product-only for now) — dropped, no confirmed Mycelium surface",
+      "item_name": "EffectKind"
+    },
+    {
+      "file": "/root/git/isolated/mycelium/crates/mycelium-interp/src/budget.rs",
+      "line": 42,
+      "col": 1,
+      "category": "Impl",
+      "rust_construct": "Impl",
+      "snippet": "impl fmt :: Display for EffectKind { fn fmt (& self , f : & mut fmt :: Formatter < '_ >) -> fmt :: Result { match self { EffectKind :: Retry => f . write_str (\"retry\") , EffectKind :: Alloc => f . write_str (\"alloc\") , EffectKind :: Io => f . write_str (\"io\") , EffectKind :: Cascade => f . write_str (\"cascade\") , EffectKind :: Time => f . write_str (\"time\") , EffectKind :: Named (n) => write ! (f , \"{n}\") , } } }",
+      "reason": "trait-impl of non-prelude trait `Display` — no ambient trait definition and synthetic trait emission is refused (DN-34 §8.8 / DN-122 MVP); gapped the whole impl so the residual cannot file-poison myc-check (G2; express gap-close 2026-07-16)",
+      "item_name": "EffectKind"
+    },
+    {
+      "file": "/root/git/isolated/mycelium/crates/mycelium-interp/src/budget.rs",
+      "line": 55,
+      "col": 1,
+      "category": "DeriveSatisfied",
+      "rust_construct": "DeriveSatisfied",
+      "snippet": "# [doc = \" A per-kind **budget** (RFC-0014 §4.5 I4) — distinct vocabulary (`max_attempts` / `max_depth` / a\"] # [doc = \" memory ceiling / a fuel clock / an I/O-op ceiling / a named ceiling), all enforced by the one\"] # [doc = \" [`Budgets`] mechanism. There is **one budget variant per** [`EffectKind`], so any declared effect\"] # [doc = \" kind — including [`EffectKind::Io`] and a user [`EffectKind::Named`] — can be primed (the gap\"] # [doc = \" RFC-0014 §4.5 left for `Io`/`Named` is closed).\"] # [doc = \"\"] # [doc = \" Not `Copy`: [`EffectBudget::Named`] carries its effect name.\"] # [derive (Debug , Clone , PartialEq , Eq)] pub enum EffectBudget { # [doc = \" Bound on retry attempts ([`EffectKind::Retry`]).\"] Attempts (u64) , # [doc = \" Bound on cascade depth ([`EffectKind::Cascade`]).\"] Depth (u64) , # [doc = \" Bound on bytes allocated ([`EffectKind::Alloc`]).\"] Bytes (u64) , # [doc = \" Bound on a time/fuel clock ([`EffectKind::Time`]).\"] Fuel (u64) , # [doc = \" Bound on the number of I/O operations ([`EffectKind::Io`]).\"] Ops (u64) , # [doc = \" Bound on a user-declared named effect ([`EffectKind::Named`]) — the name plus its ceiling.\"] Named (String , u64) , }",
+      "reason": "enum `EffectBudget` derive(Clone) is a satisfied no-op under Mycelium's value semantics (ADR-003 — every value already copies structurally; DN-128 §6.1) — not emitted as an impl, not a gap",
+      "item_name": "EffectBudget"
+    },
+    {
+      "file": "/root/git/isolated/mycelium/crates/mycelium-interp/src/budget.rs",
+      "line": 55,
+      "col": 1,
+      "category": "DeriveSatisfied",
+      "rust_construct": "DeriveSatisfied",
+      "snippet": "# [doc = \" A per-kind **budget** (RFC-0014 §4.5 I4) — distinct vocabulary (`max_attempts` / `max_depth` / a\"] # [doc = \" memory ceiling / a fuel clock / an I/O-op ceiling / a named ceiling), all enforced by the one\"] # [doc = \" [`Budgets`] mechanism. There is **one budget variant per** [`EffectKind`], so any declared effect\"] # [doc = \" kind — including [`EffectKind::Io`] and a user [`EffectKind::Named`] — can be primed (the gap\"] # [doc = \" RFC-0014 §4.5 left for `Io`/`Named` is closed).\"] # [doc = \"\"] # [doc = \" Not `Copy`: [`EffectBudget::Named`] carries its effect name.\"] # [derive (Debug , Clone , PartialEq , Eq)] pub enum EffectBudget { # [doc = \" Bound on retry attempts ([`EffectKind::Retry`]).\"] Attempts (u64) , # [doc = \" Bound on cascade depth ([`EffectKind::Cascade`]).\"] Depth (u64) , # [doc = \" Bound on bytes allocated ([`EffectKind::Alloc`]).\"] Bytes (u64) , # [doc = \" Bound on a time/fuel clock ([`EffectKind::Time`]).\"] Fuel (u64) , # [doc = \" Bound on the number of I/O operations ([`EffectKind::Io`]).\"] Ops (u64) , # [doc = \" Bound on a user-declared named effect ([`EffectKind::Named`]) — the name plus its ceiling.\"] Named (String , u64) , }",
+      "reason": "enum `EffectBudget` derive(Eq): covered by co-occurring PartialEq → `fn eq_EffectBudget` (product-row collision policy; DN-128 / ONESHOT C2) — not a second emission",
+      "item_name": "EffectBudget"
+    },
+    {
+      "file": "/root/git/isolated/mycelium/crates/mycelium-interp/src/budget.rs",
+      "line": 78,
+      "col": 1,
+      "category": "Impl",
+      "rust_construct": "Impl",
+      "snippet": "impl EffectBudget { # [doc = \" The effect kind this budget bounds.\"] # [must_use] pub fn kind (& self) -> EffectKind { match self { EffectBudget :: Attempts (_) => EffectKind :: Retry , EffectBudget :: Depth (_) => EffectKind :: Cascade , EffectBudget :: Bytes (_) => EffectKind :: Alloc , EffectBudget :: Fuel (_) => EffectKind :: Time , EffectBudget :: Ops (_) => EffectKind :: Io , EffectBudget :: Named (name , _) => EffectKind :: Named (name . clone ()) , } } # [doc = \" The budget's scalar amount.\"] # [must_use] pub fn amount (& self) -> u64 { match self { EffectBudget :: Attempts (n) | EffectBudget :: Depth (n) | EffectBudget :: Bytes (n) | EffectBudget :: Fuel (n) | EffectBudget :: Ops (n) | EffectBudget :: Named (_ , n) => * n , } } }",
+      "reason": "no member of this impl block could be transpiled (2 sub-issue(s)): impl method `kind` body: qualified/associated-function call `EffectKind :: Named` did not resolve to a known-emitted associated fn — Mycelium calls are bare identifiers, and the only sound surface form for `Type::method(...)` is the mangled `Type__method` name the declaration side already emits for a receiver-less inherent-impl associated fn (DN-34 §8.13/8.14), referenced only when that exact declaration is PROVEN present (same-file, or a resolved M-1084 cross-nodule sibling). A primitive/std associated fn with no emitted decl (e.g. `i128::try_from`), an unresolved type, or a `self`-receiving method (excluded by construction — it stays reachable only from its own bare call site) all gap here rather than fabricate a call (G2/VR-5, DN-133); impl method `amount` body: unsupported unary operator (e.g. `*` deref has no equivalent in a value-semantic grammar)",
+      "item_name": "EffectBudget"
+    },
+    {
+      "file": "/root/git/isolated/mycelium/crates/mycelium-interp/src/budget.rs",
+      "line": 105,
+      "col": 1,
+      "category": "NamedFieldDrop",
+      "rust_construct": "NamedFieldDrop",
+      "snippet": "# [doc = \" Exceeding a budget — an **explicit, graceful** structured error (RFC-0014 §4.5 I4), never a hang /\"] # [doc = \" stack overflow / OOM. The effect analogue of [`FuelExhausted`] / [`DepthLimit`] (RFC-0007 §4.5,\"] # [doc = \" M-347, DN-05); converts into [`EvalError::EffectBudget`] so the *runtime* refuses an effect overrun\"] # [doc = \" through the same explicit channel as recursion.\"] # [doc = \"\"] # [doc = \" [`FuelExhausted`]: crate::EvalError::FuelExhausted\"] # [doc = \" [`DepthLimit`]: crate::EvalError::DepthLimit\"] # [doc = \" [`EvalError::EffectBudget`]: crate::EvalError::EffectBudget\"] # [derive (Debug , Clone , PartialEq , Eq)] pub struct EffectBudgetExhausted { # [doc = \" The effect whose budget was exceeded.\"] pub kind : EffectKind , # [doc = \" The amount requested at the overrun.\"] pub requested : u64 , # [doc = \" The amount remaining when the overrun occurred.\"] pub remaining : u64 , }",
+      "reason": "struct `EffectBudgetExhausted` named field(s) `kind, requested, remaining` emitted positionally as `EffectBudgetExhausted(EffectKind, Binary{64}, Binary{64})` — Mycelium's `constructor` is positional-only (no record surface); product structure preserved, field names dropped (matches `lib/std/*.myc` hand-ports)",
+      "item_name": "EffectBudgetExhausted"
+    },
+    {
+      "file": "/root/git/isolated/mycelium/crates/mycelium-interp/src/budget.rs",
+      "line": 105,
+      "col": 1,
+      "category": "DeriveSatisfied",
+      "rust_construct": "DeriveSatisfied",
+      "snippet": "# [doc = \" Exceeding a budget — an **explicit, graceful** structured error (RFC-0014 §4.5 I4), never a hang /\"] # [doc = \" stack overflow / OOM. The effect analogue of [`FuelExhausted`] / [`DepthLimit`] (RFC-0007 §4.5,\"] # [doc = \" M-347, DN-05); converts into [`EvalError::EffectBudget`] so the *runtime* refuses an effect overrun\"] # [doc = \" through the same explicit channel as recursion.\"] # [doc = \"\"] # [doc = \" [`FuelExhausted`]: crate::EvalError::FuelExhausted\"] # [doc = \" [`DepthLimit`]: crate::EvalError::DepthLimit\"] # [doc = \" [`EvalError::EffectBudget`]: crate::EvalError::EffectBudget\"] # [derive (Debug , Clone , PartialEq , Eq)] pub struct EffectBudgetExhausted { # [doc = \" The effect whose budget was exceeded.\"] pub kind : EffectKind , # [doc = \" The amount requested at the overrun.\"] pub requested : u64 , # [doc = \" The amount remaining when the overrun occurred.\"] pub remaining : u64 , }",
+      "reason": "struct `EffectBudgetExhausted` derive(Clone) is a satisfied no-op under Mycelium's value semantics (ADR-003 — every value already copies structurally; DN-128 §6.1) — not emitted as an impl, not a gap",
+      "item_name": "EffectBudgetExhausted"
+    },
+    {
+      "file": "/root/git/isolated/mycelium/crates/mycelium-interp/src/budget.rs",
+      "line": 105,
+      "col": 1,
+      "category": "DeriveAttr",
+      "rust_construct": "DeriveAttr",
+      "snippet": "# [doc = \" Exceeding a budget — an **explicit, graceful** structured error (RFC-0014 §4.5 I4), never a hang /\"] # [doc = \" stack overflow / OOM. The effect analogue of [`FuelExhausted`] / [`DepthLimit`] (RFC-0007 §4.5,\"] # [doc = \" M-347, DN-05); converts into [`EvalError::EffectBudget`] so the *runtime* refuses an effect overrun\"] # [doc = \" through the same explicit channel as recursion.\"] # [doc = \"\"] # [doc = \" [`FuelExhausted`]: crate::EvalError::FuelExhausted\"] # [doc = \" [`DepthLimit`]: crate::EvalError::DepthLimit\"] # [doc = \" [`EvalError::EffectBudget`]: crate::EvalError::EffectBudget\"] # [derive (Debug , Clone , PartialEq , Eq)] pub struct EffectBudgetExhausted { # [doc = \" The effect whose budget was exceeded.\"] pub kind : EffectKind , # [doc = \" The amount requested at the overrun.\"] pub requested : u64 , # [doc = \" The amount remaining when the overrun occurred.\"] pub remaining : u64 , }",
+      "reason": "struct `EffectBudgetExhausted` derive(...) names Eq not in the DN-128 standard-derive set this leaf builds (Debug/Default/Clone/Copy/PartialEq/PartialOrd/Hash all recognized; bare Eq/Ord are deliberately NOT recognized — see emit/derives/mod.rs::TABLE's doc for why) — dropped, no confirmed Mycelium surface",
+      "item_name": "EffectBudgetExhausted"
+    },
+    {
+      "file": "/root/git/isolated/mycelium/crates/mycelium-interp/src/budget.rs",
+      "line": 123,
+      "col": 1,
+      "category": "Impl",
+      "rust_construct": "Impl",
+      "snippet": "impl fmt :: Display for EffectBudgetExhausted { fn fmt (& self , f : & mut fmt :: Formatter < '_ >) -> fmt :: Result { write ! (f , \"effect budget exhausted for {}: requested {}, {} remaining — an explicit, graceful refusal \\\n             (RFC-0014 §4.5 I4), never a hang or OOM\" , self . kind , self . requested , self . remaining) } }",
+      "reason": "trait-impl of non-prelude trait `Display` — no ambient trait definition and synthetic trait emission is refused (DN-34 §8.8 / DN-122 MVP); gapped the whole impl so the residual cannot file-poison myc-check (G2; express gap-close 2026-07-16)",
+      "item_name": "EffectBudgetExhausted"
+    },
+    {
+      "file": "/root/git/isolated/mycelium/crates/mycelium-interp/src/budget.rs",
+      "line": 134,
+      "col": 1,
+      "category": "Impl",
+      "rust_construct": "Impl",
+      "snippet": "impl std :: error :: Error for EffectBudgetExhausted { }",
+      "reason": "trait-impl of non-prelude trait `Error` — no ambient trait definition and synthetic trait emission is refused (DN-34 §8.8 / DN-122 MVP); gapped the whole impl so the residual cannot file-poison myc-check (G2; express gap-close 2026-07-16)",
+      "item_name": "EffectBudgetExhausted"
+    },
+    {
+      "file": "/root/git/isolated/mycelium/crates/mycelium-interp/src/budget.rs",
+      "line": 136,
+      "col": 1,
+      "category": "Struct",
+      "rust_construct": "Struct",
+      "snippet": "# [doc = \" The **budget ledger** — one enforcement mechanism over the separate named budgets (RFC-0014 §8\"] # [doc = \" resolved). An effect with **no** budget set cannot consume anything (default tightly scoped, I5):\"] # [doc = \" you opt into a broader effect by explicitly [`set`](Budgets::set)ting its budget.\"] # [doc = \"\"] # [doc = \" The env-machine threads a `&mut Budgets` (alongside its fuel/depth clocks) and the recovery driver\"] # [doc = \" consumes the *same* type, so an overrun surfaces as [`EvalError::EffectBudget`] on the one runtime\"] # [doc = \" refusal path (RFC-0014 §4.8). The concurrency wave (RFC-0008) layers *per-task* ledgers on this seam.\"] # [doc = \"\"] # [doc = \" [`EvalError::EffectBudget`]: crate::EvalError::EffectBudget\"] # [derive (Debug , Clone , Default , PartialEq , Eq)] pub struct Budgets { remaining : BTreeMap < EffectKind , u64 > , }",
+      "reason": "struct `Budgets` uses named fields and references a type not resolvable in-file — emitting it positionally would introduce an unresolved reference that poisons the file's `myc check`; left gapped under the M-1006 resolvability gate (VR-5/G2)",
+      "item_name": "Budgets"
+    },
+    {
+      "file": "/root/git/isolated/mycelium/crates/mycelium-interp/src/budget.rs",
+      "line": 150,
+      "col": 1,
+      "category": "Impl",
+      "rust_construct": "Impl",
+      "snippet": "impl Budgets { # [doc = \" An empty ledger — no effect may run until a budget is declared (I5).\"] # [must_use] pub fn new () -> Self { Budgets { remaining : BTreeMap :: new () , } } # [doc = \" Builder: declare a budget.\"] # [must_use] pub fn with (mut self , budget : EffectBudget) -> Self { self . set (budget) ; self } # [doc = \" Declare (or reset) a budget for its effect kind.\"] pub fn set (& mut self , budget : EffectBudget) { self . remaining . insert (budget . kind () , budget . amount ()) ; } # [doc = \" The remaining budget for `kind` (`None` if none was declared).\"] # [must_use] pub fn remaining (& self , kind : & EffectKind) -> Option < u64 > { self . remaining . get (kind) . copied () } # [doc = \" Consume `amount` of `kind`'s budget. An overrun — including consuming an effect with **no**\"] # [doc = \" declared budget — is an explicit, graceful [`EffectBudgetExhausted`] (I4). On success the\"] # [doc = \" remaining budget is decremented.\"] # [doc = \"\"] # [doc = \" # Errors\"] # [doc = \" Returns [`EffectBudgetExhausted`] when `amount` exceeds the remaining budget (or none is set).\"] pub fn consume (& mut self , kind : EffectKind , amount : u64) -> Result < () , EffectBudgetExhausted > { let remaining = self . remaining . get (& kind) . copied () . unwrap_or (0) ; if amount > remaining { return Err (EffectBudgetExhausted { kind , requested : amount , remaining , }) ; } self . remaining . insert (kind , remaining - amount) ; Ok (()) } }",
+      "reason": "no member of this impl block could be transpiled (5 sub-issue(s)): impl method `new` body: struct literal `Budgets { .. }` — not an in-file single-ctor struct or enum struct-variant that emits (no constructor to build; a cross-nodule variant is an honest DN-113/DN-134-OQ-2 resolvability gap, never a fabricated out-of-file reference — VR-5/G2); impl method `with` body: function body has a semicolon-terminated (value-discarding) statement expression before the tail — a `let`-chain body maps only simple `let x = e;` bindings plus a single trailing expression; impl method `set` body: mutating method body statement is neither a `let`, a supported `self.<field>`/`*<param>` re-assignment, nor (in tail position) the method's own return value — value-threading deliberately refuses any shape outside a flat re-assignment sequence rather than risk an unsound rebind (DN-125 §6.1, never-silent G2/VR-5); impl method `remaining` body: method call `.copied(...)` has no proven-emitted free-fn referent in this file (neither a D4-mangled inherent `Type__copied` nor a bare inherent recorded by this file's left-to-right pass, nor a prim_map / combinator row). Emitting bare `copied(recv, …)` would fabricate an unknown prim and file-poison myc-check (G-β Rank A / G2/VR-5; residual when the method body itself gapped — e.g. M-1037 `.to_vec()` inside `read_to_end` — so the declaration was never registered); impl method `consume` body: method call `.unwrap_or(...)` has no proven-emitted free-fn referent in this file (neither a D4-mangled inherent `Type__unwrap_or` nor a bare inherent recorded by this file's left-to-right pass, nor a prim_map / combinator row). Emitting bare `unwrap_or(recv, …)` would fabricate an unknown prim and file-poison myc-check (G-β Rank A / G2/VR-5; residual when the method body itself gapped — e.g. M-1037 `.to_vec()` inside `read_to_end` — so the declaration was never registered)",
+      "item_name": "Budgets"
+    },
+    {
+      "file": "/root/git/isolated/mycelium/crates/mycelium-interp/src/budget.rs",
+      "line": 197,
+      "col": 1,
+      "category": "TestItem",
+      "rust_construct": "TestItem",
+      "snippet": "# [cfg (test)] mod tests { use super :: * ; use crate :: EvalError ; # [test] fn an_undeclared_budget_refuses_immediately () { let mut b = Budgets :: new () ; let err = b . consume (EffectKind :: Retry , 1) . unwrap_err () ; assert_eq ! (err . kind , EffectKind :: Retry) ; assert_eq ! (err . remaining , 0) ; } # [test] fn a_declared_budget_drains_then_overruns_explicitly () { let mut b = Budgets :: new () . with (EffectBudget :: Attempts (2)) ; assert ! (b . consume (EffectKind :: Retry , 1) . is_ok ()) ; assert_eq ! (b . remaining (& EffectKind :: Retry) , Some (1)) ; assert ! (b . consume (EffectKind :: Retry , 1) . is_ok ()) ; let err = b . consume (EffectKind :: Retry , 1) . unwrap_err () ; assert_eq ! (err . requested , 1) ; assert_eq ! (err . remaining , 0) ; } # [test] fn an_io_budget_can_be_primed_drained_and_overruns_explicitly () { let mut b = Budgets :: new () . with (EffectBudget :: Ops (1)) ; assert_eq ! (b . remaining (& EffectKind :: Io) , Some (1)) ; assert ! (b . consume (EffectKind :: Io , 1) . is_ok ()) ; let err = b . consume (EffectKind :: Io , 1) . unwrap_err () ; assert_eq ! (err . kind , EffectKind :: Io) ; assert_eq ! (err . remaining , 0) ; } # [test] fn named_budgets_are_keyed_by_name_and_independent () { let net = EffectKind :: Named (\"net\" . to_owned ()) ; let disk = EffectKind :: Named (\"disk\" . to_owned ()) ; let mut b = Budgets :: new () . with (EffectBudget :: Named (\"net\" . to_owned () , 2)) . with (EffectBudget :: Named (\"disk\" . to_owned () , 0)) ; assert_eq ! (b . remaining (& net) , Some (2)) ; assert ! (b . consume (net . clone () , 2) . is_ok ()) ; assert ! (b . consume (net , 1) . is_err ()) ; assert ! (b . consume (disk , 1) . is_err ()) ; } # [test] fn an_overrun_routes_through_the_runtime_eval_error_channel () { let mut b = Budgets :: new () . with (EffectBudget :: Depth (0)) ; let exhausted = b . consume (EffectKind :: Cascade , 1) . unwrap_err () ; let as_eval : EvalError = exhausted . clone () . into () ; assert_eq ! (as_eval , EvalError :: EffectBudget (exhausted)) ; } # [test] fn effect_kind_display_is_non_empty_and_variant_specific () { assert_eq ! (EffectKind :: Retry . to_string () , \"retry\") ; assert_eq ! (EffectKind :: Alloc . to_string () , \"alloc\") ; assert_eq ! (EffectKind :: Io . to_string () , \"io\") ; assert_eq ! (EffectKind :: Cascade . to_string () , \"cascade\") ; assert_eq ! (EffectKind :: Time . to_string () , \"time\") ; let named = EffectKind :: Named (\"myeffect\" . to_owned ()) . to_string () ; assert ! (named . contains (\"myeffect\") , \"Named variant must include the effect name; got: {named:?}\") ; } # [test] fn effect_budget_exhausted_display_contains_kind_and_amounts () { let e = EffectBudgetExhausted { kind : EffectKind :: Retry , requested : 3 , remaining : 1 , } ; let msg = e . to_string () ; assert ! (msg . contains (\"retry\") , \"Display must include the effect kind 'retry'; got: {msg:?}\") ; assert ! (msg . contains ('3') , \"Display must include the requested amount 3; got: {msg:?}\") ; assert ! (msg . contains ('1') , \"Display must include the remaining amount 1; got: {msg:?}\") ; } }",
+      "reason": "#[cfg(test)] item — out of scope for this PoC's transpilation surface (excluded from the expressible-fraction denominator, but recorded, never silently skipped)",
+      "item_name": "tests"
+    }
+  ],
+  "total_top_level_items": 12
+}

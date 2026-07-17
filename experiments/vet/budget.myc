@@ -1,0 +1,72 @@
+// nodule: interp.budget
+// **Effect budgets** — the shared budget-resolution surface for *declared, bounded effects*
+// (RFC-0014 §4.5/§4.8), unified with the runtime's existing fuel/depth clocks (RFC-0007 §4.5,
+// M-347, DN-05).
+//
+// This module is the **one home** the RFC-0014 §4.8 integration required: the recovery `Budgets`
+// ledger (formerly tooling-only, in `mycelium-lsp/src/recover/effect.rs`) and the AOT env-machine
+// (`mycelium-mlir`) both depend on `mycelium-interp`, with no edge between them — so the ledger
+// primitive lives here, alongside the fuel clock and [`EvalError`](crate::EvalError). An effect
+// overrun is routed through [`EvalError::EffectBudget`](crate::EvalError::EffectBudget): **one
+// enforcement mechanism over separate named budgets** (RFC-0014 §8 disposition) — a budgeted effect
+// overruns *gracefully* at runtime exactly as a runaway recursion hits [`FuelExhausted`] /
+// [`DepthLimit`], never a hang or an OOM.
+//
+// It introduces **no L0 node** (KC-3): these are runtime/checker types, not kernel calculus — the
+// ledger lives where fuel/depth already live, mirroring how the totality checker lives outside the
+// trusted base (RFC-0014 §8, maintainer 2026-06-16: no kernel-visible hook).
+//
+// [`FuelExhausted`]: crate::EvalError::FuelExhausted
+// [`DepthLimit`]: crate::EvalError::DepthLimit
+// @summary: best-effort transpilation via mycelium-transpile (M-873). Declared,
+// unvalidated — no Mycelium parser/typechecker confirms this output; see the
+// accompanying .gap.json for every construct this pass could not express.
+nodule interp.budget;
+
+// A closed kernel of effect **kinds** (RFC-0014 §4.5 I3) plus user-declared names. Coarse by design
+// (KISS/YAGNI) — a declared *set*, not effect-row polymorphism (§9).
+pub type EffectKind = Retry | Alloc | Io | Cascade | Time | Named(Bytes);
+
+impl Show[EffectKind] for EffectKind {
+  fn render(x: EffectKind) => Bytes =
+    match x { Retry => "Retry", Alloc => "Alloc", Io => "Io", Cascade => "Cascade", Time => "Time", Named(p0) => bytes_concat(bytes_concat("Named(", render(p0)), ")") };
+};
+
+fn eq_EffectKind(a: EffectKind, b: EffectKind) => Binary{1} =
+  match a { Retry => match b { Retry => 0b1, _ => 0b0 }, Alloc => match b { Alloc => 0b1, _ => 0b0 }, Io => match b { Io => 0b1, _ => 0b0 }, Cascade => match b { Cascade => 0b1, _ => 0b0 }, Time => match b { Time => 0b1, _ => 0b0 }, Named(p0) => match b { Named(q0) => bytes_eq(p0, q0), _ => 0b0 } };
+
+// A per-kind **budget** (RFC-0014 §4.5 I4) — distinct vocabulary (`max_attempts` / `max_depth` / a
+// memory ceiling / a fuel clock / an I/O-op ceiling / a named ceiling), all enforced by the one
+// [`Budgets`] mechanism. There is **one budget variant per** [`EffectKind`], so any declared effect
+// kind — including [`EffectKind::Io`] and a user [`EffectKind::Named`] — can be primed (the gap
+// RFC-0014 §4.5 left for `Io`/`Named` is closed).
+//
+// Not `Copy`: [`EffectBudget::Named`] carries its effect name.
+// Declared: renamed Bytes -> Bytes_kw (reserved-word collision, DN-140)
+pub type EffectBudget = Attempts(Binary{64}) | Depth(Binary{64}) | Bytes_kw(Binary{64}) | Fuel(Binary{64}) | Ops(Binary{64}) | Named(Bytes, Binary{64});
+
+impl Show[EffectBudget] for EffectBudget {
+  fn render(x: EffectBudget) => Bytes =
+    match x { Attempts(p0) => bytes_concat(bytes_concat("Attempts(", render(p0)), ")"), Depth(p0) => bytes_concat(bytes_concat("Depth(", render(p0)), ")"), Bytes_kw(p0) => bytes_concat(bytes_concat("Bytes_kw(", render(p0)), ")"), Fuel(p0) => bytes_concat(bytes_concat("Fuel(", render(p0)), ")"), Ops(p0) => bytes_concat(bytes_concat("Ops(", render(p0)), ")"), Named(p0, p1) => bytes_concat(bytes_concat(bytes_concat(bytes_concat("Named(", render(p0)), ", "), render(p1)), ")") };
+};
+
+fn eq_EffectBudget(a: EffectBudget, b: EffectBudget) => Binary{1} =
+  match a { Attempts(p0) => match b { Attempts(q0) => eq(p0, q0), _ => 0b0 }, Depth(p0) => match b { Depth(q0) => eq(p0, q0), _ => 0b0 }, Bytes_kw(p0) => match b { Bytes_kw(q0) => eq(p0, q0), _ => 0b0 }, Fuel(p0) => match b { Fuel(q0) => eq(p0, q0), _ => 0b0 }, Ops(p0) => match b { Ops(q0) => eq(p0, q0), _ => 0b0 }, Named(p0, p1) => match b { Named(q0, q1) => and(bytes_eq(p0, q0), eq(p1, q1)), _ => 0b0 } };
+
+// Exceeding a budget — an **explicit, graceful** structured error (RFC-0014 §4.5 I4), never a hang /
+// stack overflow / OOM. The effect analogue of [`FuelExhausted`] / [`DepthLimit`] (RFC-0007 §4.5,
+// M-347, DN-05); converts into [`EvalError::EffectBudget`] so the *runtime* refuses an effect overrun
+// through the same explicit channel as recursion.
+//
+// [`FuelExhausted`]: crate::EvalError::FuelExhausted
+// [`DepthLimit`]: crate::EvalError::DepthLimit
+// [`EvalError::EffectBudget`]: crate::EvalError::EffectBudget
+pub type EffectBudgetExhausted = EffectBudgetExhausted(EffectKind, Binary{64}, Binary{64});
+
+impl Show[EffectBudgetExhausted] for EffectBudgetExhausted {
+  fn render(x: EffectBudgetExhausted) => Bytes =
+    match x { EffectBudgetExhausted(p0, p1, p2) => bytes_concat(bytes_concat(bytes_concat(bytes_concat(bytes_concat(bytes_concat("EffectBudgetExhausted(", render(p0)), ", "), render(p1)), ", "), render(p2)), ")") };
+};
+
+fn eq_EffectBudgetExhausted(a: EffectBudgetExhausted, b: EffectBudgetExhausted) => Binary{1} =
+    match a { EffectBudgetExhausted(p0, p1, p2) => match b { EffectBudgetExhausted(q0, q1, q2) => and(and(eq_EffectKind(p0, q0), eq(p1, q1)), eq(p2, q2)) } };

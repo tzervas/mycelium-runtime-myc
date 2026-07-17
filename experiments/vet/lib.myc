@@ -1,0 +1,144 @@
+// nodule: interp
+// `mycelium-interp` — the **reference interpreter**: the trusted, executable small-step semantics
+// for the Core IR (M-110; RFC-0004 §2; ADR-009; NFR-7). It is the *meaning* of a program — the AOT
+// path (M-150/M-151) is differential-tested against it, never the other way round.
+//
+// # Small-step operational semantics (closes SPEC §10.3)
+//
+// Programs are **closed** Core IR [`Node`]s (RFC-0001 §4.5). The values (normal forms) are the
+// constants, `Const(v)`. Evaluation is **call-by-value** and proceeds by substitution; we write
+// `e ⟶ e'` for one step and `e[x ↦ v]` for capture-avoiding substitution (trivial here: the only
+// substituends are closed `Const` values, so there are no free variables to capture).
+//
+// ```text
+//  (E-Let-Step)   bound ⟶ bound'
+//                 ───────────────────────────────────────────────
+//                 Let{x, bound, body} ⟶ Let{x, bound', body}
+//
+//  (E-Let-Bind)   ───────────────────────────────────────────────         (bound is a value)
+//                 Let{x, Const(v), body} ⟶ body[x ↦ Const(v)]
+//
+//  (E-Op-Arg)     argᵢ ⟶ argᵢ'         (args 0..i are values, i leftmost non-value)
+//                 ───────────────────────────────────────────────
+//                 Op{p, [..,argᵢ,..]} ⟶ Op{p, [..,argᵢ',..]}
+//
+//  (E-Op-Apply)   all args are Const(vⱼ)        δ(p, [vⱼ]) = Const(r)
+//                 ───────────────────────────────────────────────
+//                 Op{p, [Const(vⱼ)]} ⟶ Const(r)
+//
+//  (E-Swap-Arg)   src ⟶ src'
+//                 ───────────────────────────────────────────────
+//                 Swap{src, t, π} ⟶ Swap{src', t, π}
+//
+//  (E-Swap-Apply) ───────────────────────────────────────────────       σ(v, t, π) = Const(r)
+//                 Swap{Const(v), t, π} ⟶ Const(r)
+// ```
+//
+// `δ` is the primitive-operator semantics ([`prims`]); `σ` is the swap semantics ([`swap`]). Both
+// thread metadata **honestly**: an `Op`/`Swap` result's guarantee is the `meet` of its inputs and
+// the operation's own intrinsic strength (RFC-0001 §4.7, via `GuaranteeStrength::propagate`), and
+// its provenance is `Derived{ op, inputs }` over content hashes (RFC-0001 §4.6). A `Var` that is
+// free (an open term) is **stuck** — an explicit [`EvalError::FreeVariable`], not a silent default.
+//
+// # Algebraic data (r3 — RFC-0001 §4.5 / RFC-0011)
+// Two more node families evaluate here, mirroring the L1 evaluator's `try_match` so L1-eval and
+// L0-interp agree (NFR-7):
+//
+// ```text
+//  (E-Con-Arg)    argᵢ ⟶ argᵢ'      (args 0..i are values, i leftmost non-value)
+//                 ─────────────────────────────────────────────────────
+//                 Construct{c, [..,argᵢ,..]} ⟶ Construct{c, [..,argᵢ',..]}
+//
+//  (E-Con-Value)  every arg is a value  ⇒  Construct{c, [v…]} is a NORMAL FORM (a data value)
+//
+//  (E-Match-Scrut) s ⟶ s'
+//                  ─────────────────────────────────────────────
+//                  Match{s, alts, d} ⟶ Match{s', alts, d}
+//
+//  (E-Match-Sel)  s is a value, first-matching alt/default selects body, binders ↦ fields
+//                 ─────────────────────────────────────────────  (scrutinee guarantee Exact)
+//                 Match{s, alts, d} ⟶ body[binders ↦ fields]
+// ```
+//
+// # Functions & recursion (r4 — RFC-0001 r4 / RFC-0007 §4.1)
+// Three more nodes complete L1-in-Core-IR, retiring the elaboration `Residual` entirely. The v0
+// surface is first-order, so an elaborated `Lam` is **closed** (no captured environment) and
+// application is capture-free substitution — the existing `subst` carries it:
+//
+// ```text
+//  (E-Lam)        Lam{x, e} is a NORMAL FORM (a function value)
+//
+//  (E-App-Fun)    f ⟶ f'                  (E-App-Arg)  f value, a ⟶ a'
+//                 ─────────────────────────             ────────────────────────────
+//                 App{f, a} ⟶ App{f', a}               App{f, a} ⟶ App{f, a'}
+//
+//  (E-App-Beta)   ─────────────────────────────────────────────  (a is a value)
+//                 App{Lam{x, e}, a} ⟶ e[x ↦ a]
+//
+//  (E-Fix)        ─────────────────────────────────────────────  (under the fuel clock)
+//                 Fix{f, e} ⟶ e[f ↦ Fix{f, e}]
+// ```
+//
+// `Fix` unfolds by substitution every step, so a non-productive recursion is an explicit
+// [`EvalError::FuelExhausted`], never a hang (RFC-0007 §4.5, CakeML clock); the totality checker
+// gates `matured` (packaging), never meaning. Applying a non-function is an explicit
+// [`EvalError::ApplyNonFunction`]; a program that evaluates to a bare function is
+// [`EvalError::FunctionResult`] (a v0 entry returns a repr/data value, not a function).
+//
+// A `Construct` whose arguments are all values is itself a value (a data value, GHC-Core style); at
+// the `eval` boundary it reads off as a [`mycelium_core::Datum`]. `Match` selects the first
+// matching alternative (constructor arm on `CtorRef` identity; literal arm on `repr+payload`
+// equality), binds its fields left-to-right, and defaults on no match (the checker proves coverage,
+// WF7; a genuine no-match is an explicit [`EvalError::NonExhaustiveMatch`]). **Guarantee meet
+// (RFC-0011 §4.6):** a `Match` result is met with the scrutinee's guarantee — for the *reachable r3
+// fragment* the scrutinee is `Exact`, so the meet is the identity; a **non-`Exact` data scrutinee**
+// is the explicit r3 boundary [`EvalError::GuaranteeMeetUnsupported`] (degrading a precise
+// per-value bound by a composite *summary* would force fabricating a bound — refused, never
+// silent). `Construct` itself takes the meet of its fields' guarantees (in the [`mycelium_core::Datum`]
+// summary).
+//
+// # What is *not* here (by scope)
+// Balanced-ternary **arithmetic** with an integer oracle is **M-111**; the certified binary↔ternary
+// **swap** is **M-120** (this crate ships only the trivial identity swap,
+// [`swap::IdentitySwapEngine`]); the full term language (abstraction/recursion/modules) is a later
+// RFC. Composing an *approximate* input is refused until the ADR-010 bound kernels land (Phase 2 /
+// E2-4).
+//
+// **Trusted-base discipline (ADR-014 / DN-21 §5 F-1):** zero `unsafe` — compiler-enforced.
+// @summary: best-effort transpilation via mycelium-transpile (M-873). Declared,
+// unvalidated — no Mycelium parser/typechecker confirms this output; see the
+// accompanying .gap.json for every construct this pass could not express.
+nodule interp;
+
+// Declared: co-emitted guarantee-lattice type — referenced in this file but not declared here and not available via a resolved batch `use` (ORACLE-R1 A2; never silent unknown-type file poison — G2/VR-5). Variants use DN-140 `*_kw` renames for the reserved lattice keywords (Exact/Proven/Empirical/Declared).
+// Declared: renamed Exact -> Exact_kw (reserved-word collision, DN-140)
+// Declared: renamed Proven -> Proven_kw (reserved-word collision, DN-140)
+// Declared: renamed Empirical -> Empirical_kw (reserved-word collision, DN-140)
+// Declared: renamed Declared -> Declared_kw (reserved-word collision, DN-140)
+type GuaranteeStrength = Exact_kw | Proven_kw | Empirical_kw | Declared_kw;
+
+// EXPLAIN (L2-B/DN-124): Declared co-include of batch-sibling type surface (homes: interp.budget) so single-file oracle is self-contained — not a language `use` identity, not a short-form path collapse (M-1084 full path retained as provenance). Transitive type deps in the same batch are co-included. G2/VR-5.
+type EffectBudget = Attempts(Binary{64}) | Depth(Binary{64}) | Bytes_kw(Binary{64}) | Fuel(Binary{64}) | Ops(Binary{64}) | Named(Bytes, Binary{64});
+type EffectKind = Retry | Alloc | Io | Cascade | Time | Named(Bytes);
+type EffectBudgetExhausted = EffectBudgetExhausted(EffectKind, Binary{64}, Binary{64});
+
+// EXPLAIN (L2-B/DN-124): Declared co-include of batch-sibling type surface (homes: interp.parallel) so single-file oracle is self-contained — not a language `use` identity, not a short-form path collapse (M-1084 full path retained as provenance). Transitive type deps in the same batch are co-included. G2/VR-5.
+type BatchHead = Op | Construct;
+type ParallelPlan = SequentialImpure | SequentialNoBatch | TopLevelBatch(BatchHead, Binary{64});
+
+// EXPLAIN (L2-B/DN-124): Declared co-include of batch-sibling type surface (homes: interp.supervise) so single-file oracle is self-contained — not a language `use` identity, not a short-form path collapse (M-1084 full path retained as provenance). Transitive type deps in the same batch are co-included. G2/VR-5.
+type Cancelled = Cancelled;
+type RestartIntensity = RestartIntensity(Binary{32}, Binary{64});
+// EXPLAIN (DN-124): batch-resolved cross-nodule `use` of a non-type item with no extractable single-line free-fn surface — phylum mode sees the sibling export; single-file oracle (phylum-of-one) may refuse until multi-nodule co-check. Types and free-fns with extractable surface co-include instead (L2-B / G-α Rank-2). Not a silent skip (G2/VR-5).
+use interp.supervise.TaskOutcome;
+
+// EXPLAIN (L2-B/DN-124): Declared co-include of batch-sibling type surface (homes: interp.swap) so single-file oracle is self-contained — not a language `use` identity, not a short-form path collapse (M-1084 full path retained as provenance). Transitive type deps in the same batch are co-included. G2/VR-5.
+type IdentitySwapEngine = IdentitySwapEngine;
+
+// The result of one small-step attempt on a node.
+pub type Step = Value | Next(Box[Node]);
+
+// Default step budget — generous for the non-recursive core language (it always terminates), a
+// guard against pathological inputs.
+// Declared: co-emitted private const as zero-arg fn returning a BinLit — Mycelium has no const item production (`item` covers use/default/type/trait/impl/fn/object/lower/derive only); hand-port precedent `max_expr_depth()` (ORACLE-R1 A4; G2/VR-5: value from the Rust initializer or a known workspace-floor path, never fabricated). Use sites rewrite `NAME` → `NAME()`.
+fn DEFAULT_FUEL() => Binary{64} = 0b0000_0000_0000_0000_0000_0000_0000_0000_0000_0000_0000_1111_0100_0010_0100_0000; // 1000000

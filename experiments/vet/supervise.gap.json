@@ -1,0 +1,282 @@
+{
+  "source": "/root/git/isolated/mycelium/crates/mycelium-interp/src/supervise.rs",
+  "emitted_items": [
+    "co-include:EffectBudgetExhausted,EffectKind",
+    "Cancelled",
+    "TaskOutcome",
+    "RestartIntensity"
+  ],
+  "gaps": [
+    {
+      "file": "/root/git/isolated/mycelium/crates/mycelium-interp/src/supervise.rs",
+      "line": 18,
+      "col": 1,
+      "category": "Import",
+      "rust_construct": "Import",
+      "snippet": "use std :: collections :: VecDeque ;",
+      "reason": "`use std.collections::VecDeque` — `std.collections` is not a sibling module OR sibling phylum transpiled in this same batch (an external crate, `std`, or simply out of this batch's target set). Flagged, not guessed (VR-5/G2)",
+      "item_name": null
+    },
+    {
+      "file": "/root/git/isolated/mycelium/crates/mycelium-interp/src/supervise.rs",
+      "line": 19,
+      "col": 1,
+      "category": "Import",
+      "rust_construct": "Import",
+      "snippet": "use std :: fmt ;",
+      "reason": "`use std::fmt` — `std` is not a sibling module OR sibling phylum transpiled in this same batch (an external crate, `std`, or simply out of this batch's target set). Flagged, not guessed (VR-5/G2)",
+      "item_name": null
+    },
+    {
+      "file": "/root/git/isolated/mycelium/crates/mycelium-interp/src/supervise.rs",
+      "line": 20,
+      "col": 1,
+      "category": "Import",
+      "rust_construct": "Import",
+      "snippet": "use std :: sync :: atomic :: { AtomicBool , Ordering } ;",
+      "reason": "`use std.sync.atomic::AtomicBool` — `std.sync.atomic` is not a sibling module OR sibling phylum transpiled in this same batch (an external crate, `std`, or simply out of this batch's target set). Flagged, not guessed (VR-5/G2); `use std.sync.atomic::Ordering` — `std.sync.atomic` is not a sibling module OR sibling phylum transpiled in this same batch (an external crate, `std`, or simply out of this batch's target set). Flagged, not guessed (VR-5/G2)",
+      "item_name": null
+    },
+    {
+      "file": "/root/git/isolated/mycelium/crates/mycelium-interp/src/supervise.rs",
+      "line": 21,
+      "col": 1,
+      "category": "Import",
+      "rust_construct": "Import",
+      "snippet": "use std :: sync :: Arc ;",
+      "reason": "`use std.sync::Arc` — `std.sync` is not a sibling module OR sibling phylum transpiled in this same batch (an external crate, `std`, or simply out of this batch's target set). Flagged, not guessed (VR-5/G2)",
+      "item_name": null
+    },
+    {
+      "file": "/root/git/isolated/mycelium/crates/mycelium-interp/src/supervise.rs",
+      "line": 23,
+      "col": 1,
+      "category": "Import",
+      "rust_construct": "Import",
+      "snippet": "use crate :: budget :: { Budgets , EffectBudgetExhausted , EffectKind } ;",
+      "reason": "`use budget::Budgets` — `Budgets` is not among sibling `budget`'s successfully-emitted surface in this batch (the sibling file itself gapped it rather than emitting it). Flagged, not guessed (VR-5/G2)",
+      "item_name": "co-include:EffectBudgetExhausted,EffectKind"
+    },
+    {
+      "file": "/root/git/isolated/mycelium/crates/mycelium-interp/src/supervise.rs",
+      "line": 25,
+      "col": 1,
+      "category": "Struct",
+      "rust_construct": "Struct",
+      "snippet": "# [doc = \" A **cooperative** cancellation token (RFC-0008 §4.7; structured-concurrency cancellation, RT7).\"] # [doc = \"\"] # [doc = \" Cancellation is **never preemptive**: a task observes the token at its own budget-check points (the\"] # [doc = \" same cadence it checks fuel/depth), so it can never be stopped mid-step in a way that drops an\"] # [doc = \" in-flight explicit outcome. Observing a cancelled token yields an explicit [`Cancelled`] — an\"] # [doc = \" *additive* outcome (RFC-0014 I1), never a silent termination. `Arc<AtomicBool>` so the token can be\"] # [doc = \" shared with tasks placed on other threads by the future runtime (M-357) without a redesign.\"] # [derive (Clone , Debug , Default)] pub struct CancelToken { flag : Arc < AtomicBool > , }",
+      "reason": "struct `CancelToken` uses named fields and references a type not resolvable in-file — emitting it positionally would introduce an unresolved reference that poisons the file's `myc check`; left gapped under the M-1006 resolvability gate (VR-5/G2)",
+      "item_name": "CancelToken"
+    },
+    {
+      "file": "/root/git/isolated/mycelium/crates/mycelium-interp/src/supervise.rs",
+      "line": 37,
+      "col": 1,
+      "category": "Impl",
+      "rust_construct": "Impl",
+      "snippet": "impl CancelToken { # [doc = \" A fresh, un-cancelled token.\"] # [must_use] pub fn new () -> Self { CancelToken { flag : Arc :: new (AtomicBool :: new (false)) , } } # [doc = \" Request cancellation. Idempotent; cooperative — it sets a flag the task observes at its next\"] # [doc = \" checkpoint, it does **not** interrupt a running step.\"] pub fn cancel (& self) { self . flag . store (true , Ordering :: SeqCst) ; } # [doc = \" Whether cancellation has been requested.\"] # [must_use] pub fn is_cancelled (& self) -> bool { self . flag . load (Ordering :: SeqCst) } # [doc = \" Observe the token at a checkpoint: an explicit [`Cancelled`] if cancellation was requested, else\"] # [doc = \" `Ok`. A task calls this where it already checks its budgets — cooperative, never preemptive.\"] # [doc = \"\"] # [doc = \" # Errors\"] # [doc = \" Returns [`Cancelled`] when [`cancel`](CancelToken::cancel) has been called.\"] pub fn check (& self) -> Result < () , Cancelled > { if self . is_cancelled () { Err (Cancelled) } else { Ok (()) } } }",
+      "reason": "no member of this impl block could be transpiled (4 sub-issue(s)): impl method `new` body: struct literal `CancelToken { .. }` — not an in-file single-ctor struct or enum struct-variant that emits (no constructor to build; a cross-nodule variant is an honest DN-113/DN-134-OQ-2 resolvability gap, never a fabricated out-of-file reference — VR-5/G2); impl method `cancel` signature: function has no return type (implicit `()`) — no unit value is representable in this grammar fragment; impl method `is_cancelled` body: method call `.load(...)` has no proven-emitted free-fn referent in this file (neither a D4-mangled inherent `Type__load` nor a bare inherent recorded by this file's left-to-right pass, nor a prim_map / combinator row). Emitting bare `load(recv, …)` would fabricate an unknown prim and file-poison myc-check (G-β Rank A / G2/VR-5; residual when the method body itself gapped — e.g. M-1037 `.to_vec()` inside `read_to_end` — so the declaration was never registered); impl method `check` body: method call `.is_cancelled(...)` has no proven-emitted free-fn referent in this file (neither a D4-mangled inherent `Type__is_cancelled` nor a bare inherent recorded by this file's left-to-right pass, nor a prim_map / combinator row). Emitting bare `is_cancelled(recv, …)` would fabricate an unknown prim and file-poison myc-check (G-β Rank A / G2/VR-5; residual when the method body itself gapped — e.g. M-1037 `.to_vec()` inside `read_to_end` — so the declaration was never registered)",
+      "item_name": "CancelToken"
+    },
+    {
+      "file": "/root/git/isolated/mycelium/crates/mycelium-interp/src/supervise.rs",
+      "line": 72,
+      "col": 1,
+      "category": "DeriveSatisfied",
+      "rust_construct": "DeriveSatisfied",
+      "snippet": "# [doc = \" A task observed its [`CancelToken`] cancelled — an **explicit, additive** outcome (RFC-0014 I1),\"] # [doc = \" never a silent stop.\"] # [derive (Debug , Clone , Copy , PartialEq , Eq)] pub struct Cancelled ;",
+      "reason": "struct `Cancelled` derive(Clone) is a satisfied no-op under Mycelium's value semantics (ADR-003 — every value already copies structurally; DN-128 §6.1) — not emitted as an impl, not a gap",
+      "item_name": "Cancelled"
+    },
+    {
+      "file": "/root/git/isolated/mycelium/crates/mycelium-interp/src/supervise.rs",
+      "line": 72,
+      "col": 1,
+      "category": "DeriveSatisfied",
+      "rust_construct": "DeriveSatisfied",
+      "snippet": "# [doc = \" A task observed its [`CancelToken`] cancelled — an **explicit, additive** outcome (RFC-0014 I1),\"] # [doc = \" never a silent stop.\"] # [derive (Debug , Clone , Copy , PartialEq , Eq)] pub struct Cancelled ;",
+      "reason": "struct `Cancelled` derive(Copy) is a satisfied no-op under Mycelium's value semantics (ADR-003 — every value already copies structurally; DN-128 §6.1) — not emitted as an impl, not a gap",
+      "item_name": "Cancelled"
+    },
+    {
+      "file": "/root/git/isolated/mycelium/crates/mycelium-interp/src/supervise.rs",
+      "line": 72,
+      "col": 1,
+      "category": "DeriveAttr",
+      "rust_construct": "DeriveAttr",
+      "snippet": "# [doc = \" A task observed its [`CancelToken`] cancelled — an **explicit, additive** outcome (RFC-0014 I1),\"] # [doc = \" never a silent stop.\"] # [derive (Debug , Clone , Copy , PartialEq , Eq)] pub struct Cancelled ;",
+      "reason": "struct `Cancelled` derive(...) names Eq not in the DN-128 standard-derive set this leaf builds (Debug/Default/Clone/Copy/PartialEq/PartialOrd/Hash all recognized; bare Eq/Ord are deliberately NOT recognized — see emit/derives/mod.rs::TABLE's doc for why) — dropped, no confirmed Mycelium surface",
+      "item_name": "Cancelled"
+    },
+    {
+      "file": "/root/git/isolated/mycelium/crates/mycelium-interp/src/supervise.rs",
+      "line": 77,
+      "col": 1,
+      "category": "Impl",
+      "rust_construct": "Impl",
+      "snippet": "impl fmt :: Display for Cancelled { fn fmt (& self , f : & mut fmt :: Formatter < '_ >) -> fmt :: Result { f . write_str (\"task cancelled (cooperative, RFC-0008 §4.7) — an explicit, additive outcome\") } }",
+      "reason": "trait-impl of non-prelude trait `Display` — no ambient trait definition and synthetic trait emission is refused (DN-34 §8.8 / DN-122 MVP); gapped the whole impl so the residual cannot file-poison myc-check (G2; express gap-close 2026-07-16)",
+      "item_name": "Cancelled"
+    },
+    {
+      "file": "/root/git/isolated/mycelium/crates/mycelium-interp/src/supervise.rs",
+      "line": 83,
+      "col": 1,
+      "category": "Impl",
+      "rust_construct": "Impl",
+      "snippet": "impl std :: error :: Error for Cancelled { }",
+      "reason": "trait-impl of non-prelude trait `Error` — no ambient trait definition and synthetic trait emission is refused (DN-34 §8.8 / DN-122 MVP); gapped the whole impl so the residual cannot file-poison myc-check (G2; express gap-close 2026-07-16)",
+      "item_name": "Cancelled"
+    },
+    {
+      "file": "/root/git/isolated/mycelium/crates/mycelium-interp/src/supervise.rs",
+      "line": 85,
+      "col": 1,
+      "category": "DeriveAttr",
+      "rust_construct": "DeriveAttr",
+      "snippet": "# [doc = \" The **explicit, additive result of running a task** (RFC-0014 I1 lifted across the task boundary,\"] # [doc = \" RFC-0008 §4.7). A task always resolves to exactly one of these — there is deliberately **no silent /\"] # [doc = \" dropped variant**, so cross-task propagation cannot lose a failure:\"] # [doc = \" - [`Done`](TaskOutcome::Done) — completed with a value;\"] # [doc = \" - [`Failed`](TaskOutcome::Failed) — an explicit error (propagates to the parent scope, additive);\"] # [doc = \" - [`BudgetExhausted`](TaskOutcome::BudgetExhausted) — a **per-task** effect-budget overrun (the\"] # [doc = \"   in-that-task [`EffectBudgetExhausted`], on the same channel as the single-task case — M-353);\"] # [doc = \" - [`Cancelled`](TaskOutcome::Cancelled) — cooperatively cancelled.\"] # [derive (Debug , Clone , PartialEq , Eq)] pub enum TaskOutcome < T , E > { # [doc = \" Completed with a value.\"] Done (T) , # [doc = \" Failed with an explicit error — propagates additively to the owning scope (RT4/I1).\"] Failed (E) , # [doc = \" A per-task effect budget overran — an in-that-task, graceful refusal (M-353; I4).\"] BudgetExhausted (EffectBudgetExhausted) , # [doc = \" Cooperatively cancelled (RT7).\"] Cancelled , }",
+      "reason": "enum `TaskOutcome` derive(Debug): generic enum — a derived Show impl for a generic type needs DN-130's generic-trait-instance mechanism, out of this leaf's scope (ONESHOT C2 / DN-128 enum half)",
+      "item_name": "TaskOutcome"
+    },
+    {
+      "file": "/root/git/isolated/mycelium/crates/mycelium-interp/src/supervise.rs",
+      "line": 85,
+      "col": 1,
+      "category": "DeriveSatisfied",
+      "rust_construct": "DeriveSatisfied",
+      "snippet": "# [doc = \" The **explicit, additive result of running a task** (RFC-0014 I1 lifted across the task boundary,\"] # [doc = \" RFC-0008 §4.7). A task always resolves to exactly one of these — there is deliberately **no silent /\"] # [doc = \" dropped variant**, so cross-task propagation cannot lose a failure:\"] # [doc = \" - [`Done`](TaskOutcome::Done) — completed with a value;\"] # [doc = \" - [`Failed`](TaskOutcome::Failed) — an explicit error (propagates to the parent scope, additive);\"] # [doc = \" - [`BudgetExhausted`](TaskOutcome::BudgetExhausted) — a **per-task** effect-budget overrun (the\"] # [doc = \"   in-that-task [`EffectBudgetExhausted`], on the same channel as the single-task case — M-353);\"] # [doc = \" - [`Cancelled`](TaskOutcome::Cancelled) — cooperatively cancelled.\"] # [derive (Debug , Clone , PartialEq , Eq)] pub enum TaskOutcome < T , E > { # [doc = \" Completed with a value.\"] Done (T) , # [doc = \" Failed with an explicit error — propagates additively to the owning scope (RT4/I1).\"] Failed (E) , # [doc = \" A per-task effect budget overran — an in-that-task, graceful refusal (M-353; I4).\"] BudgetExhausted (EffectBudgetExhausted) , # [doc = \" Cooperatively cancelled (RT7).\"] Cancelled , }",
+      "reason": "enum `TaskOutcome` derive(Clone) is a satisfied no-op under Mycelium's value semantics (ADR-003 — every value already copies structurally; DN-128 §6.1) — not emitted as an impl, not a gap",
+      "item_name": "TaskOutcome"
+    },
+    {
+      "file": "/root/git/isolated/mycelium/crates/mycelium-interp/src/supervise.rs",
+      "line": 85,
+      "col": 1,
+      "category": "DeriveAttr",
+      "rust_construct": "DeriveAttr",
+      "snippet": "# [doc = \" The **explicit, additive result of running a task** (RFC-0014 I1 lifted across the task boundary,\"] # [doc = \" RFC-0008 §4.7). A task always resolves to exactly one of these — there is deliberately **no silent /\"] # [doc = \" dropped variant**, so cross-task propagation cannot lose a failure:\"] # [doc = \" - [`Done`](TaskOutcome::Done) — completed with a value;\"] # [doc = \" - [`Failed`](TaskOutcome::Failed) — an explicit error (propagates to the parent scope, additive);\"] # [doc = \" - [`BudgetExhausted`](TaskOutcome::BudgetExhausted) — a **per-task** effect-budget overrun (the\"] # [doc = \"   in-that-task [`EffectBudgetExhausted`], on the same channel as the single-task case — M-353);\"] # [doc = \" - [`Cancelled`](TaskOutcome::Cancelled) — cooperatively cancelled.\"] # [derive (Debug , Clone , PartialEq , Eq)] pub enum TaskOutcome < T , E > { # [doc = \" Completed with a value.\"] Done (T) , # [doc = \" Failed with an explicit error — propagates additively to the owning scope (RT4/I1).\"] Failed (E) , # [doc = \" A per-task effect budget overran — an in-that-task, graceful refusal (M-353; I4).\"] BudgetExhausted (EffectBudgetExhausted) , # [doc = \" Cooperatively cancelled (RT7).\"] Cancelled , }",
+      "reason": "enum `TaskOutcome` derive(PartialEq): generic enum — a derived equality fn for a generic type needs DN-130's generic-instance mechanism, out of this leaf's scope (ONESHOT C2 / DN-128 enum half)",
+      "item_name": "TaskOutcome"
+    },
+    {
+      "file": "/root/git/isolated/mycelium/crates/mycelium-interp/src/supervise.rs",
+      "line": 85,
+      "col": 1,
+      "category": "DeriveSatisfied",
+      "rust_construct": "DeriveSatisfied",
+      "snippet": "# [doc = \" The **explicit, additive result of running a task** (RFC-0014 I1 lifted across the task boundary,\"] # [doc = \" RFC-0008 §4.7). A task always resolves to exactly one of these — there is deliberately **no silent /\"] # [doc = \" dropped variant**, so cross-task propagation cannot lose a failure:\"] # [doc = \" - [`Done`](TaskOutcome::Done) — completed with a value;\"] # [doc = \" - [`Failed`](TaskOutcome::Failed) — an explicit error (propagates to the parent scope, additive);\"] # [doc = \" - [`BudgetExhausted`](TaskOutcome::BudgetExhausted) — a **per-task** effect-budget overrun (the\"] # [doc = \"   in-that-task [`EffectBudgetExhausted`], on the same channel as the single-task case — M-353);\"] # [doc = \" - [`Cancelled`](TaskOutcome::Cancelled) — cooperatively cancelled.\"] # [derive (Debug , Clone , PartialEq , Eq)] pub enum TaskOutcome < T , E > { # [doc = \" Completed with a value.\"] Done (T) , # [doc = \" Failed with an explicit error — propagates additively to the owning scope (RT4/I1).\"] Failed (E) , # [doc = \" A per-task effect budget overran — an in-that-task, graceful refusal (M-353; I4).\"] BudgetExhausted (EffectBudgetExhausted) , # [doc = \" Cooperatively cancelled (RT7).\"] Cancelled , }",
+      "reason": "enum `TaskOutcome` derive(Eq): covered by co-occurring PartialEq → `fn eq_TaskOutcome` (product-row collision policy; DN-128 / ONESHOT C2) — not a second emission",
+      "item_name": "TaskOutcome"
+    },
+    {
+      "file": "/root/git/isolated/mycelium/crates/mycelium-interp/src/supervise.rs",
+      "line": 105,
+      "col": 1,
+      "category": "Impl",
+      "rust_construct": "Impl",
+      "snippet": "impl < T , E > TaskOutcome < T , E > { # [doc = \" Whether this outcome is a **failure** the parent scope must observe (failure, budget overrun, or\"] # [doc = \" cancellation) — i.e. anything other than a clean [`Done`](TaskOutcome::Done). Cross-task\"] # [doc = \" propagation is \\\"the parent acts on this explicitly\\\"; it can never silently treat a failure as\"] # [doc = \" success (I1).\"] # [must_use] pub fn is_failure (& self) -> bool { ! matches ! (self , TaskOutcome :: Done (_)) } }",
+      "reason": "no member of this impl block could be transpiled (1 sub-issue(s)): impl method `is_failure` body: expression-position macro `matches` — no macro system in this grammar fragment (`write!`/`format!` lower to pure `Bytes` per DN-127/M-1090 WU-3)",
+      "item_name": "TaskOutcome < T , E >"
+    },
+    {
+      "file": "/root/git/isolated/mycelium/crates/mycelium-interp/src/supervise.rs",
+      "line": 116,
+      "col": 1,
+      "category": "NamedFieldDrop",
+      "rust_construct": "NamedFieldDrop",
+      "snippet": "# [doc = \" **Max-restart-intensity** for `reclaim` supervision (RFC-0008 §4.7; Erlang/OTP, Research Record 05\"] # [doc = \" T5.3): at most `max_restarts` within a window of `window_ticks` **logical** ticks.\"] # [doc = \"\"] # [doc = \" v0 uses a **logical clock** — a deterministic, monotonic counter the supervisor advances — not the\"] # [doc = \" wall clock; physical/hybrid clocks for real time are RFC-0008 R8-Q3, deferred. This is the *rate*\"] # [doc = \" bound; it composes with a `cascade` effect **budget** (the *total* restart cap) so a restart storm\"] # [doc = \" is bounded on **both** axes (the combined disposition): exceeding *either* is an explicit\"] # [doc = \" [`Escalation`], a **declared, bounded cascade** (RT4/RT7), never an unbounded storm.\"] # [derive (Debug , Clone , Copy , PartialEq , Eq)] pub struct RestartIntensity { # [doc = \" The maximum restarts permitted within the window.\"] pub max_restarts : u32 , # [doc = \" The window length, in logical-clock ticks.\"] pub window_ticks : u64 , }",
+      "reason": "struct `RestartIntensity` named field(s) `max_restarts, window_ticks` emitted positionally as `RestartIntensity(Binary{32}, Binary{64})` — Mycelium's `constructor` is positional-only (no record surface); product structure preserved, field names dropped (matches `lib/std/*.myc` hand-ports)",
+      "item_name": "RestartIntensity"
+    },
+    {
+      "file": "/root/git/isolated/mycelium/crates/mycelium-interp/src/supervise.rs",
+      "line": 116,
+      "col": 1,
+      "category": "DeriveSatisfied",
+      "rust_construct": "DeriveSatisfied",
+      "snippet": "# [doc = \" **Max-restart-intensity** for `reclaim` supervision (RFC-0008 §4.7; Erlang/OTP, Research Record 05\"] # [doc = \" T5.3): at most `max_restarts` within a window of `window_ticks` **logical** ticks.\"] # [doc = \"\"] # [doc = \" v0 uses a **logical clock** — a deterministic, monotonic counter the supervisor advances — not the\"] # [doc = \" wall clock; physical/hybrid clocks for real time are RFC-0008 R8-Q3, deferred. This is the *rate*\"] # [doc = \" bound; it composes with a `cascade` effect **budget** (the *total* restart cap) so a restart storm\"] # [doc = \" is bounded on **both** axes (the combined disposition): exceeding *either* is an explicit\"] # [doc = \" [`Escalation`], a **declared, bounded cascade** (RT4/RT7), never an unbounded storm.\"] # [derive (Debug , Clone , Copy , PartialEq , Eq)] pub struct RestartIntensity { # [doc = \" The maximum restarts permitted within the window.\"] pub max_restarts : u32 , # [doc = \" The window length, in logical-clock ticks.\"] pub window_ticks : u64 , }",
+      "reason": "struct `RestartIntensity` derive(Clone) is a satisfied no-op under Mycelium's value semantics (ADR-003 — every value already copies structurally; DN-128 §6.1) — not emitted as an impl, not a gap",
+      "item_name": "RestartIntensity"
+    },
+    {
+      "file": "/root/git/isolated/mycelium/crates/mycelium-interp/src/supervise.rs",
+      "line": 116,
+      "col": 1,
+      "category": "DeriveSatisfied",
+      "rust_construct": "DeriveSatisfied",
+      "snippet": "# [doc = \" **Max-restart-intensity** for `reclaim` supervision (RFC-0008 §4.7; Erlang/OTP, Research Record 05\"] # [doc = \" T5.3): at most `max_restarts` within a window of `window_ticks` **logical** ticks.\"] # [doc = \"\"] # [doc = \" v0 uses a **logical clock** — a deterministic, monotonic counter the supervisor advances — not the\"] # [doc = \" wall clock; physical/hybrid clocks for real time are RFC-0008 R8-Q3, deferred. This is the *rate*\"] # [doc = \" bound; it composes with a `cascade` effect **budget** (the *total* restart cap) so a restart storm\"] # [doc = \" is bounded on **both** axes (the combined disposition): exceeding *either* is an explicit\"] # [doc = \" [`Escalation`], a **declared, bounded cascade** (RT4/RT7), never an unbounded storm.\"] # [derive (Debug , Clone , Copy , PartialEq , Eq)] pub struct RestartIntensity { # [doc = \" The maximum restarts permitted within the window.\"] pub max_restarts : u32 , # [doc = \" The window length, in logical-clock ticks.\"] pub window_ticks : u64 , }",
+      "reason": "struct `RestartIntensity` derive(Copy) is a satisfied no-op under Mycelium's value semantics (ADR-003 — every value already copies structurally; DN-128 §6.1) — not emitted as an impl, not a gap",
+      "item_name": "RestartIntensity"
+    },
+    {
+      "file": "/root/git/isolated/mycelium/crates/mycelium-interp/src/supervise.rs",
+      "line": 116,
+      "col": 1,
+      "category": "DeriveAttr",
+      "rust_construct": "DeriveAttr",
+      "snippet": "# [doc = \" **Max-restart-intensity** for `reclaim` supervision (RFC-0008 §4.7; Erlang/OTP, Research Record 05\"] # [doc = \" T5.3): at most `max_restarts` within a window of `window_ticks` **logical** ticks.\"] # [doc = \"\"] # [doc = \" v0 uses a **logical clock** — a deterministic, monotonic counter the supervisor advances — not the\"] # [doc = \" wall clock; physical/hybrid clocks for real time are RFC-0008 R8-Q3, deferred. This is the *rate*\"] # [doc = \" bound; it composes with a `cascade` effect **budget** (the *total* restart cap) so a restart storm\"] # [doc = \" is bounded on **both** axes (the combined disposition): exceeding *either* is an explicit\"] # [doc = \" [`Escalation`], a **declared, bounded cascade** (RT4/RT7), never an unbounded storm.\"] # [derive (Debug , Clone , Copy , PartialEq , Eq)] pub struct RestartIntensity { # [doc = \" The maximum restarts permitted within the window.\"] pub max_restarts : u32 , # [doc = \" The window length, in logical-clock ticks.\"] pub window_ticks : u64 , }",
+      "reason": "struct `RestartIntensity` derive(...) names Eq not in the DN-128 standard-derive set this leaf builds (Debug/Default/Clone/Copy/PartialEq/PartialOrd/Hash all recognized; bare Eq/Ord are deliberately NOT recognized — see emit/derives/mod.rs::TABLE's doc for why) — dropped, no confirmed Mycelium surface",
+      "item_name": "RestartIntensity"
+    },
+    {
+      "file": "/root/git/isolated/mycelium/crates/mycelium-interp/src/supervise.rs",
+      "line": 132,
+      "col": 1,
+      "category": "PayloadVariant",
+      "rust_construct": "PayloadVariant",
+      "snippet": "# [doc = \" A supervisor escalated: a restart cascade hit a bound and the supervisor itself fails (its own\"] # [doc = \" explicit outcome — never an unbounded restart storm; RT4/RT7). Carries *why* (rate vs. total).\"] # [derive (Debug , Clone , PartialEq , Eq)] pub enum Escalation { # [doc = \" The windowed [`RestartIntensity`] rate was exceeded.\"] IntensityExceeded { # [doc = \" The restarts observed within the window (including the one that tripped it).\"] restarts_in_window : u32 , # [doc = \" The configured ceiling.\"] max_restarts : u32 , # [doc = \" The window length (logical ticks).\"] window_ticks : u64 , } , # [doc = \" The total restart **cascade budget** was exhausted (the M-353 effect-budget channel).\"] CascadeBudgetExhausted (EffectBudgetExhausted) , }",
+      "reason": "enum `Escalation` has a named-field variant referencing a type not resolvable in-file — emitting it positionally would introduce an unresolved reference that poisons the file's `myc check`; left gapped under the M-1006 resolvability gate (VR-5/G2)",
+      "item_name": "Escalation"
+    },
+    {
+      "file": "/root/git/isolated/mycelium/crates/mycelium-interp/src/supervise.rs",
+      "line": 149,
+      "col": 1,
+      "category": "Impl",
+      "rust_construct": "Impl",
+      "snippet": "impl fmt :: Display for Escalation { fn fmt (& self , f : & mut fmt :: Formatter < '_ >) -> fmt :: Result { match self { Escalation :: IntensityExceeded { restarts_in_window , max_restarts , window_ticks , } => write ! (f , \"supervisor escalated: {restarts_in_window} restarts within {window_ticks} ticks \\\n                 exceeds the max-restart-intensity {max_restarts} (RFC-0008 §4.7) — a bounded cascade, \\\n                 not an unbounded storm\") , Escalation :: CascadeBudgetExhausted (e) => { write ! (f , \"supervisor escalated: {e}\") } } } }",
+      "reason": "trait-impl of non-prelude trait `Display` — no ambient trait definition and synthetic trait emission is refused (DN-34 §8.8 / DN-122 MVP); gapped the whole impl so the residual cannot file-poison myc-check (G2; express gap-close 2026-07-16)",
+      "item_name": "Escalation"
+    },
+    {
+      "file": "/root/git/isolated/mycelium/crates/mycelium-interp/src/supervise.rs",
+      "line": 169,
+      "col": 1,
+      "category": "Impl",
+      "rust_construct": "Impl",
+      "snippet": "impl std :: error :: Error for Escalation { }",
+      "reason": "trait-impl of non-prelude trait `Error` — no ambient trait definition and synthetic trait emission is refused (DN-34 §8.8 / DN-122 MVP); gapped the whole impl so the residual cannot file-poison myc-check (G2; express gap-close 2026-07-16)",
+      "item_name": "Escalation"
+    },
+    {
+      "file": "/root/git/isolated/mycelium/crates/mycelium-interp/src/supervise.rs",
+      "line": 171,
+      "col": 1,
+      "category": "Struct",
+      "rust_construct": "Struct",
+      "snippet": "# [doc = \" A `reclaim` **supervisor** (RFC-0008 §4.7; RT4/RT7): it restarts a failed child under a *bounded*\"] # [doc = \" cascade, escalating (its own explicit failure) when the cascade hits **either** bound — the total\"] # [doc = \" `cascade` budget (M-353) **or** the windowed [`RestartIntensity`] rate. Both axes are honest and\"] # [doc = \" declared; neither lets a restart storm run away.\"] # [doc = \"\"] # [doc = \" The logical clock is the supervisor's own monotonic counter ([`tick`](Supervisor::tick)); a driver\"] # [doc = \" advances it deterministically (one tick per supervised step, say). No wall clock is read (R8-Q3).\"] # [derive (Debug , Clone)] pub struct Supervisor { intensity : RestartIntensity , budgets : Budgets , # [doc = \" The logical tick of each restart still inside the current window (oldest at the front).\"] restarts : VecDeque < u64 > , clock : u64 , }",
+      "reason": "struct `Supervisor` uses named fields and references a type not resolvable in-file — emitting it positionally would introduce an unresolved reference that poisons the file's `myc check`; left gapped under the M-1006 resolvability gate (VR-5/G2)",
+      "item_name": "Supervisor"
+    },
+    {
+      "file": "/root/git/isolated/mycelium/crates/mycelium-interp/src/supervise.rs",
+      "line": 187,
+      "col": 1,
+      "category": "Impl",
+      "rust_construct": "Impl",
+      "snippet": "impl Supervisor { # [doc = \" A supervisor with a windowed [`RestartIntensity`] (the *rate* bound) and a total `cascade`\"] # [doc = \" budget of `max_total` restarts (the *cascade* bound). Both must hold for a restart to proceed.\"] # [must_use] pub fn new (intensity : RestartIntensity , max_total : u64) -> Self { Supervisor { intensity , budgets : Budgets :: new () . with (crate :: budget :: EffectBudget :: Depth (max_total)) , restarts : VecDeque :: new () , clock : 0 , } } # [doc = \" The current logical tick.\"] # [must_use] pub fn now (& self) -> u64 { self . clock } # [doc = \" Advance the logical clock by one tick and return the new value. A deterministic, monotonic\"] # [doc = \" counter — *not* wall-clock time (R8-Q3).\"] pub fn tick (& mut self) -> u64 { self . clock += 1 ; self . clock } # [doc = \" The total restart budget remaining (the `cascade` cap).\"] # [must_use] pub fn restarts_remaining (& self) -> u64 { self . budgets . remaining (& EffectKind :: Cascade) . unwrap_or (0) } # [doc = \" Record a restart at the current logical tick. Succeeds iff **both** bounds hold; otherwise the\"] # [doc = \" supervisor **escalates** with an explicit [`Escalation`] (never an unbounded storm).\"] # [doc = \"\"] # [doc = \" Enforcement order (both are checked, both are honest): first the **total** `cascade` budget\"] # [doc = \" (M-353 channel) — a [`EffectBudgetExhausted`] becomes [`Escalation::CascadeBudgetExhausted`];\"] # [doc = \" then the **windowed** intensity *rate* — too many restarts within `window_ticks` becomes\"] # [doc = \" [`Escalation::IntensityExceeded`].\"] # [doc = \"\"] # [doc = \" # Errors\"] # [doc = \" Returns [`Escalation`] when the total cascade budget is exhausted or the windowed restart\"] # [doc = \" intensity is exceeded.\"] pub fn record_restart (& mut self) -> Result < () , Escalation > { self . budgets . consume (EffectKind :: Cascade , 1) . map_err (Escalation :: CascadeBudgetExhausted) ? ; let cutoff = self . clock . saturating_sub (self . intensity . window_ticks) ; while self . restarts . front () . is_some_and (| & t | t <= cutoff) { self . restarts . pop_front () ; } self . restarts . push_back (self . clock) ; let in_window = u32 :: try_from (self . restarts . len ()) . unwrap_or (u32 :: MAX) ; if in_window > self . intensity . max_restarts { return Err (Escalation :: IntensityExceeded { restarts_in_window : in_window , max_restarts : self . intensity . max_restarts , window_ticks : self . intensity . window_ticks , }) ; } Ok (()) } }",
+      "reason": "no member of this impl block could be transpiled (5 sub-issue(s)): impl method `new` body: struct literal `Supervisor { .. }` — not an in-file single-ctor struct or enum struct-variant that emits (no constructor to build; a cross-nodule variant is an honest DN-113/DN-134-OQ-2 resolvability gap, never a fabricated out-of-file reference — VR-5/G2); impl method `now` body: field projection `self.clock` on `Supervisor` — not an in-file single-ctor struct that emits (an enum / external / non-resolvable type has no constructor to `match` against); impl method `tick` body: field assignment `self.clock = ..` on `Supervisor` — not an in-file single-ctor struct that emits (no constructor to rebuild); impl method `restarts_remaining` body: method call `.unwrap_or(...)` has no proven-emitted free-fn referent in this file (neither a D4-mangled inherent `Type__unwrap_or` nor a bare inherent recorded by this file's left-to-right pass, nor a prim_map / combinator row). Emitting bare `unwrap_or(recv, …)` would fabricate an unknown prim and file-poison myc-check (G-β Rank A / G2/VR-5; residual when the method body itself gapped — e.g. M-1037 `.to_vec()` inside `read_to_end` — so the declaration was never registered); impl method `record_restart` body: mutating method body statement is neither a `let`, a supported `self.<field>`/`*<param>` re-assignment, nor (in tail position) the method's own return value — value-threading deliberately refuses any shape outside a flat re-assignment sequence rather than risk an unsound rebind (DN-125 §6.1, never-silent G2/VR-5)",
+      "item_name": "Supervisor"
+    },
+    {
+      "file": "/root/git/isolated/mycelium/crates/mycelium-interp/src/supervise.rs",
+      "line": 254,
+      "col": 1,
+      "category": "TestItem",
+      "rust_construct": "TestItem",
+      "snippet": "# [cfg (test)] mod tests { use super :: * ; # [test] fn cancellation_is_cooperative_and_explicit () { let tok = CancelToken :: new () ; assert ! (tok . check () . is_ok ()) ; tok . cancel () ; assert ! (tok . is_cancelled ()) ; assert_eq ! (tok . check () . unwrap_err () , Cancelled) ; let other = tok . clone () ; assert ! (other . is_cancelled ()) ; } # [test] fn a_task_outcome_never_silently_succeeds_on_failure () { let done : TaskOutcome < u8 , & str > = TaskOutcome :: Done (1) ; assert ! (! done . is_failure ()) ; assert ! (TaskOutcome ::< u8 , & str >:: Failed (\"boom\") . is_failure ()) ; assert ! (TaskOutcome ::< u8 , & str >:: Cancelled . is_failure ()) ; assert ! (TaskOutcome ::< u8 , & str >:: BudgetExhausted (EffectBudgetExhausted { kind : EffectKind :: Retry , requested : 1 , remaining : 0 , }) . is_failure ()) ; } # [test] fn supervision_bounds_a_cascade_by_total_count () { let mut sup = Supervisor :: new (RestartIntensity { max_restarts : 100 , window_ticks : 1_000 , } , 2 ,) ; sup . tick () ; assert ! (sup . record_restart () . is_ok ()) ; assert ! (sup . record_restart () . is_ok ()) ; assert_eq ! (sup . restarts_remaining () , 0) ; match sup . record_restart () { Err (Escalation :: CascadeBudgetExhausted (e)) => assert_eq ! (e . kind , EffectKind :: Cascade) , other => panic ! (\"expected a cascade-budget escalation, got {other:?}\") , } } # [test] fn supervision_bounds_a_cascade_by_windowed_rate () { let mut sup = Supervisor :: new (RestartIntensity { max_restarts : 2 , window_ticks : 5 , } , 1_000 ,) ; sup . tick () ; assert ! (sup . record_restart () . is_ok ()) ; sup . tick () ; assert ! (sup . record_restart () . is_ok ()) ; sup . tick () ; match sup . record_restart () { Err (Escalation :: IntensityExceeded { restarts_in_window , max_restarts , .. }) => { assert_eq ! (restarts_in_window , 3) ; assert_eq ! (max_restarts , 2) ; } other => panic ! (\"expected an intensity escalation, got {other:?}\") , } for _ in 0 .. 10 { sup . tick () ; } assert ! (sup . record_restart () . is_ok () , \"after the window clears, restarting is bounded-OK again\") ; } # [test] fn cancelled_display_is_non_empty_and_descriptive () { let msg = Cancelled . to_string () ; assert ! (! msg . is_empty () , \"Cancelled Display must not be empty (got empty string)\") ; assert ! (msg . to_lowercase () . contains (\"cancel\") , \"Cancelled Display must mention 'cancel'; got: {msg:?}\") ; } # [test] fn escalation_display_is_non_empty_and_variant_specific () { let e = Escalation :: IntensityExceeded { restarts_in_window : 5 , max_restarts : 3 , window_ticks : 10 , } ; let msg = e . to_string () ; assert ! (! msg . is_empty () , \"Escalation::IntensityExceeded Display must not be empty\") ; assert ! (msg . contains ('5') || msg . contains ('3') , \"IntensityExceeded Display must contain the restart counts; got: {msg:?}\") ; let cascade_e = Escalation :: CascadeBudgetExhausted (EffectBudgetExhausted { kind : EffectKind :: Cascade , requested : 1 , remaining : 0 , }) ; let cascade_msg = cascade_e . to_string () ; assert ! (! cascade_msg . is_empty () , \"Escalation::CascadeBudgetExhausted Display must not be empty\") ; } # [test] fn supervisor_now_reflects_actual_tick_count () { let mut sup = Supervisor :: new (RestartIntensity { max_restarts : 100 , window_ticks : 1_000 , } , 1_000 ,) ; assert_eq ! (sup . now () , 0 , \"initial tick is 0\") ; sup . tick () ; assert_eq ! (sup . now () , 1 , \"after 1 tick, now() must be 1 (not 0 or some constant)\") ; sup . tick () ; assert_eq ! (sup . now () , 2 , \"after 2 ticks, now() must be 2 (not 1 or 0)\") ; for _ in 0 .. 8 { sup . tick () ; } assert_eq ! (sup . now () , 10 , \"after 10 ticks total, now() must be 10\") ; } # [test] fn supervisor_restarts_remaining_decrements_correctly () { let mut sup = Supervisor :: new (RestartIntensity { max_restarts : 100 , window_ticks : 1_000 , } , 5 ,) ; assert_eq ! (sup . restarts_remaining () , 5 , \"before any restarts, remaining must be 5\") ; sup . tick () ; sup . record_restart () . unwrap () ; assert_eq ! (sup . restarts_remaining () , 4 , \"after 1 restart, remaining must be 4 (not 0)\") ; sup . tick () ; sup . record_restart () . unwrap () ; assert_eq ! (sup . restarts_remaining () , 3 , \"after 2 restarts, remaining must be 3 (not 0)\") ; } }",
+      "reason": "#[cfg(test)] item — out of scope for this PoC's transpilation surface (excluded from the expressible-fraction denominator, but recorded, never silently skipped)",
+      "item_name": "tests"
+    }
+  ],
+  "total_top_level_items": 19
+}

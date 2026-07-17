@@ -1,0 +1,405 @@
+{
+  "source": "/root/git/isolated/mycelium/crates/mycelium-interp/src/lib.rs",
+  "emitted_items": [
+    "co-emit:GuaranteeStrength",
+    "co-include:EffectBudget,EffectBudgetExhausted,EffectKind",
+    "co-include:BatchHead,ParallelPlan",
+    "co-include+use:Cancelled,RestartIntensity,TaskOutcome",
+    "co-include:IdentitySwapEngine",
+    "Step",
+    "DEFAULT_FUEL"
+  ],
+  "gaps": [
+    {
+      "file": "/root/git/isolated/mycelium/crates/mycelium-interp/src/lib.rs",
+      "line": 1,
+      "col": 1,
+      "category": "InnerAttr",
+      "rust_construct": "InnerAttr",
+      "snippet": "# ! [forbid (unsafe_code)]",
+      "reason": "crate/file-level inner attributes (#![...]) are not transpiled (no nodule-header equivalent for these Rust-specific directives)",
+      "item_name": null
+    },
+    {
+      "file": "/root/git/isolated/mycelium/crates/mycelium-interp/src/lib.rs",
+      "line": 109,
+      "col": 1,
+      "category": "ModuleDecl",
+      "rust_construct": "ModuleDecl",
+      "snippet": "pub mod budget ;",
+      "reason": "external `mod foo;` declaration — file-linkage, not translatable library surface (Mycelium's nodule-per-file model makes the module tree implicit in the file layout; the sibling file transpiles as its own nodule). Excluded from the expressible-fraction denominator, recorded not dropped",
+      "item_name": "budget"
+    },
+    {
+      "file": "/root/git/isolated/mycelium/crates/mycelium-interp/src/lib.rs",
+      "line": 110,
+      "col": 1,
+      "category": "ModuleDecl",
+      "rust_construct": "ModuleDecl",
+      "snippet": "pub mod parallel ;",
+      "reason": "external `mod foo;` declaration — file-linkage, not translatable library surface (Mycelium's nodule-per-file model makes the module tree implicit in the file layout; the sibling file transpiles as its own nodule). Excluded from the expressible-fraction denominator, recorded not dropped",
+      "item_name": "parallel"
+    },
+    {
+      "file": "/root/git/isolated/mycelium/crates/mycelium-interp/src/lib.rs",
+      "line": 111,
+      "col": 1,
+      "category": "ModuleDecl",
+      "rust_construct": "ModuleDecl",
+      "snippet": "pub mod prims ;",
+      "reason": "external `mod foo;` declaration — file-linkage, not translatable library surface (Mycelium's nodule-per-file model makes the module tree implicit in the file layout; the sibling file transpiles as its own nodule). Excluded from the expressible-fraction denominator, recorded not dropped",
+      "item_name": "prims"
+    },
+    {
+      "file": "/root/git/isolated/mycelium/crates/mycelium-interp/src/lib.rs",
+      "line": 112,
+      "col": 1,
+      "category": "ModuleDecl",
+      "rust_construct": "ModuleDecl",
+      "snippet": "pub mod supervise ;",
+      "reason": "external `mod foo;` declaration — file-linkage, not translatable library surface (Mycelium's nodule-per-file model makes the module tree implicit in the file layout; the sibling file transpiles as its own nodule). Excluded from the expressible-fraction denominator, recorded not dropped",
+      "item_name": "supervise"
+    },
+    {
+      "file": "/root/git/isolated/mycelium/crates/mycelium-interp/src/lib.rs",
+      "line": 113,
+      "col": 1,
+      "category": "ModuleDecl",
+      "rust_construct": "ModuleDecl",
+      "snippet": "pub mod swap ;",
+      "reason": "external `mod foo;` declaration — file-linkage, not translatable library surface (Mycelium's nodule-per-file model makes the module tree implicit in the file layout; the sibling file transpiles as its own nodule). Excluded from the expressible-fraction denominator, recorded not dropped",
+      "item_name": "swap"
+    },
+    {
+      "file": "/root/git/isolated/mycelium/crates/mycelium-interp/src/lib.rs",
+      "line": 115,
+      "col": 1,
+      "category": "TestItem",
+      "rust_construct": "TestItem",
+      "snippet": "# [cfg (test)] mod tests ;",
+      "reason": "#[cfg(test)] item — out of scope for this PoC's transpilation surface (excluded from the expressible-fraction denominator, but recorded, never silently skipped)",
+      "item_name": "tests"
+    },
+    {
+      "file": "/root/git/isolated/mycelium/crates/mycelium-interp/src/lib.rs",
+      "line": 118,
+      "col": 1,
+      "category": "Import",
+      "rust_construct": "Import",
+      "snippet": "use std :: sync :: Arc ;",
+      "reason": "`use std.sync::Arc` — `std.sync` is not a sibling module OR sibling phylum transpiled in this same batch (an external crate, `std`, or simply out of this batch's target set). Flagged, not guessed (VR-5/G2)",
+      "item_name": null
+    },
+    {
+      "file": "/root/git/isolated/mycelium/crates/mycelium-interp/src/lib.rs",
+      "line": 120,
+      "col": 1,
+      "category": "Import",
+      "rust_construct": "Import",
+      "snippet": "use mycelium_core :: { Alt , CoreValue , Datum , GuaranteeStrength , Node , Repr , Value , WfError } ;",
+      "reason": "`use mycelium_core::Alt` — `mycelium_core` is not a sibling module OR sibling phylum transpiled in this same batch (an external crate, `std`, or simply out of this batch's target set). Flagged, not guessed (VR-5/G2); `use mycelium_core::CoreValue` — `mycelium_core` is not a sibling module OR sibling phylum transpiled in this same batch (an external crate, `std`, or simply out of this batch's target set). Flagged, not guessed (VR-5/G2); `use mycelium_core::Datum` — `mycelium_core` is not a sibling module OR sibling phylum transpiled in this same batch (an external crate, `std`, or simply out of this batch's target set). Flagged, not guessed (VR-5/G2); `use mycelium_core::GuaranteeStrength` — `mycelium_core` is not a sibling module OR sibling phylum transpiled in this same batch (an external crate, `std`, or simply out of this batch's target set). Flagged, not guessed (VR-5/G2); `use mycelium_core::Node` — `mycelium_core` is not a sibling module OR sibling phylum transpiled in this same batch (an external crate, `std`, or simply out of this batch's target set). Flagged, not guessed (VR-5/G2); `use mycelium_core::Repr` — `mycelium_core` is not a sibling module OR sibling phylum transpiled in this same batch (an external crate, `std`, or simply out of this batch's target set). Flagged, not guessed (VR-5/G2); `use mycelium_core::Value` — `mycelium_core` is not a sibling module OR sibling phylum transpiled in this same batch (an external crate, `std`, or simply out of this batch's target set). Flagged, not guessed (VR-5/G2); `use mycelium_core::WfError` — `mycelium_core` is not a sibling module OR sibling phylum transpiled in this same batch (an external crate, `std`, or simply out of this batch's target set). Flagged, not guessed (VR-5/G2)",
+      "item_name": null
+    },
+    {
+      "file": "/root/git/isolated/mycelium/crates/mycelium-interp/src/lib.rs",
+      "line": 121,
+      "col": 1,
+      "category": "Import",
+      "rust_construct": "Import",
+      "snippet": "use mycelium_workstack :: { ensure_sufficient_stack , BudgetError , DepthGuard , RecursionBudget } ;",
+      "reason": "`use mycelium_workstack::ensure_sufficient_stack` — `mycelium_workstack` is not a sibling module OR sibling phylum transpiled in this same batch (an external crate, `std`, or simply out of this batch's target set). Flagged, not guessed (VR-5/G2); `use mycelium_workstack::BudgetError` — `mycelium_workstack` is not a sibling module OR sibling phylum transpiled in this same batch (an external crate, `std`, or simply out of this batch's target set). Flagged, not guessed (VR-5/G2); `use mycelium_workstack::DepthGuard` — `mycelium_workstack` is not a sibling module OR sibling phylum transpiled in this same batch (an external crate, `std`, or simply out of this batch's target set). Flagged, not guessed (VR-5/G2); `use mycelium_workstack::RecursionBudget` — `mycelium_workstack` is not a sibling module OR sibling phylum transpiled in this same batch (an external crate, `std`, or simply out of this batch's target set). Flagged, not guessed (VR-5/G2)",
+      "item_name": null
+    },
+    {
+      "file": "/root/git/isolated/mycelium/crates/mycelium-interp/src/lib.rs",
+      "line": 123,
+      "col": 1,
+      "category": "Import",
+      "rust_construct": "Import",
+      "snippet": "pub use budget :: { Budgets , EffectBudget , EffectBudgetExhausted , EffectKind } ;",
+      "reason": "`use budget::Budgets` — `Budgets` is not among sibling `budget`'s successfully-emitted surface in this batch (the sibling file itself gapped it rather than emitting it). Flagged, not guessed (VR-5/G2)",
+      "item_name": "co-include:EffectBudget,EffectBudgetExhausted,EffectKind"
+    },
+    {
+      "file": "/root/git/isolated/mycelium/crates/mycelium-interp/src/lib.rs",
+      "line": 124,
+      "col": 1,
+      "category": "Import",
+      "rust_construct": "Import",
+      "snippet": "pub use parallel :: { is_pure , plan_parallel , BatchHead , ParallelPlan } ;",
+      "reason": "`use parallel::is_pure` — `is_pure` is not among sibling `parallel`'s successfully-emitted surface in this batch (the sibling file itself gapped it rather than emitting it). Flagged, not guessed (VR-5/G2)",
+      "item_name": "co-include:BatchHead,ParallelPlan"
+    },
+    {
+      "file": "/root/git/isolated/mycelium/crates/mycelium-interp/src/lib.rs",
+      "line": 124,
+      "col": 1,
+      "category": "Import",
+      "rust_construct": "Import",
+      "snippet": "pub use parallel :: { is_pure , plan_parallel , BatchHead , ParallelPlan } ;",
+      "reason": "`use parallel::plan_parallel` — `plan_parallel` is not among sibling `parallel`'s successfully-emitted surface in this batch (the sibling file itself gapped it rather than emitting it). Flagged, not guessed (VR-5/G2)",
+      "item_name": "co-include:BatchHead,ParallelPlan"
+    },
+    {
+      "file": "/root/git/isolated/mycelium/crates/mycelium-interp/src/lib.rs",
+      "line": 125,
+      "col": 1,
+      "category": "Import",
+      "rust_construct": "Import",
+      "snippet": "pub use prims :: PrimRegistry ;",
+      "reason": "`use prims::PrimRegistry` — `PrimRegistry` is not among sibling `prims`'s successfully-emitted surface in this batch (the sibling file itself gapped it rather than emitting it). Flagged, not guessed (VR-5/G2)",
+      "item_name": null
+    },
+    {
+      "file": "/root/git/isolated/mycelium/crates/mycelium-interp/src/lib.rs",
+      "line": 126,
+      "col": 1,
+      "category": "Import",
+      "rust_construct": "Import",
+      "snippet": "pub use supervise :: { CancelToken , Cancelled , Escalation , RestartIntensity , Supervisor , TaskOutcome , } ;",
+      "reason": "`use supervise::CancelToken` — `CancelToken` is not among sibling `supervise`'s successfully-emitted surface in this batch (the sibling file itself gapped it rather than emitting it). Flagged, not guessed (VR-5/G2)",
+      "item_name": "co-include+use:Cancelled,RestartIntensity,TaskOutcome"
+    },
+    {
+      "file": "/root/git/isolated/mycelium/crates/mycelium-interp/src/lib.rs",
+      "line": 126,
+      "col": 1,
+      "category": "Import",
+      "rust_construct": "Import",
+      "snippet": "pub use supervise :: { CancelToken , Cancelled , Escalation , RestartIntensity , Supervisor , TaskOutcome , } ;",
+      "reason": "`use supervise::Escalation` — `Escalation` is not among sibling `supervise`'s successfully-emitted surface in this batch (the sibling file itself gapped it rather than emitting it). Flagged, not guessed (VR-5/G2)",
+      "item_name": "co-include+use:Cancelled,RestartIntensity,TaskOutcome"
+    },
+    {
+      "file": "/root/git/isolated/mycelium/crates/mycelium-interp/src/lib.rs",
+      "line": 126,
+      "col": 1,
+      "category": "Import",
+      "rust_construct": "Import",
+      "snippet": "pub use supervise :: { CancelToken , Cancelled , Escalation , RestartIntensity , Supervisor , TaskOutcome , } ;",
+      "reason": "`use supervise::Supervisor` — `Supervisor` is not among sibling `supervise`'s successfully-emitted surface in this batch (the sibling file itself gapped it rather than emitting it). Flagged, not guessed (VR-5/G2)",
+      "item_name": "co-include+use:Cancelled,RestartIntensity,TaskOutcome"
+    },
+    {
+      "file": "/root/git/isolated/mycelium/crates/mycelium-interp/src/lib.rs",
+      "line": 129,
+      "col": 1,
+      "category": "Import",
+      "rust_construct": "Import",
+      "snippet": "pub use swap :: { IdentitySwapEngine , SwapEngine } ;",
+      "reason": "`use swap::SwapEngine` — `SwapEngine` is not among sibling `swap`'s successfully-emitted surface in this batch (the sibling file itself gapped it rather than emitting it). Flagged, not guessed (VR-5/G2)",
+      "item_name": "co-include:IdentitySwapEngine"
+    },
+    {
+      "file": "/root/git/isolated/mycelium/crates/mycelium-interp/src/lib.rs",
+      "line": 131,
+      "col": 1,
+      "category": "DeriveAttr",
+      "rust_construct": "DeriveAttr",
+      "snippet": "# [doc = \" The result of one small-step attempt on a node.\"] # [derive (Debug , Clone , PartialEq)] pub enum Step { # [doc = \" The node is already a value (`Const`) — no redex.\"] Value , # [doc = \" The node reduced by one step to this successor. Boxed because a [`Node`] embeds a whole\"] # [doc = \" [`Value`] and would otherwise dwarf the `Value` variant.\"] Next (Box < Node >) , }",
+      "reason": "enum `Step` derive(Debug): variant 1 (`Next`) field 0 has type `Box[Node]`, a primitive repr (or `Seq`/tuple/other bracketed shape) with no ambient `Show` instance in this file — the whole derive is left an honest gap rather than a partial/fabricated render (G2)",
+      "item_name": "Step"
+    },
+    {
+      "file": "/root/git/isolated/mycelium/crates/mycelium-interp/src/lib.rs",
+      "line": 131,
+      "col": 1,
+      "category": "DeriveSatisfied",
+      "rust_construct": "DeriveSatisfied",
+      "snippet": "# [doc = \" The result of one small-step attempt on a node.\"] # [derive (Debug , Clone , PartialEq)] pub enum Step { # [doc = \" The node is already a value (`Const`) — no redex.\"] Value , # [doc = \" The node reduced by one step to this successor. Boxed because a [`Node`] embeds a whole\"] # [doc = \" [`Value`] and would otherwise dwarf the `Value` variant.\"] Next (Box < Node >) , }",
+      "reason": "enum `Step` derive(Clone) is a satisfied no-op under Mycelium's value semantics (ADR-003 — every value already copies structurally; DN-128 §6.1) — not emitted as an impl, not a gap",
+      "item_name": "Step"
+    },
+    {
+      "file": "/root/git/isolated/mycelium/crates/mycelium-interp/src/lib.rs",
+      "line": 131,
+      "col": 1,
+      "category": "DeriveAttr",
+      "rust_construct": "DeriveAttr",
+      "snippet": "# [doc = \" The result of one small-step attempt on a node.\"] # [derive (Debug , Clone , PartialEq)] pub enum Step { # [doc = \" The node is already a value (`Const`) — no redex.\"] Value , # [doc = \" The node reduced by one step to this successor. Boxed because a [`Node`] embeds a whole\"] # [doc = \" [`Value`] and would otherwise dwarf the `Value` variant.\"] Next (Box < Node >) , }",
+      "reason": "enum `Step` derive(PartialEq): variant 1 (`Next`) field 0 has type `Box[Node]`, a `Seq`/tuple or other bracketed shape with no structural-equality route yet — the whole derive is left an honest gap rather than a partial/fabricated equality (G2)",
+      "item_name": "Step"
+    },
+    {
+      "file": "/root/git/isolated/mycelium/crates/mycelium-interp/src/lib.rs",
+      "line": 141,
+      "col": 1,
+      "category": "PayloadVariant",
+      "rust_construct": "PayloadVariant",
+      "snippet": "# [doc = \" Why evaluation could not proceed (always explicit — the interpreter is never silent; SC-3/G2).\"] # [derive (Debug , Clone , PartialEq)] pub enum EvalError { # [doc = \" A free variable was encountered (the program is not closed).\"] FreeVariable (String) , # [doc = \" No primitive is registered under this name.\"] UnknownPrim (String) , # [doc = \" A primitive was applied to the wrong arity/paradigm/width.\"] PrimType { # [doc = \" The primitive name.\"] prim : String , # [doc = \" A human-readable explanation.\"] why : String , } , # [doc = \" A primitive would have to compose an approximate input for which it has **no defined\"] # [doc = \" ε-propagation rule** (the logical `bit.*` ops; `trit.mul` pending the Dense magnitudes; or an\"] # [doc = \" input carrying a non-`Error` bound). The additive arithmetic *does* compose now via the\"] # [doc = \" verified-numerics kernel (M-204; ADR-010); this is refused rather than fabricating a bound.\"] ApproxCompositionUnsupported { # [doc = \" The primitive name.\"] prim : String , } , # [doc = \" The swap engine does not support this `(from → to)` conversion (the certified cross-paradigm\"] # [doc = \" swap is M-120).\"] UnsupportedSwap { # [doc = \" Source representation.\"] from : Repr , # [doc = \" Target representation.\"] to : Repr , } , # [doc = \" A fixed-width arithmetic result fell outside the representable range — explicit, never a\"] # [doc = \" silent wrap (SC-3; balanced-ternary range, `binary-ternary.md` §1).\"] Overflow { # [doc = \" The primitive name.\"] prim : String , } , # [doc = \" Evaluation exceeded its step budget (a non-termination guard).\"] FuelExhausted , # [doc = \" Evaluation exceeded its **control-stack depth** budget — the space analogue of `FuelExhausted`\"] # [doc = \" (M-347): the AOT env-machine (a trampoline over an explicit heap control stack) refuses past a\"] # [doc = \" depth ceiling with this **explicit, graceful** error rather than growing memory unboundedly /\"] # [doc = \" aborting. Never silent. The reference interpreter is O(1)-stack and does not raise this.\"] DepthLimit { # [doc = \" The control-stack depth ceiling that was hit.\"] limit : usize , } , # [doc = \" A declared **effect budget** was exceeded — the effect analogue of `FuelExhausted` (time) and\"] # [doc = \" `DepthLimit` (space) (RFC-0014 §4.5 I4). A bounded effect (retry/cascade/alloc/time) overruns\"] # [doc = \" its *named* budget **gracefully**: the runtime refuses with this explicit error rather than\"] # [doc = \" hanging or OOM-ing, exactly as a runaway recursion does. **One enforcement mechanism over\"] # [doc = \" separate named budgets** (RFC-0014 §8): the recovery [`Budgets`] ledger and the env-machine\"] # [doc = \" share this channel (RFC-0014 §4.8). Lives at the runtime/checker layer; introduces no L0 node\"] # [doc = \" (KC-3). Never silent (G2).\"] EffectBudget (EffectBudgetExhausted) , # [doc = \" A swap engine reported a failure (e.g. an illegal pair or an out-of-range conversion). The\"] # [doc = \" message comes from the engine; it is always explicit, never a silent coercion.\"] Swap (String) , # [doc = \" A constructed result violated a Core IR well-formedness invariant (RFC-0001 §4.3/§4.5).\"] Wf (WfError) , # [doc = \" A `Match` reduced with no alternative matching and no `default` (RFC-0011 §4.3 WF7). The\"] # [doc = \" checker proves coverage above the kernel, so this is unreachable for checked programs — kept\"] # [doc = \" as the explicit never-silent fallback (G2), never a panic or a silent default.\"] NonExhaustiveMatch , # [doc = \" A `Construct`/`Match` node was malformed against the data fragment (an arity mismatch the\"] # [doc = \" checker should have caught, a non-saturated constructor — WF6/WF7). Explicit, never a guess.\"] DataMalformed { # [doc = \" What was malformed, and why.\"] why : String , } , # [doc = \" The r3 boundary (RFC-0011 §4.6): a `Match` on a **non-`Exact` data scrutinee` would have to\"] # [doc = \" fold the scrutinee's composite *summary* guarantee into the result. Realising that without\"] # [doc = \" fabricating a bound is deferred (the reachable r3 fragment is `Exact`). Refused explicitly,\"] # [doc = \" never silently dropped.\"] GuaranteeMeetUnsupported { # [doc = \" The scrutinee's (non-`Exact`) summary guarantee.\"] scrutinee : GuaranteeStrength , } , # [doc = \" [`Interpreter::eval`] was asked for a representation [`Value`] but the program evaluated to a\"] # [doc = \" **data value** ([`mycelium_core::Datum`]). Use [`Interpreter::eval_core`] for the data\"] # [doc = \" fragment. Explicit, so a repr-only caller never silently mishandles a datum.\"] DataResult , # [doc = \" An `App` whose function position reduced to a **non-function** value (a `Const`/`Construct`,\"] # [doc = \" not a `Lam`) — RFC-0001 r4. The checker proves applications are well-typed, so this is\"] # [doc = \" unreachable for checked programs; kept as the explicit never-silent fallback (G2).\"] ApplyNonFunction , # [doc = \" The program evaluated to a **function value** (a bare `Lam`) — RFC-0001 r4. A v0 entry returns\"] # [doc = \" a representation or data value, never a function (the first-order surface has no function-typed\"] # [doc = \" results), so this is an explicit refusal rather than a silent or partial observable.\"] FunctionResult , }",
+      "reason": "enum `EvalError` has a named-field variant referencing a type not resolvable in-file — emitting it positionally would introduce an unresolved reference that poisons the file's `myc check`; left gapped under the M-1006 resolvability gate (VR-5/G2)",
+      "item_name": "EvalError"
+    },
+    {
+      "file": "/root/git/isolated/mycelium/crates/mycelium-interp/src/lib.rs",
+      "line": 232,
+      "col": 1,
+      "category": "Impl",
+      "rust_construct": "Impl",
+      "snippet": "impl From < EffectBudgetExhausted > for EvalError { # [doc = \" Route a bounded-effect overrun onto the unified runtime refusal channel (RFC-0014 §4.8): the\"] # [doc = \" env-machine and the recovery driver share this conversion so an effect overrun surfaces exactly\"] # [doc = \" as `FuelExhausted`/`DepthLimit` do — explicit and graceful, never a hang.\"] fn from (e : EffectBudgetExhausted) -> Self { EvalError :: EffectBudget (e) } }",
+      "reason": "trait-impl of non-prelude trait `From` — no ambient trait definition and synthetic trait emission is refused (DN-34 §8.8 / DN-122 MVP); gapped the whole impl so the residual cannot file-poison myc-check (G2; express gap-close 2026-07-16)",
+      "item_name": "EvalError"
+    },
+    {
+      "file": "/root/git/isolated/mycelium/crates/mycelium-interp/src/lib.rs",
+      "line": 241,
+      "col": 1,
+      "category": "Impl",
+      "rust_construct": "Impl",
+      "snippet": "impl From < BudgetError > for EvalError { # [doc = \" Reconcile the shared `mycelium-workstack` over-budget surface to the interpreter's existing\"] # [doc = \" never-silent `DepthLimit` (RFC-0041 W4/§5.1). The canonical [`BudgetError::DepthExceeded`]\"] # [doc = \" (a `u32` ceiling on the §4.0 depth metric — W1) becomes [`EvalError::DepthLimit`] (`usize`\"] # [doc = \" ceiling) at the **same threshold**, so a deep-but-fuel-cheap value refuses cleanly here exactly\"] # [doc = \" as the AOT env-machine's `depth_limit_error` does (W3½). The interpreter charges **only** the\"] # [doc = \" depth budget (`try_enter`), so `DepthExceeded` is the only variant it can produce; the\"] # [doc = \" `OutOfBudget` arm is unreachable in this crate and is mapped defensively onto the same\"] # [doc = \" `DepthLimit` channel (its ceiling reported) rather than panicking — never-silent (G2).\"] fn from (e : BudgetError) -> Self { let limit = match e { BudgetError :: DepthExceeded { limit } => limit , BudgetError :: OutOfBudget { limit , .. } => u32 :: try_from (limit) . unwrap_or (u32 :: MAX) , } ; EvalError :: DepthLimit { limit : limit as usize , } } }",
+      "reason": "trait-impl of non-prelude trait `From` — no ambient trait definition and synthetic trait emission is refused (DN-34 §8.8 / DN-122 MVP); gapped the whole impl so the residual cannot file-poison myc-check (G2; express gap-close 2026-07-16)",
+      "item_name": "EvalError"
+    },
+    {
+      "file": "/root/git/isolated/mycelium/crates/mycelium-interp/src/lib.rs",
+      "line": 261,
+      "col": 1,
+      "category": "GenericBound",
+      "rust_construct": "GenericBound",
+      "snippet": "# [doc = \" Charge one structural-recursion frame against the shared [`RecursionBudget`] (RFC-0041 W4),\"] # [doc = \" mapping a never-silent over-budget to [`EvalError::DepthLimit`]. The returned [`DepthGuard`]\"] # [doc = \" releases the frame on `Drop`, so the budget's *live* depth tracks the current structural nesting\"] # [doc = \" — sibling descents (e.g. an `Op`/`Construct`'s argument list) do **not** accumulate, only nesting\"] # [doc = \" does. This is the guard the substitution machine wraps each recursive descent in so a crafted\"] # [doc = \" deep value refuses with `DepthLimit` at the ceiling instead of a host-stack `SIGABRT` (RR-29 §0.1).\"] fn charge_depth (budget : & RecursionBudget) -> Result < DepthGuard < '_ > , EvalError > { budget . try_enter () . map_err (EvalError :: from) }",
+      "reason": "generic type path `DepthGuard < '_ >` — type argument `'_` is not a type (lifetime / const-generic / associated-type binding-or-constraint); `type_args` admits only type_refs, so left an explicit gap (VR-5)",
+      "item_name": "charge_depth"
+    },
+    {
+      "file": "/root/git/isolated/mycelium/crates/mycelium-interp/src/lib.rs",
+      "line": 271,
+      "col": 1,
+      "category": "Impl",
+      "rust_construct": "Impl",
+      "snippet": "impl core :: fmt :: Display for EvalError { fn fmt (& self , f : & mut core :: fmt :: Formatter < '_ >) -> core :: fmt :: Result { match self { EvalError :: FreeVariable (x) => write ! (f , \"free variable: {x}\") , EvalError :: UnknownPrim (p) => match p . strip_prefix (\"wild:\") { Some (op) => write ! (f , \"host capability `{op}` not granted: the `wild` FFI floor (RFC-0028 §4.3)\\\n\\u{20}dispatches through the prim registry, which registers no host op by default —\\\n\\u{20}the `@std-sys` host must register `wild:{op}` to grant it (never silent — G2)\") , None => write ! (f , \"unknown primitive: {p}\") , } , EvalError :: PrimType { prim , why } => write ! (f , \"type error in {prim}: {why}\") , EvalError :: ApproxCompositionUnsupported { prim } => write ! (f , \"{prim}: no defined ε-propagation rule for an approximate input (ADR-010/M-204)\") , EvalError :: UnsupportedSwap { from , to } => { write ! (f , \"unsupported swap: {from:?} → {to:?} (certified swap is M-120)\") } EvalError :: Overflow { prim } => { write ! (f , \"{prim}: fixed-width arithmetic overflow (result out of range)\") } EvalError :: FuelExhausted => write ! (f , \"evaluation exceeded its step budget\") , EvalError :: DepthLimit { limit } => { write ! (f , \"evaluation exceeded its control-stack depth budget ({limit})\") } EvalError :: EffectBudget (e) => write ! (f , \"{e}\") , EvalError :: Swap (msg) => write ! (f , \"swap failed: {msg}\") , EvalError :: Wf (e) => write ! (f , \"well-formedness violation: {e}\") , EvalError :: NonExhaustiveMatch => write ! (f , \"match had no matching alternative and no default (WF7 — the checker requires \\\n                 coverage)\") , EvalError :: DataMalformed { why } => write ! (f , \"malformed data node: {why}\") , EvalError :: GuaranteeMeetUnsupported { scrutinee } => write ! (f , \"match on a non-Exact data scrutinee ({scrutinee:?}): the guarantee-meet through \\\n                 Match is deferred in r3 (RFC-0011 §4.6) — the reachable fragment is Exact\") , EvalError :: DataResult => write ! (f , \"the program evaluated to a data value; use eval_core for the data fragment\") , EvalError :: ApplyNonFunction => write ! (f , \"applied a non-function value (the checker should have refused this application)\") , EvalError :: FunctionResult => write ! (f , \"the program evaluated to a function value (a v0 entry returns a repr/data value)\") , } } }",
+      "reason": "trait-impl of non-prelude trait `Display` — no ambient trait definition and synthetic trait emission is refused (DN-34 §8.8 / DN-122 MVP); gapped the whole impl so the residual cannot file-poison myc-check (G2; express gap-close 2026-07-16)",
+      "item_name": "EvalError"
+    },
+    {
+      "file": "/root/git/isolated/mycelium/crates/mycelium-interp/src/lib.rs",
+      "line": 344,
+      "col": 1,
+      "category": "Impl",
+      "rust_construct": "Impl",
+      "snippet": "impl std :: error :: Error for EvalError { }",
+      "reason": "trait-impl of non-prelude trait `Error` — no ambient trait definition and synthetic trait emission is refused (DN-34 §8.8 / DN-122 MVP); gapped the whole impl so the residual cannot file-poison myc-check (G2; express gap-close 2026-07-16)",
+      "item_name": "EvalError"
+    },
+    {
+      "file": "/root/git/isolated/mycelium/crates/mycelium-interp/src/lib.rs",
+      "line": 350,
+      "col": 1,
+      "category": "Struct",
+      "rust_construct": "Struct",
+      "snippet": "# [doc = \" The reference interpreter: a primitive registry + a swap engine. [`Interpreter::default`] wires\"] # [doc = \" the exact built-in prims and the identity swap engine.\"] # [doc = \"\"] # [doc = \" **`Clone` (M-864):** the parallel-pure-fragment evaluator (`crate::parallel`) needs an *owned*\"] # [doc = \" handle to the interpreter's config it can move into a `'static` job closure submitted to the\"] # [doc = \" M-861/M-864 persistent [`Scheduler`](mycelium_sched::scheduler::Scheduler) pool — a borrow no\"] # [doc = \" longer suffices once the pool's worker threads outlive any single `run_indexed` call (see\"] # [doc = \" `crate::parallel::eval_top_batch`). Cloning is cheap: `swap` is stored as `Arc<dyn SwapEngine>`\"] # [doc = \" (an `Arc::clone` bump, not a deep copy — `SwapEngine` itself has no `Clone` bound, since a boxed\"] # [doc = \" trait object can't derive one; `Arc` sidesteps that without changing the trait), `prims` is a\"] # [doc = \" small `BTreeMap` clone (bounded by the built-in prim count, not by program size), and `fuel` is\"] # [doc = \" `Copy`.\"] # [derive (Clone)] pub struct Interpreter { prims : PrimRegistry , swap : Arc < dyn SwapEngine > , fuel : u64 , # [doc = \" The shared [`RecursionBudget`] depth ceiling on the §4.0 metric (RFC-0041 W4/W7). Defaults to\"] # [doc = \" the global floor [`RecursionBudget::DEFAULT_DEPTH_LIMIT`] (4096) — [`Default`]/[`new`](Self::new)\"] # [doc = \" preserve the established behavior exactly. Tunable per-invocation via\"] # [doc = \" [`with_depth`](Self::with_depth): the additive constructor that lets a caller verify the\"] # [doc = \" budget→[`EvalError::DepthLimit`] mapping at an *arbitrary* ceiling (not only the floor), and that\"] # [doc = \" backs the CLI `--unbounded` escape hatch by setting it to [`u32::MAX`] (RFC-0041 §5 / DN-84 §9.3).\"] depth_limit : u32 , }",
+      "reason": "struct `Interpreter` has a field type with no confirmed mapping (unsupported Rust type form `dyn SwapEngine`)",
+      "item_name": "Interpreter"
+    },
+    {
+      "file": "/root/git/isolated/mycelium/crates/mycelium-interp/src/lib.rs",
+      "line": 376,
+      "col": 1,
+      "category": "Impl",
+      "rust_construct": "Impl",
+      "snippet": "impl Default for Interpreter { fn default () -> Self { Interpreter { prims : PrimRegistry :: with_builtins () , swap : Arc :: new (IdentitySwapEngine) , fuel : DEFAULT_FUEL , depth_limit : RecursionBudget :: DEFAULT_DEPTH_LIMIT , } } }",
+      "reason": "no member of this impl block could be transpiled (1 sub-issue(s)): impl method `default` body: struct literal `Interpreter { .. }` — not an in-file single-ctor struct or enum struct-variant that emits (no constructor to build; a cross-nodule variant is an honest DN-113/DN-134-OQ-2 resolvability gap, never a fabricated out-of-file reference — VR-5/G2)",
+      "item_name": "Interpreter"
+    },
+    {
+      "file": "/root/git/isolated/mycelium/crates/mycelium-interp/src/lib.rs",
+      "line": 387,
+      "col": 1,
+      "category": "Impl",
+      "rust_construct": "Impl",
+      "snippet": "impl Interpreter { # [doc = \" Build an interpreter with a custom prim registry and swap engine (e.g. M-120's certified\"] # [doc = \" swap, or M-111's arithmetic prims). Takes an owned `Box` (the existing, stable public\"] # [doc = \" signature); internally stored as `Arc<dyn SwapEngine>` (M-864 — see the struct docs), an\"] # [doc = \" unconditional, allocation-free `Box` → `Arc` conversion (`Arc::from`).\"] # [must_use] pub fn new (prims : PrimRegistry , swap : Box < dyn SwapEngine >) -> Self { Interpreter { prims , swap : Arc :: from (swap) , fuel : DEFAULT_FUEL , depth_limit : RecursionBudget :: DEFAULT_DEPTH_LIMIT , } } # [doc = \" Override the step budget.\"] # [must_use] pub fn with_fuel (mut self , fuel : u64) -> Self { self . fuel = fuel ; self } # [doc = \" Override the shared [`RecursionBudget`] **depth ceiling** on the §4.0 metric (RFC-0041 W7 —\"] # [doc = \" additive; the error enum and every observable are unchanged). The default is the global floor\"] # [doc = \" [`RecursionBudget::DEFAULT_DEPTH_LIMIT`] (4096); this lets a caller run the substitution machine\"] # [doc = \" under an *arbitrary* ceiling.\"] # [doc = \"\"] # [doc = \" Two uses (both never-silent, G2): (1) a **uniform-mapping check** — a small `depth_limit` (e.g.\"] # [doc = \" 8) proves a controlled-depth value refuses with [`EvalError::DepthLimit`] at *exactly* that\"] # [doc = \" ceiling, confirming the budget→error mapping is uniform across the range, not merely\"] # [doc = \" floor-verified; (2) the CLI **`--unbounded`** escape hatch (RFC-0041 §5 / DN-84 §9.3) passes\"] # [doc = \" [`u32::MAX`] to lift the deterministic ceiling for opt-in, non-deterministic REPL/exploration —\"] # [doc = \" a machine-dependent mode excluded from the conformance corpus. Even at [`u32::MAX`] the refusal\"] # [doc = \" stays never-silent: the growable deep stack ([`eval`](Self::eval)) makes memory, not a host-stack\"] # [doc = \" `SIGABRT`, the binding limit.\"] # [must_use] pub fn with_depth (mut self , depth_limit : u32) -> Self { self . depth_limit = depth_limit ; self } # [doc = \" A fresh shared [`RecursionBudget`] sized to this interpreter's [`depth_limit`](Self::with_depth),\"] # [doc = \" with the memory/work-step ceilings left effectively unbounded (as [`RecursionBudget::default`]\"] # [doc = \" does — the real memory ceiling is a startup/process-arena concern, §4.2, not this per-eval knob).\"] # [doc = \" A default interpreter yields a budget identical to [`RecursionBudget::default`], so the\"] # [doc = \" established behavior is preserved exactly.\"] fn budget (& self) -> RecursionBudget { RecursionBudget :: new (self . depth_limit , u64 :: MAX , u64 :: MAX) } # [doc = \" The registered primitive names (for tooling/EXPLAIN).\"] # [must_use] pub fn prim_names (& self) -> Vec < & str > { self . prims . names () } # [doc = \" Perform exactly one small-step reduction on `node` (the `⟶` relation above).\"] # [doc = \"\"] # [doc = \" Returns [`Step::Value`] if `node` is already a `Const`, or [`Step::Next`] with the reduced\"] # [doc = \" term. Errors are explicit (free variable, unknown/ill-typed prim, unsupported swap).\"] # [doc = \"\"] # [doc = \" **RFC-0041 W4:** the single-step entry drives the substitution recursion on a fresh default\"] # [doc = \" [`RecursionBudget`], so even a direct `step` on a deep node refuses with [`EvalError::DepthLimit`]\"] # [doc = \" at the ceiling rather than a host-stack abort. Callers evaluating adversarial input should use\"] # [doc = \" [`eval`](Self::eval)/[`eval_core`](Self::eval_core), which additionally run on the growable deep\"] # [doc = \" stack (§4.3); a bare `step` charges the budget but is not itself stack-wrapped.\"] pub fn step (& self , node : & Node) -> Result < Step , EvalError > { self . step_budgeted (node , & self . budget ()) } # [doc = \" The budgeted small-step relation (RFC-0041 §4.1): identical to [`step`](Self::step) but charging\"] # [doc = \" the shared [`RecursionBudget`] at each structural descent. L0 keeps its substitution shape — only\"] # [doc = \" the budget + guard are threaded in. One frame is charged on entry (via [`charge_depth`]) and\"] # [doc = \" released when this call returns, so the budget's *live* depth equals the current structural\"] # [doc = \" nesting; when a descent would exceed the ceiling the enter refuses with `DepthLimit`.\"] fn step_budgeted (& self , node : & Node , budget : & RecursionBudget) -> Result < Step , EvalError > { let _frame = charge_depth (budget) ? ; match node { Node :: Const (_) => Ok (Step :: Value) , Node :: Var (x) => Err (EvalError :: FreeVariable (x . clone ())) , Node :: Let { id , bound , body } => match self . step_budgeted (bound , budget) ? { Step :: Value => Ok (Step :: Next (Box :: new (subst (body , id , bound , budget) ?))) , Step :: Next (bound2) => Ok (Step :: Next (Box :: new (Node :: Let { id : id . clone () , bound : bound2 , body : body . clone () , }))) , } , Node :: Op { prim , args } => { for (i , arg) in args . iter () . enumerate () { if let Step :: Next (arg2) = self . step_budgeted (arg , budget) ? { let mut next = args . clone () ; next [i] = * arg2 ; return Ok (Step :: Next (Box :: new (Node :: Op { prim : prim . clone () , args : next , }))) ; } } let values = collect_values (args) ? ; let f = self . prims . get (prim) . ok_or_else (| | EvalError :: UnknownPrim (prim . clone ())) ? ; let result = f (prim , & values) ? ; Ok (Step :: Next (Box :: new (Node :: Const (result)))) } Node :: Swap { src , target , policy , } => match self . step_budgeted (src , budget) ? { Step :: Value => { let v = as_const (src) ? ; let result = self . swap . swap (v , target , policy) ? ; Ok (Step :: Next (Box :: new (Node :: Const (result)))) } Step :: Next (src2) => Ok (Step :: Next (Box :: new (Node :: Swap { src : src2 , target : target . clone () , policy : policy . clone () , }))) , } , Node :: Construct { ctor , args } => { for (i , arg) in args . iter () . enumerate () { if let Step :: Next (arg2) = self . step_budgeted (arg , budget) ? { let mut next = args . clone () ; next [i] = * arg2 ; return Ok (Step :: Next (Box :: new (Node :: Construct { ctor : ctor . clone () , args : next , }))) ; } } Ok (Step :: Value) } Node :: Match { scrutinee , alts , default , } => match self . step_budgeted (scrutinee , budget) ? { Step :: Next (s2) => Ok (Step :: Next (Box :: new (Node :: Match { scrutinee : s2 , alts : alts . clone () , default : default . clone () , }))) , Step :: Value => { let g = guarantee_of_value (scrutinee , budget) ? ; if g != GuaranteeStrength :: Exact { return Err (EvalError :: GuaranteeMeetUnsupported { scrutinee : g }) ; } let body = select_arm (scrutinee , alts , default . as_deref () , budget) ? ; Ok (Step :: Next (Box :: new (body))) } } , Node :: Lam { .. } => Ok (Step :: Value) , Node :: App { func , arg } => match self . step_budgeted (func , budget) ? { Step :: Next (f2) => Ok (Step :: Next (Box :: new (Node :: App { func : f2 , arg : arg . clone () , }))) , Step :: Value => match self . step_budgeted (arg , budget) ? { Step :: Next (a2) => Ok (Step :: Next (Box :: new (Node :: App { func : func . clone () , arg : a2 , }))) , Step :: Value => match func . as_ref () { Node :: Lam { param , body } => { Ok (Step :: Next (Box :: new (subst (body , param , arg , budget) ?))) } _ => Err (EvalError :: ApplyNonFunction) , } , } , } , Node :: Fix { name , body } => { let unfolded = subst (body , name , node , budget) ? ; Ok (Step :: Next (Box :: new (unfolded))) } Node :: FixGroup { defs , body } => { let target : Node = match body . as_ref () { Node :: Var (v) => defs . iter () . find (| (name , _) | name == v) . map_or_else (| | (* * body) . clone () , | (_ , d) | (* * d) . clone ()) , _ => (* * body) . clone () , } ; let unfolded = defs . iter () . try_fold (target , | acc , (name , _) | { let focus = Node :: FixGroup { defs : defs . clone () , body : Box :: new (Node :: Var (name . clone ())) , } ; subst (& acc , name , & focus , budget) }) ? ; Ok (Step :: Next (Box :: new (unfolded))) } } } # [doc = \" Evaluate `node` to a **representation** value by iterating [`step`](Self::step) to a normal\"] # [doc = \" form. Returns the resulting [`Value`], or an [`EvalError`] (including\"] # [doc = \" [`EvalError::FuelExhausted`] if the budget is exceeded, or [`EvalError::DataResult`] if the\"] # [doc = \" program evaluates to a data value — use [`eval_core`](Self::eval_core) for the data fragment).\"] pub fn eval (& self , node : & Node) -> Result < Value , EvalError > { match self . eval_core (node) ? { CoreValue :: Repr (v) => Ok (v) , CoreValue :: Data (_) => Err (EvalError :: DataResult) , } } # [doc = \" Evaluate `node` to a [`CoreValue`] — a representation value **or** a data value (the r3 data\"] # [doc = \" fragment, RFC-0011). Iterates [`step`](Self::step) to a normal form and reads it off: a\"] # [doc = \" `Const` is a representation value; a saturated `Construct` of values is a [`Datum`] (its\"] # [doc = \" meet-summary guarantee computed from its fields). This is the path the M-210 differential\"] # [doc = \" runs for matching/data, against the L1 evaluator (NFR-7).\"] pub fn eval_core (& self , node : & Node) -> Result < CoreValue , EvalError > { let sizing = self . budget () ; ensure_sufficient_stack (& sizing , move | | { let budget = self . budget () ; self . eval_core_budgeted (node , & budget) }) } # [doc = \" The budgeted normal-form driver (RFC-0041 W4): the O(1) fuel loop of\"] # [doc = \" [`eval_core`](Self::eval_core), threading the shared [`RecursionBudget`] into every structural\"] # [doc = \" recursion (`step` and the value read-off) so deep input refuses with [`EvalError::DepthLimit`]\"] # [doc = \" at the budget's ceiling. Separated from `eval_core` so the fuel loop itself stays O(1) host\"] # [doc = \" stack while the (already `Send`-owned) budget is threaded down.\"] fn eval_core_budgeted (& self , node : & Node , budget : & RecursionBudget ,) -> Result < CoreValue , EvalError > { let mut current = node . clone () ; let mut fuel = self . fuel ; loop { match self . step_budgeted (& current , budget) ? { Step :: Value => return node_to_core_value (& current , budget) , Step :: Next (next) => { fuel = fuel . checked_sub (1) . ok_or (EvalError :: FuelExhausted) ? ; current = * next ; } } } } }",
+      "reason": "no member of this impl block could be transpiled (10 sub-issue(s)): impl method `new` signature: unsupported Rust type form `dyn SwapEngine`; impl method `with_fuel` body: function body has a semicolon-terminated (value-discarding) statement expression before the tail — a `let`-chain body maps only simple `let x = e;` bindings plus a single trailing expression; impl method `with_depth` body: function body has a semicolon-terminated (value-discarding) statement expression before the tail — a `let`-chain body maps only simple `let x = e;` bindings plus a single trailing expression; impl method `budget` body: qualified/associated-function call `RecursionBudget :: new` did not resolve to a known-emitted associated fn — Mycelium calls are bare identifiers, and the only sound surface form for `Type::method(...)` is the mangled `Type__method` name the declaration side already emits for a receiver-less inherent-impl associated fn (DN-34 §8.13/8.14), referenced only when that exact declaration is PROVEN present (same-file, or a resolved M-1084 cross-nodule sibling). A primitive/std associated fn with no emitted decl (e.g. `i128::try_from`), an unresolved type, or a `self`-receiving method (excluded by construction — it stays reachable only from its own bare call site) all gap here rather than fabricate a call (G2/VR-5, DN-133); impl method `prim_names` body: method call `.names(...)` has no proven-emitted free-fn referent in this file (neither a D4-mangled inherent `Type__names` nor a bare inherent recorded by this file's left-to-right pass, nor a prim_map / combinator row). Emitting bare `names(recv, …)` would fabricate an unknown prim and file-poison myc-check (G-β Rank A / G2/VR-5; residual when the method body itself gapped — e.g. M-1037 `.to_vec()` inside `read_to_end` — so the declaration was never registered); impl method `step` body: method call `.step_budgeted(...)` has no proven-emitted free-fn referent in this file (neither a D4-mangled inherent `Type__step_budgeted` nor a bare inherent recorded by this file's left-to-right pass, nor a prim_map / combinator row). Emitting bare `step_budgeted(recv, …)` would fabricate an unknown prim and file-poison myc-check (G-β Rank A / G2/VR-5; residual when the method body itself gapped — e.g. M-1037 `.to_vec()` inside `read_to_end` — so the declaration was never registered); impl method `step_budgeted` body: unsupported expression form `charge_depth (budget) ?`; impl method `eval` body: unsupported expression form `self . eval_core (node) ?`; impl method `eval_core` body: method call `.budget(...)` has no proven-emitted free-fn referent in this file (neither a D4-mangled inherent `Type__budget` nor a bare inherent recorded by this file's left-to-right pass, nor a prim_map / combinator row). Emitting bare `budget(recv, …)` would fabricate an unknown prim and file-poison myc-check (G-β Rank A / G2/VR-5; residual when the method body itself gapped — e.g. M-1037 `.to_vec()` inside `read_to_end` — so the declaration was never registered); impl method `eval_core_budgeted` body: Rust ownership/identity-conversion no-op method `.clone()` has no Mycelium free-function/prim referent (value semantics — ADR-003); desugaring it to a bare `clone(recv)` would fabricate an unknown prim (`unknown function/constructor/prim `clone`` — verified against the oracle), so it is gapped, never fake-emitted (G2/VR-5)",
+      "item_name": "Interpreter"
+    },
+    {
+      "file": "/root/git/isolated/mycelium/crates/mycelium-interp/src/lib.rs",
+      "line": 677,
+      "col": 1,
+      "category": "Other",
+      "rust_construct": "Other",
+      "snippet": "# [doc = \" Read a normal-form node off as a [`CoreValue`]: a `Const` is a representation value; a saturated\"] # [doc = \" `Construct` of values is a [`Datum`] (the meet-summary computed by [`Datum::new`]). Any other\"] # [doc = \" node is not a normal form — an explicit error, never a silent default.\"] fn node_to_core_value (node : & Node , budget : & RecursionBudget) -> Result < CoreValue , EvalError > { let _frame = charge_depth (budget) ? ; match node { Node :: Const (v) => Ok (CoreValue :: Repr (v . clone ())) , Node :: Construct { ctor , args } => { let fields = args . iter () . map (| a | node_to_core_value (a , budget)) . collect :: < Result < Vec < _ > , _ > > () ? ; Ok (CoreValue :: Data (Datum :: new (ctor . clone () , fields))) } Node :: Var (x) => Err (EvalError :: FreeVariable (x . clone ())) , Node :: Lam { .. } => Err (EvalError :: FunctionResult) , _ => Err (EvalError :: DataMalformed { why : \"evaluation ended on a non-normal-form node\" . to_owned () , }) , } }",
+      "reason": "unsupported expression form `charge_depth (budget) ?`",
+      "item_name": "node_to_core_value"
+    },
+    {
+      "file": "/root/git/isolated/mycelium/crates/mycelium-interp/src/lib.rs",
+      "line": 703,
+      "col": 1,
+      "category": "Other",
+      "rust_construct": "Other",
+      "snippet": "# [doc = \" The guarantee of a **value** node (a `Const`, a saturated `Construct`, or a `Lam`): the\"] # [doc = \" representation value's own `Meta.guarantee`, the `meet`-summary of a data value's fields\"] # [doc = \" (RFC-0011 §4.6), or — for a bare function value — `Exact` (a closed lambda term carries no\"] # [doc = \" representational approximation to summarize; it is the identity element for the field-wise\"] # [doc = \" meet, same as an empty `Construct`).\"] # [doc = \"\"] # [doc = \" **`Node::Lam` (ADR-033/DN-74, M-923).** Before this fix a `Construct` field holding a `Lam`\"] # [doc = \" (the normal form of a `FieldSpec::Fn`-typed field — ADR-033 §3.1: \\\"a `Lam` node *is* a function\"] # [doc = \" value\\\") fell through to the `DataMalformed` catch-all below, because no program ever produced\"] # [doc = \" such a field until `mycelium-l1`'s `field_spec`/`elaborate_direct` (M-923) made `FieldSpec::Fn`\"] # [doc = \" reachable. This is a pre-existing latent gap, not a new relaxation: a `Lam` was already a\"] # [doc = \" legitimate `Step::Value` normal form (`Node::Lam { .. } => Ok(Step::Value)` above); this only\"] # [doc = \" teaches the **guarantee**-meet computation the same fact `Step`-reduction already knew.\"] fn guarantee_of_value (node : & Node , budget : & RecursionBudget ,) -> Result < GuaranteeStrength , EvalError > { let _frame = charge_depth (budget) ? ; match node { Node :: Const (v) => Ok (v . meta () . guarantee ()) , Node :: Construct { args , .. } => { let mut g = GuaranteeStrength :: Exact ; for a in args { g = g . meet (guarantee_of_value (a , budget) ?) ; } Ok (g) } Node :: Lam { .. } => Ok (GuaranteeStrength :: Exact) , Node :: Var (x) => Err (EvalError :: FreeVariable (x . clone ())) , _ => Err (EvalError :: DataMalformed { why : \"match scrutinee did not reduce to a value\" . to_owned () , }) , } }",
+      "reason": "unsupported expression form `charge_depth (budget) ?`",
+      "item_name": "guarantee_of_value"
+    },
+    {
+      "file": "/root/git/isolated/mycelium/crates/mycelium-interp/src/lib.rs",
+      "line": 740,
+      "col": 1,
+      "category": "MultiStmtBody",
+      "rust_construct": "MultiStmtBody",
+      "snippet": "# [doc = \" Select the first-matching `Match` alternative (or the default) and return its binder-substituted\"] # [doc = \" body (RFC-0011 §4.6; mirrors the L1 evaluator's `try_match`). A constructor arm matches a\"] # [doc = \" `Construct` of the same [`CtorRef`](mycelium_core::CtorRef), binding its fields left-to-right; a\"] # [doc = \" literal arm matches a `Const` equal on `repr+payload`. No match + no default is an explicit\"] # [doc = \" [`EvalError::NonExhaustiveMatch`].\"] fn select_arm (scrutinee : & Node , alts : & [Alt] , default : Option < & Node > , budget : & RecursionBudget ,) -> Result < Node , EvalError > { for alt in alts { match alt { Alt :: Ctor { ctor , binders , body , } => { if let Node :: Construct { ctor : c2 , args } = scrutinee { if c2 == ctor { if binders . len () != args . len () { return Err (EvalError :: DataMalformed { why : format ! (\"constructor arm binds {} of {} field(s) (WF6/WF7)\" , binders . len () , args . len ()) , }) ; } let mut b = body . clone () ; for (binder , arg) in binders . iter () . zip (args) { b = subst (& b , binder , arg , budget) ? ; } return Ok (b) ; } } } Alt :: Lit { value , body } => { if let Node :: Const (v) = scrutinee { if v . repr () == value . repr () && v . payload () == value . payload () { return Ok (body . clone ()) ; } } } } } match default { Some (d) => Ok (d . clone ()) , None => Err (EvalError :: NonExhaustiveMatch) , } }",
+      "reason": "function body has a semicolon-terminated (value-discarding) statement expression before the tail — a `let`-chain body maps only simple `let x = e;` bindings plus a single trailing expression",
+      "item_name": "select_arm"
+    },
+    {
+      "file": "/root/git/isolated/mycelium/crates/mycelium-interp/src/lib.rs",
+      "line": 794,
+      "col": 1,
+      "category": "Other",
+      "rust_construct": "Other",
+      "snippet": "# [doc = \" Extract the `Value` from a `Const` node (an internal invariant when [`Step::Value`] was reported).\"] fn as_const (node : & Node) -> Result < & Value , EvalError > { match node { Node :: Const (v) => Ok (v) , Node :: Var (x) => Err (EvalError :: FreeVariable (x . clone ())) , _ => Err (EvalError :: FreeVariable (\"<non-value normal form>\" . to_owned () ,)) , } }",
+      "reason": "qualified/associated-function call `EvalError :: FreeVariable` did not resolve to a known-emitted associated fn — Mycelium calls are bare identifiers, and the only sound surface form for `Type::method(...)` is the mangled `Type__method` name the declaration side already emits for a receiver-less inherent-impl associated fn (DN-34 §8.13/8.14), referenced only when that exact declaration is PROVEN present (same-file, or a resolved M-1084 cross-nodule sibling). A primitive/std associated fn with no emitted decl (e.g. `i128::try_from`), an unresolved type, or a `self`-receiving method (excluded by construction — it stays reachable only from its own bare call site) all gap here rather than fabricate a call (G2/VR-5, DN-133)",
+      "item_name": "as_const"
+    },
+    {
+      "file": "/root/git/isolated/mycelium/crates/mycelium-interp/src/lib.rs",
+      "line": 806,
+      "col": 1,
+      "category": "Other",
+      "rust_construct": "Other",
+      "snippet": "# [doc = \" Collect a list of nodes known to be values into their `Value`s.\"] fn collect_values (args : & [Node]) -> Result < Vec < & Value > , EvalError > { args . iter () . map (as_const) . collect () }",
+      "reason": "method call `.collect(...)` has no proven-emitted free-fn referent in this file (neither a D4-mangled inherent `Type__collect` nor a bare inherent recorded by this file's left-to-right pass, nor a prim_map / combinator row). Emitting bare `collect(recv, …)` would fabricate an unknown prim and file-poison myc-check (G-β Rank A / G2/VR-5; residual when the method body itself gapped — e.g. M-1037 `.to_vec()` inside `read_to_end` — so the declaration was never registered)",
+      "item_name": "collect_values"
+    },
+    {
+      "file": "/root/git/isolated/mycelium/crates/mycelium-interp/src/lib.rs",
+      "line": 811,
+      "col": 1,
+      "category": "Other",
+      "rust_construct": "Other",
+      "snippet": "# [doc = \" Capture-avoiding substitution `node[var ↦ value]`. Substituends are closed `Const` values, so no\"] # [doc = \" renaming is ever needed; substitution stops under a binder that shadows `var`.\"] # [doc = \"\"] # [doc = \" **RFC-0041 W4:** this walks the *whole* term in one recursive descent (a single `step`'s\"] # [doc = \" `Let`/β/`Fix` unfold), so a deep term would otherwise overflow the host stack. It charges the\"] # [doc = \" shared [`RecursionBudget`] at every descent (via [`charge_depth`]) and is therefore fallible — a\"] # [doc = \" term deeper than the ceiling refuses with [`EvalError::DepthLimit`] rather than a `SIGABRT`. L0\"] # [doc = \" keeps its substitution shape (§4.1); only the budget + guard are threaded in.\"] fn subst (node : & Node , var : & str , value : & Node , budget : & RecursionBudget ,) -> Result < Node , EvalError > { let _frame = charge_depth (budget) ? ; Ok (match node { Node :: Const (_) => node . clone () , Node :: Var (x) => { if x == var { value . clone () } else { node . clone () } } Node :: Let { id , bound , body } => Node :: Let { id : id . clone () , bound : Box :: new (subst (bound , var , value , budget) ?) , body : if id == var { body . clone () } else { Box :: new (subst (body , var , value , budget) ?) } , } , Node :: Op { prim , args } => Node :: Op { prim : prim . clone () , args : args . iter () . map (| a | subst (a , var , value , budget)) . collect :: < Result < Vec < _ > , _ > > () ? , } , Node :: Swap { src , target , policy , } => Node :: Swap { src : Box :: new (subst (src , var , value , budget) ?) , target : target . clone () , policy : policy . clone () , } , Node :: Construct { ctor , args } => Node :: Construct { ctor : ctor . clone () , args : args . iter () . map (| a | subst (a , var , value , budget)) . collect :: < Result < Vec < _ > , _ > > () ? , } , Node :: Match { scrutinee , alts , default , } => Node :: Match { scrutinee : Box :: new (subst (scrutinee , var , value , budget) ?) , alts : alts . iter () . map (| alt | match alt { Alt :: Ctor { ctor , binders , body , } => Ok (Alt :: Ctor { ctor : ctor . clone () , binders : binders . clone () , body : if binders . iter () . any (| b | b == var) { body . clone () } else { subst (body , var , value , budget) ? } , }) , Alt :: Lit { value : lit , body } => Ok (Alt :: Lit { value : lit . clone () , body : subst (body , var , value , budget) ? , }) , }) . collect :: < Result < Vec < _ > , EvalError > > () ? , default : match default . as_ref () { Some (d) => Some (Box :: new (subst (d , var , value , budget) ?)) , None => None , } , } , Node :: Lam { param , body } => Node :: Lam { param : param . clone () , body : if param == var { body . clone () } else { Box :: new (subst (body , var , value , budget) ?) } , } , Node :: App { func , arg } => Node :: App { func : Box :: new (subst (func , var , value , budget) ?) , arg : Box :: new (subst (arg , var , value , budget) ?) , } , Node :: Fix { name , body } => Node :: Fix { name : name . clone () , body : if name == var { body . clone () } else { Box :: new (subst (body , var , value , budget) ?) } , } , Node :: FixGroup { defs , body } => { if defs . iter () . any (| (name , _) | name == var) { node . clone () } else { Node :: FixGroup { defs : defs . iter () . map (| (name , d) | { Ok ((name . clone () , Box :: new (subst (d , var , value , budget) ?))) }) . collect :: < Result < Vec < _ > , EvalError > > () ? , body : Box :: new (subst (body , var , value , budget) ?) , } } } }) }",
+      "reason": "unsupported expression form `charge_depth (budget) ?`",
+      "item_name": "subst"
+    },
+    {
+      "file": "/root/git/isolated/mycelium/crates/mycelium-interp/src/lib.rs",
+      "line": 943,
+      "col": 1,
+      "category": "TestItem",
+      "rust_construct": "TestItem",
+      "snippet": "# [cfg (test)] mod data_tests { # ! [doc = \" The r3 data fragment at the L0 boundary (RFC-0011): `Construct`/`Match` evaluation, the\"] # ! [doc = \" meet-summary guarantee, and the never-silent refusals. These pin the L0 semantics\"] # ! [doc = \" independently of the L1 elaborator (the L1↔L0 agreement is the M-210 differential).\"] use super :: * ; use mycelium_core :: { Bound , BoundBasis , BoundKind , CtorRef , CtorSpec , DataRegistry , DeclSpec , FieldSpec , Meta , NormKind , Payload , Provenance , Repr , Value , } ; use std :: collections :: BTreeMap ; # [doc = \" `type Nat = Z | S(Nat)` plus `type Box = Mk(Binary{8})`.\"] fn registry () -> DataRegistry { let mut m = BTreeMap :: new () ; m . insert (\"Nat\" . to_owned () , DeclSpec { ctors : vec ! [CtorSpec { fields : vec ! [] } , CtorSpec { fields : vec ! [FieldSpec :: Data (\"Nat\" . to_owned ())] , } ,] , } ,) ; m . insert (\"Box\" . to_owned () , DeclSpec { ctors : vec ! [CtorSpec { fields : vec ! [FieldSpec :: Repr (Repr :: Binary { width : 8 })] , }] , } ,) ; DataRegistry :: build (& m) . unwrap () } fn z (reg : & DataRegistry) -> Node { Node :: Construct { ctor : reg . ctor_ref (\"Nat\" , 0) . unwrap () , args : vec ! [] , } } fn s (reg : & DataRegistry , inner : Node) -> Node { Node :: Construct { ctor : reg . ctor_ref (\"Nat\" , 1) . unwrap () , args : vec ! [inner] , } } fn byte (g : GuaranteeStrength) -> Value { let meta = if g == GuaranteeStrength :: Exact { Meta :: exact (Provenance :: Root) } else { Meta :: new (Provenance :: Root , g , Some (Bound { kind : BoundKind :: Error { eps : 0.1 , norm : NormKind :: Linf , } , basis : BoundBasis :: EmpiricalFit { trials : 1 , method : \"m\" . into () , } , }) , None , None , None ,) . unwrap () } ; Value :: new (Repr :: Binary { width : 8 } , Payload :: Bits (vec ! [false ; 8]) , meta ,) . unwrap () } fn datum (reg : & DataRegistry , ty : & str , i : u32 , fields : Vec < CoreValue >) -> CoreValue { CoreValue :: Data (Datum :: new (reg . ctor_ref (ty , i) . unwrap () , fields)) } # [test] fn construct_evaluates_to_a_datum () { let reg = registry () ; let interp = Interpreter :: default () ; let node = s (& reg , s (& reg , z (& reg))) ; let v = interp . eval_core (& node) . expect (\"evaluates\") ; assert_eq ! (v , datum (& reg , \"Nat\" , 1 , vec ! [datum (& reg , \"Nat\" , 1 , vec ! [datum (& reg , \"Nat\" , 0 , vec ! [])])])) ; } # [test] fn eval_on_a_data_result_is_an_explicit_refusal () { let reg = registry () ; let err = Interpreter :: default () . eval (& z (& reg)) . unwrap_err () ; assert_eq ! (err , EvalError :: DataResult) ; } # [test] fn match_selects_the_constructor_arm_and_binds_fields () { let reg = registry () ; let node = Node :: Match { scrutinee : Box :: new (s (& reg , z (& reg))) , alts : vec ! [Alt :: Ctor { ctor : reg . ctor_ref (\"Nat\" , 0) . unwrap () , binders : vec ! [] , body : z (& reg) , } , Alt :: Ctor { ctor : reg . ctor_ref (\"Nat\" , 1) . unwrap () , binders : vec ! [\"m\" . to_owned ()] , body : Node :: Var (\"m\" . to_owned ()) , } ,] , default : None , } ; let v = Interpreter :: default () . eval_core (& node) . expect (\"evaluates\") ; assert_eq ! (v , datum (& reg , \"Nat\" , 0 , vec ! [])) ; } # [test] fn match_picks_the_first_matching_arm_not_a_later_one () { let reg = registry () ; let node = Node :: Match { scrutinee : Box :: new (z (& reg)) , alts : vec ! [Alt :: Ctor { ctor : reg . ctor_ref (\"Nat\" , 0) . unwrap () , binders : vec ! [] , body : s (& reg , z (& reg)) , }] , default : Some (Box :: new (z (& reg))) , } ; let v = Interpreter :: default () . eval_core (& node) . expect (\"evaluates\") ; assert_eq ! (v , datum (& reg , \"Nat\" , 1 , vec ! [datum (& reg , \"Nat\" , 0 , vec ! [])])) ; } # [test] fn literal_arm_matches_on_repr_and_payload () { let reg = registry () ; let all_ones = Value :: new (Repr :: Binary { width : 8 } , Payload :: Bits (vec ! [true ; 8]) , Meta :: exact (Provenance :: Root) ,) . unwrap () ; let inner_match = Node :: Match { scrutinee : Box :: new (Node :: Var (\"b\" . to_owned ())) , alts : vec ! [Alt :: Lit { value : all_ones . clone () , body : z (& reg) , }] , default : Some (Box :: new (s (& reg , z (& reg)))) , } ; let node = Node :: Match { scrutinee : Box :: new (Node :: Construct { ctor : reg . ctor_ref (\"Box\" , 0) . unwrap () , args : vec ! [Node :: Const (all_ones)] , }) , alts : vec ! [Alt :: Ctor { ctor : reg . ctor_ref (\"Box\" , 0) . unwrap () , binders : vec ! [\"b\" . to_owned ()] , body : inner_match , }] , default : None , } ; let v = Interpreter :: default () . eval_core (& node) . expect (\"evaluates\") ; assert_eq ! (v , datum (& reg , \"Nat\" , 0 , vec ! [])) ; } # [test] fn no_match_and_no_default_is_an_explicit_non_exhaustive_error () { let reg = registry () ; let node = Node :: Match { scrutinee : Box :: new (s (& reg , z (& reg))) , alts : vec ! [Alt :: Ctor { ctor : reg . ctor_ref (\"Nat\" , 0) . unwrap () , binders : vec ! [] , body : z (& reg) , }] , default : None , } ; assert_eq ! (Interpreter :: default () . eval_core (& node) . unwrap_err () , EvalError :: NonExhaustiveMatch) ; } # [test] fn construct_summary_guarantee_is_the_meet_of_fields () { let reg = registry () ; let node = Node :: Construct { ctor : reg . ctor_ref (\"Box\" , 0) . unwrap () , args : vec ! [Node :: Const (byte (GuaranteeStrength :: Empirical))] , } ; let v = Interpreter :: default () . eval_core (& node) . expect (\"evaluates\") ; assert_eq ! (v . guarantee () , GuaranteeStrength :: Empirical) ; } # [test] fn matching_a_non_exact_data_scrutinee_is_the_explicit_r3_boundary () { let reg = registry () ; let node = Node :: Match { scrutinee : Box :: new (Node :: Construct { ctor : reg . ctor_ref (\"Box\" , 0) . unwrap () , args : vec ! [Node :: Const (byte (GuaranteeStrength :: Empirical))] , }) , alts : vec ! [Alt :: Ctor { ctor : reg . ctor_ref (\"Box\" , 0) . unwrap () , binders : vec ! [\"b\" . to_owned ()] , body : Node :: Var (\"b\" . to_owned ()) , }] , default : None , } ; assert_eq ! (Interpreter :: default () . eval_core (& node) . unwrap_err () , EvalError :: GuaranteeMeetUnsupported { scrutinee : GuaranteeStrength :: Empirical }) ; } # [test] fn aot_lowerable_now_spans_the_data_fragment () { let reg = registry () ; assert ! (z (& reg) . is_aot_lowerable ()) ; assert ! (Node :: Const (byte (GuaranteeStrength :: Exact)) . is_aot_lowerable ()) ; } fn _unused (_ : CtorRef) { } }",
+      "reason": "#[cfg(test)] item — out of scope for this PoC's transpilation surface (excluded from the expressible-fraction denominator, but recorded, never silently skipped)",
+      "item_name": "data_tests"
+    },
+    {
+      "file": "/root/git/isolated/mycelium/crates/mycelium-interp/src/lib.rs",
+      "line": 1201,
+      "col": 1,
+      "category": "TestItem",
+      "rust_construct": "TestItem",
+      "snippet": "# [cfg (test)] mod r4_tests { # ! [doc = \" r4 functions + recursion at the L0 boundary (RFC-0001 r4): β-reduction, Fix unfolding under\"] # ! [doc = \" the fuel clock, and the never-silent refusals. Pins the L0 semantics independently of the\"] # ! [doc = \" elaborator (the L1↔L0 agreement is the M-210 differential).\"] use super :: * ; use mycelium_core :: { CtorSpec , DataRegistry , DeclSpec , FieldSpec , Meta , Payload , Provenance , Repr , Value , } ; use std :: collections :: BTreeMap ; fn nat () -> DataRegistry { let mut m = BTreeMap :: new () ; m . insert (\"Nat\" . to_owned () , DeclSpec { ctors : vec ! [CtorSpec { fields : vec ! [] } , CtorSpec { fields : vec ! [FieldSpec :: Data (\"Nat\" . to_owned ())] , } ,] , } ,) ; DataRegistry :: build (& m) . unwrap () } fn z (r : & DataRegistry) -> Node { Node :: Construct { ctor : r . ctor_ref (\"Nat\" , 0) . unwrap () , args : vec ! [] , } } fn s (r : & DataRegistry , n : Node) -> Node { Node :: Construct { ctor : r . ctor_ref (\"Nat\" , 1) . unwrap () , args : vec ! [n] , } } fn byte (bits : [bool ; 8]) -> Node { Node :: Const (Value :: new (Repr :: Binary { width : 8 } , Payload :: Bits (bits . to_vec ()) , Meta :: exact (Provenance :: Root) ,) . unwrap () ,) } # [test] fn beta_reduction_applies_a_closed_lambda () { let lam = Node :: Lam { param : \"x\" . into () , body : Box :: new (Node :: Op { prim : \"bit.not\" . into () , args : vec ! [Node :: Var (\"x\" . into ())] , }) , } ; let app = Node :: App { func : Box :: new (lam) , arg : Box :: new (byte ([false , false , false , false , true , true , true , true])) , } ; let v = Interpreter :: default () . eval (& app) . expect (\"runs\") ; assert_eq ! (v . payload () , & Payload :: Bits (vec ! [true , true , true , true , false , false , false , false])) ; } # [test] fn curried_application_reduces_left_to_right () { let lam = Node :: Lam { param : \"x\" . into () , body : Box :: new (Node :: Lam { param : \"y\" . into () , body : Box :: new (Node :: Op { prim : \"bit.xor\" . into () , args : vec ! [Node :: Var (\"x\" . into ()) , Node :: Var (\"y\" . into ())] , }) , }) , } ; let app = Node :: App { func : Box :: new (Node :: App { func : Box :: new (lam) , arg : Box :: new (byte ([true , true , true , true , false , false , false , false])) , }) , arg : Box :: new (byte ([false , false , false , false , true , true , true , true])) , } ; let v = Interpreter :: default () . eval (& app) . expect (\"runs\") ; assert_eq ! (v . payload () , & Payload :: Bits (vec ! [true ; 8])) ; } # [doc = \" `drop_ = Fix(f, λn. match n { Z => Z, S(m) => f m })` — structural recursion to Z.\"] fn drop_ (r : & DataRegistry) -> Node { Node :: Fix { name : \"f\" . into () , body : Box :: new (Node :: Lam { param : \"n\" . into () , body : Box :: new (Node :: Match { scrutinee : Box :: new (Node :: Var (\"n\" . into ())) , alts : vec ! [Alt :: Ctor { ctor : r . ctor_ref (\"Nat\" , 0) . unwrap () , binders : vec ! [] , body : z (r) , } , Alt :: Ctor { ctor : r . ctor_ref (\"Nat\" , 1) . unwrap () , binders : vec ! [\"m\" . into ()] , body : Node :: App { func : Box :: new (Node :: Var (\"f\" . into ())) , arg : Box :: new (Node :: Var (\"m\" . into ())) , } , } ,] , default : None , }) , }) , } } # [test] fn fix_drives_structural_recursion_to_a_value () { let r = nat () ; let app = Node :: App { func : Box :: new (drop_ (& r)) , arg : Box :: new (s (& r , s (& r , s (& r , z (& r))))) , } ; let v = Interpreter :: default () . eval_core (& app) . expect (\"terminates\") ; assert_eq ! (v . as_data () . expect (\"data\") . fields () . len () , 0 , \"Z\") ; } # [test] fn an_unproductive_fix_exhausts_fuel_explicitly () { let spin = Node :: Fix { name : \"f\" . into () , body : Box :: new (Node :: Var (\"f\" . into ())) , } ; let err = Interpreter :: default () . with_fuel (100) . eval_core (& spin) . unwrap_err () ; assert_eq ! (err , EvalError :: FuelExhausted) ; } # [test] fn applying_a_non_function_is_an_explicit_refusal () { let app = Node :: App { func : Box :: new (byte ([false ; 8])) , arg : Box :: new (byte ([true ; 8])) , } ; assert_eq ! (Interpreter :: default () . eval_core (& app) . unwrap_err () , EvalError :: ApplyNonFunction) ; } # [test] fn a_function_result_is_an_explicit_refusal () { let lam = Node :: Lam { param : \"x\" . into () , body : Box :: new (Node :: Var (\"x\" . into ())) , } ; assert_eq ! (Interpreter :: default () . eval_core (& lam) . unwrap_err () , EvalError :: FunctionResult) ; } # [test] fn lam_app_fix_are_now_aot_lowerable () { let r = nat () ; assert ! (drop_ (& r) . is_aot_lowerable ()) ; } }",
+      "reason": "#[cfg(test)] item — out of scope for this PoC's transpilation surface (excluded from the expressible-fraction denominator, but recorded, never silently skipped)",
+      "item_name": "r4_tests"
+    },
+    {
+      "file": "/root/git/isolated/mycelium/crates/mycelium-interp/src/lib.rs",
+      "line": 1385,
+      "col": 1,
+      "category": "TestItem",
+      "rust_construct": "TestItem",
+      "snippet": "# [cfg (test)] mod mutant_witness_tests { # ! [doc = \" Mutant-witness tests for lib.rs survivors (M-654 Gate A3).\"] # ! [doc = \" Each test is annotated with the mutant location it targets.\"] use super :: * ; use mycelium_core :: { Alt , CtorSpec , DataRegistry , DeclSpec , FieldSpec , Meta , Payload , Provenance , Repr , Value , } ; use std :: collections :: BTreeMap ; fn nat () -> DataRegistry { let mut m = BTreeMap :: new () ; m . insert (\"Nat\" . to_owned () , DeclSpec { ctors : vec ! [CtorSpec { fields : vec ! [] } , CtorSpec { fields : vec ! [FieldSpec :: Data (\"Nat\" . to_owned ())] , } ,] , } ,) ; DataRegistry :: build (& m) . unwrap () } fn z (r : & DataRegistry) -> Node { Node :: Construct { ctor : r . ctor_ref (\"Nat\" , 0) . unwrap () , args : vec ! [] , } } fn s (r : & DataRegistry , n : Node) -> Node { Node :: Construct { ctor : r . ctor_ref (\"Nat\" , 1) . unwrap () , args : vec ! [n] , } } fn byte_val () -> Value { Value :: new (Repr :: Binary { width : 8 } , Payload :: Bits (vec ! [true , false , true , false , true , false , true , false]) , Meta :: exact (Provenance :: Root) ,) . unwrap () } # [test] fn eval_error_display_is_non_empty_and_contains_payload () { let msg = EvalError :: FreeVariable (\"the_var\" . to_owned ()) . to_string () ; assert ! (msg . contains (\"the_var\") , \"Display for FreeVariable must include the var name; got: {msg:?}\") ; let msg2 = EvalError :: UnknownPrim (\"bit.nope\" . to_owned ()) . to_string () ; assert ! (msg2 . contains (\"bit.nope\") , \"Display for UnknownPrim must include the prim name; got: {msg2:?}\") ; assert ! (! EvalError :: FuelExhausted . to_string () . is_empty () , \"Display for FuelExhausted must not be empty\") ; } # [test] fn prim_names_contains_known_builtins () { let interp = Interpreter :: default () ; let names = interp . prim_names () ; for expected in & [\"core.id\" , \"bit.not\" , \"bit.and\" , \"bit.or\" , \"bit.xor\" , \"trit.neg\" , \"trit.add\" , \"trit.sub\" , \"trit.mul\" ,] { assert ! (names . contains (expected) , \"prim_names must contain '{expected}'; got {names:?}\") ; } assert ! (! names . is_empty () , \"prim_names must not be empty for the default interpreter\") ; } # [test] fn fix_group_var_body_selects_the_correct_named_member () { let r = nat () ; let node = Node :: FixGroup { defs : vec ! [(\"f\" . to_owned () , Box :: new (z (& r))) , (\"g\" . to_owned () , Box :: new (s (& r , z (& r)))) ,] , body : Box :: new (Node :: Var (\"g\" . to_owned ())) , } ; let interp = Interpreter :: default () . with_fuel (10_000) ; let result = interp . eval_core (& node) . expect (\"FixGroup with non-recursive defs must terminate\") ; let datum = result . as_data () . expect (\"must be a data value\") ; assert_eq ! (datum . fields () . len () , 1 , \"FixGroup Var('g') body must unfold to g's def S(Z) (1 field), not f's Z (0 fields)\") ; } # [test] fn construct_with_free_var_arg_yields_free_variable () { let r = nat () ; let node = Node :: Construct { ctor : r . ctor_ref (\"Nat\" , 1) . unwrap () , args : vec ! [Node :: Var (\"x\" . to_owned ())] , } ; let err = Interpreter :: default () . eval_core (& node) . unwrap_err () ; assert_eq ! (err , EvalError :: FreeVariable (\"x\" . to_owned ()) , \"Construct with free Var arg must yield FreeVariable, not DataMalformed (lib.rs:545)\") ; } # [test] fn match_on_construct_with_free_var_field_yields_free_variable () { let r = nat () ; let node = Node :: Match { scrutinee : Box :: new (Node :: Construct { ctor : r . ctor_ref (\"Nat\" , 1) . unwrap () , args : vec ! [Node :: Var (\"free\" . to_owned ())] , }) , alts : vec ! [Alt :: Ctor { ctor : r . ctor_ref (\"Nat\" , 1) . unwrap () , binders : vec ! [\"m\" . to_owned ()] , body : z (& r) , }] , default : None , } ; let err = Interpreter :: default () . eval_core (& node) . unwrap_err () ; assert_eq ! (err , EvalError :: FreeVariable (\"free\" . to_owned ()) , \"Match with free Var in Construct scrutinee must yield FreeVariable (lib.rs:566)\") ; } # [test] fn literal_arm_requires_both_repr_and_payload_match () { let zero_byte = Value :: new (Repr :: Binary { width : 8 } , Payload :: Bits (vec ! [false ; 8]) , Meta :: exact (Provenance :: Root) ,) . unwrap () ; let ones_byte = Value :: new (Repr :: Binary { width : 8 } , Payload :: Bits (vec ! [true ; 8]) , Meta :: exact (Provenance :: Root) ,) . unwrap () ; let node = Node :: Match { scrutinee : Box :: new (Node :: Const (ones_byte . clone ())) , alts : vec ! [Alt :: Lit { value : zero_byte . clone () , body : Node :: Const (zero_byte) , }] , default : Some (Box :: new (Node :: Const (ones_byte))) , } ; let v = Interpreter :: default () . eval_core (& node) . expect (\"evaluates\") ; match v { CoreValue :: Repr (val) => assert_eq ! (val . payload () , & Payload :: Bits (vec ! [true ; 8]) , \"payload mismatch → default must fire; mutant (||) would fire the literal arm\") , _ => panic ! (\"expected Repr result\") , } } # [test] fn swap_with_free_var_source_propagates_correct_var_name () { use mycelium_core :: ContentHash ; let policy = ContentHash :: parse (\"blake3:round_trip_safe\") . unwrap () ; let node = Node :: Swap { src : Box :: new (Node :: Var (\"q\" . to_owned ())) , target : Repr :: Binary { width : 8 } , policy , } ; let err = Interpreter :: default () . eval (& node) . unwrap_err () ; assert_eq ! (err , EvalError :: FreeVariable (\"q\" . to_owned ()) , \"Swap with Var src must give FreeVariable with the var name (lib.rs:626)\") ; } # [test] fn fix_binder_shadows_outer_substitution () { let v = byte_val () ; let node = Node :: Let { id : \"x\" . to_owned () , bound : Box :: new (Node :: Const (v . clone ())) , body : Box :: new (Node :: Fix { name : \"x\" . to_owned () , body : Box :: new (Node :: Var (\"x\" . to_owned ())) , }) , } ; let err = Interpreter :: default () . with_fuel (100) . eval_core (& node) . unwrap_err () ; assert_eq ! (err , EvalError :: FuelExhausted , \"Fix binder must shadow outer substitution; broken shadow causes it to terminate (lib.rs:724)\") ; } # [test] fn fix_group_non_member_var_is_substituted () { let r = nat () ; let sz = s (& r , z (& r)) ; let node = Node :: Let { id : \"z\" . to_owned () , bound : Box :: new (sz . clone ()) , body : Box :: new (Node :: FixGroup { defs : vec ! [(\"x\" . to_owned () , Box :: new (Node :: Var (\"z\" . to_owned ())))] , body : Box :: new (Node :: Var (\"x\" . to_owned ())) , }) , } ; let v = Interpreter :: default () . eval_core (& node) . expect (\"evaluates — non-member var must be substituted (lib.rs:733)\") ; let datum = v . as_data () . expect (\"data value\") ; assert_eq ! (datum . fields () . len () , 1 , \"FixGroup: non-member var 'z' must be substituted; mutant leaves it free\") ; } }",
+      "reason": "#[cfg(test)] item — out of scope for this PoC's transpilation surface (excluded from the expressible-fraction denominator, but recorded, never silently skipped)",
+      "item_name": "mutant_witness_tests"
+    }
+  ],
+  "total_top_level_items": 34
+}
